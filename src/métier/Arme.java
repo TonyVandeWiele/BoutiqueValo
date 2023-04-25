@@ -1,100 +1,110 @@
 package métier;
+import java.io.*;
 
-abstract class Arme
+abstract class Arme implements ISaveLoad, Serializable
 {
     private String nom;
-    private Skin[] skin;
-    private String type;
+    private Skin skin;
+    private String categorie;
     private int prix;
     private String description;
 
     public Arme()
     {
         nom="Pas de Nom";
-        skin=new Skin[5];
-        skin[0] = new Skin("Default Skin",0,Rarete.commun,"TEST");
-        type="Pas de Type";
+        skin = new Skin();
+        categorie="Pas de Categorie";
         prix=0;
         description="Pas de Description";
     }
-    public Arme(String n,String t,int p,String d)
+    public Arme(String vNom,Skin vSkin,String vCategorie,int vPrix,String vDescription)
     {
-        nom=n;
-        type=t;
-        prix=p;
-        description=d;
+        nom=vNom;
+        skin=vSkin;
+        categorie=vCategorie;
+        prix=vPrix;
+        description=vDescription;
     }
     public String getNom()
     {
         return nom;
     }
-    public String getType()
+    public String getCategorie()
     {
-        return type;
+        return categorie;
     }
     public  int getPrix()
     {
         return prix;
     }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+
+    public Skin getSkin() { return skin; }
+
+    public void setNom(String nom) { this.nom = nom; }
     public void setDescription(String description) {
         this.description = description;
-    }
-    public void ajouteSkin(Skin vSkin)
-    {
-        int i=1;
-        while(i<5 && skin[i] != null)
-        {
-            i++;
-        }
-        if(i<5)
-        {
-            skin[i] = vSkin;
-        }
-    }
-
-    public void retireSkin(String vNom)
-    {
-        int i=1;
-        while(i<5 && skin[i] != null)
-        {
-            if(skin[i].getNom().compareToIgnoreCase(vNom) == 0)
-            {
-                skin[i] = null;
-            }
-            i++;
-        }
     }
     public void setPrix(int prix) {
         this.prix = prix;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setCategorie(String Categorie) {
+        this.categorie = Categorie;
     }
+
+    public void setSkin(Skin skin) { this.skin = skin; }
 
     public  String getDescription()
     {
         return description;
     }
-    public String ToString()
+
+    public String toString()
     {
-        return "\nNom :" + getNom() + "\nType :" + getType() + "\nPrix :"+getPrix()+"\nDescription :"+getDescription()+"\n";
+        return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix()+"\nDescription :"+getDescription()+"\n";
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Arme arme = (Arme) obj;
+        if(getNom().equals(arme.getNom()) && getCategorie().equalsIgnoreCase(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix() && getDescription().equals(arme.getDescription()))
+        {
+            return true;
+        }
+        return false;
     }
     public void Affiche()
     {
-        System.out.println("Voici une arme : " + ToString());
-        System.out.print("Voici ces skins : ");
+        System.out.println("Voici une arme : " + toString());
+    }
 
-        int i=0;
-        while(i<5)
-        {
-            if(skin[i] != null)
-            {
-                skin[i].Affiche();
-            }
-            i++;
+    public void Save(String filename, Object obj) {
+        try {
+            FileOutputStream fos = new FileOutputStream(filename);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(obj);
+            oos.close();
+            fos.close();
+            System.out.println("L'objet a été sauvegardé avec succès dans le fichier binaire " + filename);
+        } catch (IOException e) {
+            System.out.println("Une erreur est survenue lors de la sauvegarde de l'objet dans le fichier binaire " + filename);
+            e.printStackTrace();
+        }
+    }
+
+    public Object Load(String filename) {
+        try {
+            FileInputStream fis = new FileInputStream(filename);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Object obj = ois.readObject();
+            ois.close();
+            fis.close();
+            System.out.println("L'objet a été chargé avec succès depuis le fichier binaire " + filename);
+            return obj;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Une erreur est survenue lors du chargement de l'objet depuis le fichier binaire " + filename);
+            e.printStackTrace();
+            return null;
         }
     }
 }

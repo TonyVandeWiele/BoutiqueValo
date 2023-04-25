@@ -1,6 +1,9 @@
 package métier;
 
-public class Skin
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Skin implements Serializable
 {
     private String nom;
     private int prix;
@@ -52,5 +55,27 @@ public class Skin
     {
         System.out.println("\n Nom : " + getNom() + "  Prix : " + getPrix() + "  Rareté : " + getRarete() +
                             "  Repertoire Image : " + getImage());
+    }
+
+    @Override
+    public String toString() {
+        return "Skin{" +
+                "nom='" + nom + '\'' +
+                ", prix=" + prix +
+                ", image='" + image + '\'' +
+                ", rarete=" + rarete +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Skin skin = (Skin) obj;
+        if (prix == skin.prix && Objects.equals(nom, skin.nom) && Objects.equals(image, skin.image) && rarete == skin.rarete)
+        {
+            return true;
+        }
+        return false;
     }
 }

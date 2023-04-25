@@ -2,64 +2,53 @@ package métier;
 
 import java.io.*;
 
-public class ArmeAFeu extends Arme implements Serializable
-{
-    private int degatsTete;
-    private int degatsCorps;
-    private int portee;
-    private int capaciteChargeur;
-    public int getDegatsTete()
-    {
-        return degatsTete;
-    }
-    public int getDegatsCorps()
-    {
-        return degatsCorps;
-    }
-    public int getPortee()
-    {
-        return portee;
-    }
-    public int getCapaciteChargeur()
-    {
-        return capaciteChargeur;
-    }
-    public ArmeAFeu()
-    {
-        super();
-        degatsTete=0;
-        degatsCorps=0;
-        portee=0;
-        capaciteChargeur=0;
-    }
-    public ArmeAFeu(String vNom, Skin vSkin,String vCategorie,int vPrix,String vDescription,int vDegTete,int vDegCorps,int vPortee,int vChargeur)
-    {
-        super(vNom, vSkin,vCategorie, vPrix, vDescription);
-        degatsTete=vDegTete;
-        degatsCorps=vDegCorps;
-        portee=vPortee;
-        capaciteChargeur=vChargeur;
+public class Profil implements ISaveLoad, Serializable {
+    private String pseudo;
+    private int niveau;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "\nDegat dans la Tete : " + getDegatsTete() + "\nDegat dans le corps : " + getDegatsCorps()+ "\nPortée de l'arme : " + getPortee() + "\nCapacité du chargeur : " + getCapaciteChargeur();
+    public int getNiveau() {
+        return niveau;
     }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        ArmeAFeu armeAFeu = (ArmeAFeu) obj;
-        if(super.equals(armeAFeu) && getDegatsTete() == armeAFeu.getDegatsTete() && getPortee() == armeAFeu.getPortee() && getCapaciteChargeur() == armeAFeu.getCapaciteChargeur())
-        {
-            return true;
-        }
-        return false;
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public Profil()
+    {
+        pseudo="Pas de pseudo";
+        niveau=0;
+        avatar="Pas d'avatar";
+    }
+    public Profil(String vPseudo, int vNiveau, String vAvatar)
+    {
+        pseudo=vPseudo;
+        niveau=vNiveau;
+        avatar=vAvatar;
     }
 
     public void Affiche()
     {
         System.out.println(toString());
+    }
+    @Override
+    public String toString() {
+        return "\nPseudo : " + getPseudo() + "\nNiveau : " + getNiveau() + "\nAvatar : " +getAvatar();
+    }
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Profil profil = (Profil) obj;
+        if(getPseudo().equals(profil.getPseudo()) && getNiveau() == profil.getNiveau() && getAvatar().equals(profil.getAvatar()))
+        {
+            return true;
+        }
+        return false;
     }
 
     public void Save(String filename, Object obj) {
