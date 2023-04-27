@@ -1,4 +1,4 @@
-package métier;
+package metier;
 
 import java.io.*;
 
@@ -32,9 +32,9 @@ public class ArmeAFeu extends Arme implements Serializable
         portee=0;
         capaciteChargeur=0;
     }
-    public ArmeAFeu(String vNom, Skin vSkin,String vCategorie,float vPrix,String vDescription,int vDegTete,int vDegCorps,int vPortee,int vChargeur)
+    public ArmeAFeu(String vNom, Skin vSkin,String vCategorie,float vPrix,int vDegTete,int vDegCorps,int vPortee,int vChargeur)
     {
-        super(vNom, vSkin,vCategorie, vPrix, vDescription);
+        super(vNom, vSkin,vCategorie, vPrix);
         degatsTete=vDegTete;
         degatsCorps=vDegCorps;
         portee=vPortee;

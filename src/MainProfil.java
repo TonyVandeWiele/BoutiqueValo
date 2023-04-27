@@ -1,7 +1,4 @@
-import métier.ArmeAFeu;
-import métier.Profil;
-import métier.Rarete;
-import métier.Skin;
+import metier.Profil;
 
 public class MainProfil {
     public static void main(String[] args)

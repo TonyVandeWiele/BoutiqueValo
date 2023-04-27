@@ -1,4 +1,4 @@
-package métier;
+package metier;
 
 public class ArmeCAC extends Arme
 {
@@ -13,9 +13,9 @@ public class ArmeCAC extends Arme
         super();
         degatTranchant=0;
     }
-    public ArmeCAC(String vNom, Skin vSkin,String vCategorie,int vPrix,String vDescription,int vDegatTranchant)
+    public ArmeCAC(String vNom, Skin vSkin,String vCategorie,int vPrix,int vDegatTranchant)
     {
-        super(vNom, vSkin,vCategorie, vPrix, vDescription);
+        super(vNom, vSkin,vCategorie, vPrix);
         degatTranchant=vDegatTranchant;
     }
 

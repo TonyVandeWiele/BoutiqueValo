@@ -1,10 +1,9 @@
 package GUI;
 
-import métier.ArmeAFeu;
-import métier.ArmeCAC;
+import metier.ArmeAFeu;
+import metier.ArmeCAC;
 
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.awt.*;
 
 public class InventoryWindow {
@@ -54,7 +53,7 @@ public class InventoryWindow {
         gbc.weightx = 0.2;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        jPanelProfil.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        jPanelProfil.setBorder(BorderFactory.createMatteBorder(2,0,2,2,Color.black));
         jPanelCell.add(jPanelProfil,gbc);
 
         BoxLayout layoutProfil = new BoxLayout(jPanelProfil, BoxLayout.Y_AXIS);
@@ -64,6 +63,10 @@ public class InventoryWindow {
         Label labelProfil = new Label("Nom du Joueur",Label.CENTER);
         labelProfil.setFont(new Font("SansSerif",Font.BOLD,16));
         jPanelProfil.add(labelProfil);
+
+        Label labelBanniere = new Label("Banière : ",Label.CENTER);
+        labelBanniere.setFont(new Font("SansSerif",Font.BOLD,14));
+        jPanelProfil.add(labelBanniere);
 
         ImageIcon iconProfil = new ImageIcon("C:\\Users\\vande\\Pictures\\carte.png");
         Image imgProfil = iconProfil.getImage();
@@ -75,7 +78,7 @@ public class InventoryWindow {
         jPanelProfil.add(imageLabelProfil);
 
         Label labelLVL = new Label("LVL : ",Label.CENTER);
-        labelLVL.setFont(new Font("SansSerif",Font.BOLD,16));
+        labelLVL.setFont(new Font("SansSerif",Font.BOLD,14));
         jPanelProfil.add(labelLVL);
 
         JPanel jPanelVide = new JPanel();
@@ -100,22 +103,22 @@ public class InventoryWindow {
         gbc.weighty = 0.25;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        jPanelAssaut.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        jPanelAssaut.setBorder(BorderFactory.createMatteBorder(2,2,2,2,Color.black));
         jPanelContent.add(jPanelAssaut,gbc);
         //Panel SMG
         gbc.gridx = 1;
         gbc.gridy = 0;
-        jPanelSMG.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        jPanelSMG.setBorder(BorderFactory.createMatteBorder(2,2,2,2,Color.black));
         jPanelContent.add(jPanelSMG,gbc);
         //Panel Sniper
         gbc.gridx = 0;
         gbc.gridy = 1;
-        jPanelSniper.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        jPanelSniper.setBorder(BorderFactory.createMatteBorder(2,2,2,2,Color.black));
         jPanelContent.add(jPanelSniper,gbc);
         //Panel CAC
         gbc.gridx = 1;
         gbc.gridy = 1;
-        jPanelCAC.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        jPanelCAC.setBorder(BorderFactory.createMatteBorder(2,2,2,2,Color.black));
         jPanelContent.add(jPanelCAC,gbc);
 
         //Configuration des Layouts pour le panel Assaut, SMG, Sniper et CAC
@@ -133,63 +136,83 @@ public class InventoryWindow {
         labelAssaut.setFont(new Font("SansSerif",Font.BOLD,16));
         jPanelAssaut.add(labelAssaut);
 
-        ImageIcon icon = new ImageIcon("C:\\Users\\vande\\Pictures\\valorant-reaver-vandal.png");
-        Image img = icon.getImage();
-        Image newImg = img.getScaledInstance(320, 160, Image.SCALE_SMOOTH);
-        ImageIcon newIcon = new ImageIcon(newImg);
-        JLabel imageLabelAssaut = new JLabel(newIcon);
-        imageLabelAssaut.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        jPanelAssaut.add(imageLabelAssaut);
+        jPanelAssaut.add(getImage("MesImages/vandal_defaut.png"));
 
         JPanel jPanelVide1 = new JPanel();
         jPanelAssaut.add(jPanelVide1);
 
-        jPanelAssaut.add(new JComboBox<ArmeAFeu>());
+        JComboBox<ArmeAFeu> comboBoxAssaut = new JComboBox<>();
+        comboBoxAssaut.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(10,10,10,10),
+                comboBoxAssaut.getBorder()
+        ));
+        jPanelAssaut.add(comboBoxAssaut);
 
         //SMG
         Label labelSMG = new Label("SMG",Label.CENTER);
         labelSMG.setFont(new Font("SansSerif",Font.BOLD,16));
         jPanelSMG.add(labelSMG);
 
-        JLabel imageLabelSMG = new JLabel(newIcon);
-        imageLabelSMG.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        jPanelSMG.add(imageLabelSMG);
+        jPanelSMG.add(getImage("MesImages/spectre_defaut.png"));
 
         JPanel jPanelVide2 = new JPanel();
         jPanelSMG.add(jPanelVide2);
 
-        jPanelSMG.add(new JComboBox<ArmeAFeu>());
+        JComboBox<ArmeAFeu> comboBoxSMG = new JComboBox<>();
+        comboBoxSMG.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(10,10,10,10),
+                comboBoxSMG.getBorder()
+        ));
+        jPanelSMG.add(comboBoxSMG);
 
         //Sniper
         Label labelSniper = new Label("Sniper",Label.CENTER);
         labelSniper.setFont(new Font("SansSerif",Font.BOLD,16));
         jPanelSniper.add(labelSniper);
 
-        JLabel imageLabelSniper = new JLabel(newIcon);
-        imageLabelSniper.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        jPanelSniper.add(imageLabelSniper);
+        jPanelSniper.add(getImage("MesImages/operator_defaut.png"));
 
         JPanel jPanelVide3 = new JPanel();
         jPanelSniper.add(jPanelVide3);
 
-        jPanelSniper.add(new JComboBox<ArmeAFeu>());
+        JComboBox<ArmeAFeu> comboBoxSniper = new JComboBox<>();
+        comboBoxSniper.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(10,10,10,10),
+                comboBoxSniper.getBorder()
+        ));
+        jPanelSniper.add(comboBoxSniper);
 
-        //Sniper
+        //CAC
         Label labelCAC = new Label("Corps à Corps",Label.CENTER);
         labelCAC.setFont(new Font("SansSerif",Font.BOLD,16));
         jPanelCAC.add(labelCAC);
 
-        JLabel imageLabelCAC = new JLabel(newIcon);
-        imageLabelCAC.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        jPanelCAC.add(imageLabelCAC);
+        jPanelCAC.add(getImage("MesImages/knife_kingdom.png"));
 
         JPanel jPanelVide4 = new JPanel();
         jPanelCAC.add(jPanelVide4);
 
-        jPanelCAC.add(new JComboBox<ArmeCAC>());
+        JComboBox<ArmeCAC> comboBoxCAC = new JComboBox<>();
+        comboBoxCAC.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(10,10,10,10),
+                comboBoxCAC.getBorder()
+        ));
+        jPanelCAC.add(comboBoxCAC);
+
+    }
+    public JLabel getImage(String filename) {
+        ImageIcon icon = new ImageIcon(filename);
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(250, 125, Image.SCALE_SMOOTH);
+        ImageIcon newIcon = new ImageIcon(newImg);
+
+        JLabel imageLabel = new JLabel(newIcon);
+        imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        return imageLabel;
     }
 
     public static void main(String[] args) {
+        com.formdev.flatlaf.FlatDarculaLaf.install();
         JFrame frame = new JFrame("InventoryWindow");
         frame.setContentPane(new InventoryWindow().jPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -201,3 +224,5 @@ public class InventoryWindow {
         frame.setVisible(true);
     }
 }
+
+

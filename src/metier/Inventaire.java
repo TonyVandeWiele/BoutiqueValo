@@ -1,4 +1,4 @@
-package métier;
+package metier;
 import java.util.ArrayList;
 
 public class Inventaire {
@@ -14,6 +14,8 @@ public class Inventaire {
         SMGList = new ArrayList<>();
         SniperList = new ArrayList<>();
         CACList = new ArrayList<>();
+
+        User = new Profil();
     }
 
     public static Inventaire getInstance() {
@@ -68,5 +70,14 @@ public class Inventaire {
         } else if (arme instanceof ArmeCAC) {
             getCACList().remove((ArmeCAC) arme);
         }
+    }
+
+    public void AjouterArgent(float argent)
+    {
+        getUser().setArgent(getUser().getArgent() + argent);
+    }
+    public void RetirerArgent(float argent)
+    {
+        getUser().setArgent(getUser().getArgent() - argent);
     }
 }

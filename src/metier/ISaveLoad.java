@@ -1,4 +1,4 @@
-package métier;
+package metier;
 
 public interface ISaveLoad {
 

@@ -1,54 +1,68 @@
-package métier;
-
+package metier;
 import java.io.*;
 
-public class Profil implements ISaveLoad, Serializable {
-    private String pseudo;
-    private int niveau;
-    private String avatar;
+abstract class Arme implements ISaveLoad, Serializable
+{
+    private String nom;
+    private Skin skin;
+    private String categorie;
+    private float prix;
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public int getNiveau() {
-        return niveau;
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public Profil()
+    public Arme()
     {
-        pseudo="Pas de pseudo";
-        niveau=0;
-        avatar="Pas d'avatar";
+        nom="Pas de Nom";
+        skin = new Skin();
+        categorie="Pas de Categorie";
+        prix=0;
     }
-    public Profil(String vPseudo, int vNiveau, String vAvatar)
+    public Arme(String vNom,Skin vSkin,String vCategorie,float vPrix)
     {
-        pseudo=vPseudo;
-        niveau=vNiveau;
-        avatar=vAvatar;
+        nom=vNom;
+        skin=vSkin;
+        categorie=vCategorie;
+        prix=vPrix;
+    }
+    public String getNom()
+    {
+        return nom;
+    }
+    public String getCategorie()
+    {
+        return categorie;
+    }
+    public  float getPrix() { return prix; }
+
+    public Skin getSkin() { return skin; }
+
+    public void setNom(String nom) { this.nom = nom; }
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+    public void setCategorie(String Categorie) {
+        this.categorie = Categorie;
     }
 
-    public void Affiche()
+    public void setSkin(Skin skin) { this.skin = skin; }
+
+
+    public String toString()
     {
-        System.out.println(toString());
+        return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix();
     }
     @Override
-    public String toString() {
-        return "\nPseudo : " + getPseudo() + "\nNiveau : " + getNiveau() + "\nAvatar : " +getAvatar();
-    }
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Profil profil = (Profil) obj;
-        if(getPseudo().equals(profil.getPseudo()) && getNiveau() == profil.getNiveau() && getAvatar().equals(profil.getAvatar()))
+        Arme arme = (Arme) obj;
+        if(getNom().equals(arme.getNom()) && getCategorie().equalsIgnoreCase(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix())
         {
             return true;
         }
         return false;
+    }
+    public void Affiche()
+    {
+        System.out.println("Voici une arme : " + toString());
     }
 
     public void Save(String filename, Object obj) {
