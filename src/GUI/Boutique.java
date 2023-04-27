@@ -12,15 +12,15 @@ import javax.swing.GroupLayout;
 /**
  * @author hiroy
  */
-public class Inventory {
-    public Inventory() {
+public class Boutique {
+    public Boutique() {
         initComponents();
     }
 
     public static void main(String[] args)
     {
         JFrame frame=new JFrame("Boutique Valo");
-        frame.setContentPane(new Inventory().ShopWindow);
+        frame.setContentPane(new Boutique().ShopWindow);
         frame.pack();
         frame.setVisible(true);
     }
