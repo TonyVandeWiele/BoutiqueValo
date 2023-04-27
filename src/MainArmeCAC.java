@@ -10,7 +10,7 @@ public class MainArmeCAC {
         ArmeCAC armecac3 = new ArmeCAC();
         armecac1.Affiche();
 
-        ArmeCAC armecac2 = new ArmeCAC("AK-47",new Skin("Revear", 200, Rarete.epique, "/pc/"),"Assaut",300,"Pas de desc",20);
+        ArmeCAC armecac2 = new ArmeCAC("AK-47",new Skin("Revear", Rarete.epique, "/pc/"),"Assaut",300,"Pas de desc",20);
         armecac2.Affiche();
 
         if(armecac1.equals(armecac3))

@@ -32,7 +32,7 @@ public class ArmeAFeu extends Arme implements Serializable
         portee=0;
         capaciteChargeur=0;
     }
-    public ArmeAFeu(String vNom, Skin vSkin,String vCategorie,int vPrix,String vDescription,int vDegTete,int vDegCorps,int vPortee,int vChargeur)
+    public ArmeAFeu(String vNom, Skin vSkin,String vCategorie,float vPrix,String vDescription,int vDegTete,int vDegCorps,int vPortee,int vChargeur)
     {
         super(vNom, vSkin,vCategorie, vPrix, vDescription);
         degatsTete=vDegTete;

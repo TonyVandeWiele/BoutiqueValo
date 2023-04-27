@@ -6,7 +6,7 @@ abstract class Arme implements ISaveLoad, Serializable
     private String nom;
     private Skin skin;
     private String categorie;
-    private int prix;
+    private float prix;
     private String description;
 
     public Arme()
@@ -17,7 +17,7 @@ abstract class Arme implements ISaveLoad, Serializable
         prix=0;
         description="Pas de Description";
     }
-    public Arme(String vNom,Skin vSkin,String vCategorie,int vPrix,String vDescription)
+    public Arme(String vNom,Skin vSkin,String vCategorie,float vPrix,String vDescription)
     {
         nom=vNom;
         skin=vSkin;
@@ -33,7 +33,7 @@ abstract class Arme implements ISaveLoad, Serializable
     {
         return categorie;
     }
-    public  int getPrix()
+    public  float getPrix()
     {
         return prix;
     }
