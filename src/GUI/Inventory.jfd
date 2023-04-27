@@ -1,0 +1,101 @@
+JFDML JFormDesigner: "8.0.3.0.246" Java: "17.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "122, 139, 123"
+			"$rowSpecs": "260, 0"
+			"$hGap": 5
+			"$vGap": 5
+			"$alignTop": true
+			"$alignLeft": true
+		} ) {
+			name: "ShopWindow"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPaneListeArme"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp labelcatégorie::l::127:x, comp labelnom::l::127:x, comp labelskin::t::127:x, comp labelcapacitéchargeur::t::127:x, comp labelportée::t::127:x, comp labeldegat::t::127:x, comp labelprix::t::127:x}, space :::p}}"
+				"$verticalGroup": "par l {seq t {space :::p, comp labelcatégorie:::p:22:p, space :::p, comp labelnom:::p:22:p, space s:::p, comp labeldegat:::p:22:p, space :p:20:p, comp labelportée:::p:22:p, space :::p, comp labelcapacitéchargeur:::p:22:p, space :p:10:p, comp labelskin:::p:22:p, space u:::p, comp labelprix:::p:22:p, space ::28:x}}"
+			} ) {
+				name: "paneldescriptionarme"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labeldegat"
+					"text": "Dégats"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelprix"
+					"text": "Prix"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelskin"
+					"text": "Skin"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelportée"
+					"text": "Portée"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelcapacitéchargeur"
+					"text": "Capacité chargeur"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelcatégorie"
+					"text": "Catégorie"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelnom"
+					"text": "Nom"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp textFieldportee::l:::x, comp textFieldcapacitechargeur::l:::x, comp textFieldskin::l:::x, comp comboBoxCategorie::l:::x, comp textFielddegat::t:::x, comp textFieldnom::t:::x, seq l {comp textFieldprix:::p:111:p, space :0:0:x}}, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :p:14:p, comp comboBoxCategorie:::p:22:p, space :::p, comp textFieldnom:::p:22:p, space u:::p, comp textFielddegat:::p:22:p, space s:::p, comp textFieldportee:::p:22:p, space :::p, comp textFieldcapacitechargeur:::p:22:p, space :::p, comp textFieldskin:::p:22:p, space s:::p, comp textFieldprix:::p:22:p, space ::26:x}}"
+			} ) {
+				name: "panelValeur"
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldskin"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldnom"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFielddegat"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldportee"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldcapacitechargeur"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldprix"
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "comboBoxCategorie"
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 2
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button9"
+				"text": "Nouvelle Arme"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button10"
+				"text": "Acheter"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 2
+				"gridy": 1
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 30, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
