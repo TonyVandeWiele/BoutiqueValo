@@ -1,18 +1,15 @@
-import metier.ArmeCAC;
-import metier.Rarete;
-import metier.Skin;
+import metier.*;
 
 public class MainArmeCAC {
     public static void main(String[] args)
     {
-        ArmeCAC armecac1 = new ArmeCAC();
-        ArmeCAC armecac3 = new ArmeCAC();
-        armecac1.Affiche();
+        ArmeCAC armeBase = new ArmeCAC();
+        armeBase.Affiche();
 
-        ArmeCAC armecac2 = new ArmeCAC("AK-47",new Skin("Revear", Rarete.epique, "/pc/"),"Assaut",300,20);
-        armecac2.Affiche();
+        ArmeCAC armeCAC = new ArmeCAC("Vandal",new Skin("Reaver",Rarete.epique,"/img"),Categorie.CAC,200,50);
+        armeCAC.Affiche();
 
-        if(armecac1.equals(armecac3))
+        if(armeBase.equals(armeCAC))
         {
             System.out.println("Egal");
         }
@@ -20,5 +17,12 @@ public class MainArmeCAC {
         {
             System.out.println("Pas Egal");
         }
+
+        armeCAC.Save("Data.bin",armeCAC);
+
+        ArmeCAC armeLoad =new ArmeCAC();
+        armeLoad = (ArmeCAC) armeLoad.Load("Data.bin");
+
+        armeLoad.Affiche();
     }
 }

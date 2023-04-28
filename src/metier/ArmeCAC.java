@@ -13,7 +13,7 @@ public class ArmeCAC extends Arme
         super();
         degatTranchant=0;
     }
-    public ArmeCAC(String vNom, Skin vSkin,String vCategorie,int vPrix,int vDegatTranchant)
+    public ArmeCAC(String vNom, Skin vSkin,Categorie vCategorie,int vPrix,int vDegatTranchant)
     {
         super(vNom, vSkin,vCategorie, vPrix);
         degatTranchant=vDegatTranchant;

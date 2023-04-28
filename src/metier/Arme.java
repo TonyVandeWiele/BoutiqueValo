@@ -5,17 +5,17 @@ abstract class Arme implements ISaveLoad, Serializable
 {
     private String nom;
     private Skin skin;
-    private String categorie;
+    private Categorie categorie;
     private float prix;
 
     public Arme()
     {
         nom="Pas de Nom";
         skin = new Skin();
-        categorie="Pas de Categorie";
+        categorie=Categorie.Assaut;
         prix=0;
     }
-    public Arme(String vNom,Skin vSkin,String vCategorie,float vPrix)
+    public Arme(String vNom,Skin vSkin,Categorie vCategorie,float vPrix)
     {
         nom=vNom;
         skin=vSkin;
@@ -26,7 +26,7 @@ abstract class Arme implements ISaveLoad, Serializable
     {
         return nom;
     }
-    public String getCategorie()
+    public Categorie getCategorie()
     {
         return categorie;
     }
@@ -38,7 +38,7 @@ abstract class Arme implements ISaveLoad, Serializable
     public void setPrix(int prix) {
         this.prix = prix;
     }
-    public void setCategorie(String Categorie) {
+    public void setCategorie(Categorie Categorie) {
         this.categorie = Categorie;
     }
 
@@ -54,7 +54,7 @@ abstract class Arme implements ISaveLoad, Serializable
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Arme arme = (Arme) obj;
-        if(getNom().equals(arme.getNom()) && getCategorie().equalsIgnoreCase(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix())
+        if(getNom().equals(arme.getNom()) && getCategorie().equals(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix())
         {
             return true;
         }

@@ -4,16 +4,11 @@ import java.io.*;
 
 public class Profil implements ISaveLoad, Serializable {
     private String pseudo;
-    private int niveau;
     private String avatar;
     private float argent;
 
     public String getAvatar() {
         return avatar;
-    }
-
-    public int getNiveau() {
-        return niveau;
     }
 
     public String getPseudo() {
@@ -28,10 +23,6 @@ public class Profil implements ISaveLoad, Serializable {
         this.argent = argent;
     }
 
-    public void setNiveau(int niveau) {
-        this.niveau = niveau;
-    }
-
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
@@ -43,14 +34,12 @@ public class Profil implements ISaveLoad, Serializable {
     public Profil()
     {
         pseudo="Pas de pseudo";
-        niveau=0;
         avatar="Pas d'avatar";
         argent=0;
     }
-    public Profil(String vPseudo, int vNiveau, String vAvatar)
+    public Profil(String vPseudo, String vAvatar)
     {
         pseudo=vPseudo;
-        niveau=vNiveau;
         avatar=vAvatar;
         argent=0;
     }
@@ -61,13 +50,13 @@ public class Profil implements ISaveLoad, Serializable {
     }
     @Override
     public String toString() {
-        return "\nPseudo : " + getPseudo() + "\nNiveau : " + getNiveau() + "\nArgent" + getArgent() + "\nAvatar : " +getAvatar();
+        return "\nPseudo : " + getPseudo() + "\nArgent" + getArgent() + "\nAvatar : " +getAvatar();
     }
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Profil profil = (Profil) obj;
-        if(getPseudo().equals(profil.getPseudo()) && getNiveau() == profil.getNiveau() && getAvatar().equals(profil.getAvatar()))
+        if(getPseudo().equals(profil.getPseudo()) && getAvatar().equals(profil.getAvatar()))
         {
             return true;
         }

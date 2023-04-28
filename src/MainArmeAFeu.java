@@ -1,4 +1,5 @@
 import metier.ArmeAFeu;
+import metier.Categorie;
 import metier.Rarete;
 import metier.Skin;
 
@@ -8,12 +9,13 @@ public class MainArmeAFeu implements Serializable
 {
     public static void main(String[] args)
     {
-        ArmeAFeu arme1 = new ArmeAFeu();
-        arme1.Affiche();
-        ArmeAFeu arme2 = new ArmeAFeu("AK-47",new Skin("Revear", Rarete.epique, "/pc/"),"Assaut",300,10,5,30,30);
-        arme2.Affiche();
+        ArmeAFeu armeBase = new ArmeAFeu();
+        armeBase.Affiche();
 
-        if(arme1.equals(arme2))
+        ArmeAFeu armeAssaut = new ArmeAFeu("Vandal",new Skin("Reaver",Rarete.epique,"/img"),Categorie.Assaut,300,60,30,90,35);
+        armeAssaut.Affiche();
+
+        if(armeBase.equals(armeAssaut))
         {
             System.out.println("Egal");
         }
@@ -22,15 +24,11 @@ public class MainArmeAFeu implements Serializable
             System.out.println("Pas Egal");
         }
 
-        arme2.Save("Data.bin",arme2);
+        armeAssaut.Save("Data.bin",armeAssaut);
 
-        ArmeAFeu arme =new ArmeAFeu();
+        ArmeAFeu armeAssautLoad =new ArmeAFeu();
+        armeAssautLoad = (ArmeAFeu) armeAssautLoad.Load("Data.bin");
 
-        arme = (ArmeAFeu) arme.Load("Data.bin");
-
-        arme.Affiche();
-
-
-
+        armeAssautLoad.Affiche();
     }
 }
