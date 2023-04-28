@@ -31,7 +31,6 @@ abstract class Arme implements ISaveLoad, Serializable
         return categorie;
     }
     public  float getPrix() { return prix; }
-
     public Skin getSkin() { return skin; }
 
     public void setNom(String nom) { this.nom = nom; }

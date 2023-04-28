@@ -2,7 +2,7 @@ package metier;
 import java.util.ArrayList;
 import java.io.*;
 
-public class Inventaire implements ISaveLoad
+public class Inventaire
 {
     private static Inventaire INSTANCE = null;
     private ArrayList<ArmeAFeu> AssautList;
@@ -38,8 +38,11 @@ public class Inventaire implements ISaveLoad
     public ArrayList<ArmeAFeu> getSniperList() { return SniperList; }
     public ArrayList<ArmeCAC> getCACList() { return CACList; }
     public ArrayList<Skin> getSkinList() { return SkinList; }
-
     public Profil getUser() { return User; }
+
+    public void setAssautList(ArrayList<ArmeAFeu> assautList) {
+        AssautList = assautList;
+    }
 
     public <T extends Arme> void AjouterArme(T arme)
     {
@@ -85,34 +88,56 @@ public class Inventaire implements ISaveLoad
         getUser().setArgent(getUser().getArgent() - argent);
     }
 
-    public void Save(String fileName, Object data) {
-        try {
-            FileOutputStream fileOut = new FileOutputStream(fileName);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(data);
-            out.close();
-            fileOut.close();
-            System.out.println("Données enregistrées avec succès dans " + fileName);
-        } catch (IOException e) {
-            System.err.println("Erreur lors de la sauvegarde des données : " + e.getMessage());
+    public void SaveListFeu(ArrayList<ArmeAFeu> armeAFeuList, String nomFichier)
+    {
+        try
+        {
+            // Créer un flux de sortie pour écrire les données binaires dans le fichier
+            FileOutputStream fichierSortie = new FileOutputStream(nomFichier);
+
+            // Créer un flux d'objet pour sérialiser la liste
+            ObjectOutputStream objetSortie = new ObjectOutputStream(fichierSortie);
+
+            // Écrire la liste d'objets dans le fichier binaire
+            objetSortie.writeObject(armeAFeuList);
+
+            // Fermer les flux
+            objetSortie.close();
+            fichierSortie.close();
+
+            System.out.println("La liste d'objets a été sauvegardée dans le fichier " + nomFichier);
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
-    public Object Load(String fileName) {
-        Object data = null;
-        try {
-            FileInputStream fileIn = new FileInputStream(fileName);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            data = in.readObject();
-            in.close();
-            fileIn.close();
-            System.out.println("Données chargées avec succès depuis " + fileName);
-        } catch (IOException e) {
-            System.err.println("Erreur lors du chargement des données : " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.err.println("Erreur lors du chargement des données : classe introuvable.");
+    public ArrayList<ArmeAFeu> LoadListFeu (String nomFichier)
+    {
+        ArrayList<ArmeAFeu> listeObjets = new ArrayList<>();
+        try
+        {
+            // Créer un flux d'entrée pour lire les données binaires du fichier
+            FileInputStream fichierEntree = new FileInputStream(nomFichier);
+
+            // Créer un flux d'objet pour désérialiser la liste
+            ObjectInputStream objetEntree = new ObjectInputStream(fichierEntree);
+
+            // Lire la liste d'objets depuis le fichier binaire
+            listeObjets = (ArrayList<ArmeAFeu>) objetEntree.readObject();
+
+            // Fermer les flux
+            objetEntree.close();
+            fichierEntree.close();
+
+            System.out.println("La liste d'objets a été chargée depuis le fichier " + nomFichier);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return data;
+        return listeObjets;
     }
 }
