@@ -1,12 +1,14 @@
 package metier;
 import java.util.ArrayList;
 
-public class Inventaire {
+public class Inventaire implements ISaveLoad
+{
     private static Inventaire INSTANCE = null;
     private ArrayList<ArmeAFeu> AssautList;
     private ArrayList<ArmeAFeu> SMGList;
     private ArrayList<ArmeAFeu> SniperList;
     private ArrayList<ArmeCAC> CACList;
+    private ArrayList<Skin> SkinList;
     private Profil User;
 
     private Inventaire() {
@@ -14,6 +16,8 @@ public class Inventaire {
         SMGList = new ArrayList<>();
         SniperList = new ArrayList<>();
         CACList = new ArrayList<>();
+
+        SkinList = new ArrayList>;
 
         User = new Profil();
     }
@@ -34,6 +38,7 @@ public class Inventaire {
     }
     public ArrayList<ArmeAFeu> getSniperList() { return SniperList; }
     public ArrayList<ArmeCAC> getCACList() { return CACList; }
+    public ArrayList<Skin> getSkinList() { return SkinList; }
 
     public Profil getUser() { return User; }
 
@@ -79,5 +84,13 @@ public class Inventaire {
     public void RetirerArgent(float argent)
     {
         getUser().setArgent(getUser().getArgent() - argent);
+    }
+    public void Save(String fileName, Object data)
+    {
+
+    }
+    public Object Load(String fileName)
+    {
+
     }
 }
