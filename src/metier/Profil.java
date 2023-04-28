@@ -1,21 +1,20 @@
 package metier;
 
+import javax.xml.crypto.Data;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Profil implements ISaveLoad, Serializable {
     private String pseudo;
     private String avatar;
     private float argent;
+    private LocalDateTime datecreationProfil;
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-
+    public String getAvatar() { return avatar;}
+    public String getPseudo() { return pseudo; }
     public float getArgent() { return argent; }
+    public LocalDateTime getdateCreationProfil() { return datecreationProfil; }
 
     public void setArgent(float argent) {
         if(argent < 0)
@@ -36,12 +35,14 @@ public class Profil implements ISaveLoad, Serializable {
         pseudo="Pas de pseudo";
         avatar="Pas d'avatar";
         argent=0;
+        datecreationProfil = LocalDateTime.now();
     }
     public Profil(String vPseudo, String vAvatar)
     {
         pseudo=vPseudo;
         avatar=vAvatar;
         argent=0;
+        datecreationProfil = LocalDateTime.now();
     }
 
     public void Affiche()
@@ -50,13 +51,13 @@ public class Profil implements ISaveLoad, Serializable {
     }
     @Override
     public String toString() {
-        return "\nPseudo : " + getPseudo() + "\nArgent" + getArgent() + "\nAvatar : " +getAvatar();
+        return "\nPseudo : " + getPseudo() + "\nArgent" + getArgent() + "\nAvatar : " +getAvatar() + "\nDate création : " + getdateCreationProfil();
     }
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Profil profil = (Profil) obj;
-        if(getPseudo().equals(profil.getPseudo()) && getAvatar().equals(profil.getAvatar()))
+        if(getPseudo().equals(profil.getPseudo()) && getAvatar().equals(profil.getAvatar()) && getdateCreationProfil().equals(profil.getdateCreationProfil()))
         {
             return true;
         }

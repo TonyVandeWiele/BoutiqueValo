@@ -2,9 +2,10 @@ import metier.Profil;
 import metier.Rarete;
 import metier.Skin;
 
+import java.io.IOException;
+
 public class MainSkin {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         Skin SkinBase = new Skin();
         SkinBase.Affiche();
 
@@ -20,6 +21,8 @@ public class MainSkin {
             System.out.println("Pas Egal");
         }
 
-        SkinPerso.Save("");
+        SkinPerso.Save("DataSkin.csv",SkinPerso);
+
+        SkinBase.Affiche();
     }
 }

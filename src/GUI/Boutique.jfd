@@ -16,6 +16,7 @@ new FormModel {
 			"minimumSize": new java.awt.Dimension( 400, 300 )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPaneListeArme"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"insets": new java.awt.Insets( 1, 1, 1, 1 )
 			} )
@@ -24,33 +25,41 @@ new FormModel {
 				"$verticalGroup": "par l {seq t {space ::13:x, comp labelcatégorie:::p:22:p, space ::14:x, comp labelnom:::p:22:p, space ::14:x, comp labeldegat:::p:22:p, space ::14:x, comp labelportée:::p:22:p, space ::14:x, comp labelcapacitéchargeur:::p:22:p, space ::14:x, comp labelskin:::p:22:p, space ::14:x, comp labelprix:::p:22:p, space ::9:x}}"
 			} ) {
 				name: "paneldescriptionarme"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labeldegat"
 					"text": "Dégats"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelprix"
 					"text": "Prix"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelskin"
 					"text": "Skin"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelportée"
 					"text": "Portée"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelcapacitéchargeur"
 					"text": "Capacité chargeur"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelcatégorie"
 					"text": "Catégorie"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "labelnom"
 					"text": "Nom"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 1
@@ -61,6 +70,7 @@ new FormModel {
 				"$verticalGroup": "par l {seq l {space ::10:x, comp comboBoxCategorie:::p:24:p, space ::12:x, comp textFieldnom:::p:24:p, space ::12:x, comp textFielddegat:::p:24:p, space ::12:x, comp textFieldportee:::p:24:p, space ::12:x, comp textFieldcapacitechargeur:::p:24:p, space ::12:x, comp textFieldskin:::p:24:p, space ::12:x, comp textFieldprix:::p:24:p, space ::10:x}}"
 			} ) {
 				name: "panelValeur"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "textFieldskin"
 				} )
@@ -81,6 +91,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JComboBox" ) {
 					name: "comboBoxCategorie"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
@@ -89,6 +100,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button9"
 				"text": "Nouvelle Arme"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridy": 1
 				"insets": new java.awt.Insets( 1, 1, 1, 1 )
@@ -96,14 +108,16 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button10"
 				"text": "Acheter"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
 				"gridx": 2
 				"gridy": 1
 				"insets": new java.awt.Insets( 1, 1, 1, 1 )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 30, 0 )
+			"location": new java.awt.Point( 100, 40 )
 			"size": new java.awt.Dimension( 400, 300 )
 		} )
 	}
 }
+

@@ -77,7 +77,11 @@ public class InventoryWindow {
         imageLabelProfil.setBorder(BorderFactory.createLineBorder(Color.black));
         jPanelProfil.add(imageLabelProfil);
 
-        Label labelLVL = new Label("LVL : ",Label.CENTER);
+        Label labelLVL = new Label("Argent : ",Label.CENTER);
+        labelLVL.setFont(new Font("SansSerif",Font.BOLD,14));
+        jPanelProfil.add(labelLVL);
+
+        Label labelDate = new Label("Date Création Profil : ",Label.CENTER);
         labelLVL.setFont(new Font("SansSerif",Font.BOLD,14));
         jPanelProfil.add(labelLVL);
 
@@ -216,10 +220,9 @@ public class InventoryWindow {
         JFrame frame = new JFrame("InventoryWindow");
         frame.setContentPane(new InventoryWindow().jPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800,600);
-        frame.setMinimumSize(new Dimension(500,300));
+        frame.setMinimumSize(new Dimension(940,600));
+        frame.setSize(new Dimension(940,600));
         frame.setLocationRelativeTo(null);
-
 
         frame.setVisible(true);
     }

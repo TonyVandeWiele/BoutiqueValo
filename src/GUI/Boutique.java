@@ -45,13 +45,7 @@ public class Boutique {
         textFieldportee = new JTextField();
         textFieldcapacitechargeur = new JTextField();
         textFieldprix = new JTextField();
-        DefaultComboBoxModel listearme=new DefaultComboBoxModel<>();
-        listearme.addElement("Assaut");
-        listearme.addElement("SMG");
-        listearme.addElement("Sniper");
-        listearme.addElement("Corps à corps");
-        comboBoxCategorie = new JComboBox(listearme);
-        comboBoxCategorie.setSelectedIndex(0);
+        comboBoxCategorie = new JComboBox();
         button9 = new JButton();
         button10 = new JButton();
 
@@ -59,46 +53,58 @@ public class Boutique {
         {
             ShopWindow.setPreferredSize(new Dimension(400, 300));
             ShopWindow.setMinimumSize(new Dimension(400, 300));
-            ShopWindow.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
-            new javax.swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion"
-            ,javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
-            ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12)
-            ,java.awt.Color.red),ShopWindow. getBorder()));ShopWindow. addPropertyChangeListener(
-            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-            ){if("bord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
-            ;}});
+            ShopWindow.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,ShopWindow. getBorder( )) ); ShopWindow. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             ShopWindow.setLayout(new GridBagLayout());
             ((GridBagLayout)ShopWindow.getLayout()).columnWidths = new int[] {127, 144, 123, 0};
             ((GridBagLayout)ShopWindow.getLayout()).rowHeights = new int[] {265, 0, 0};
             ((GridBagLayout)ShopWindow.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
             ((GridBagLayout)ShopWindow.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
+
+            //======== scrollPaneListeArme ========
+            {
+                scrollPaneListeArme.setMaximumSize(new Dimension(2147483647, 2147483647));
+            }
             ShopWindow.add(scrollPaneListeArme, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(1, 1, 6, 6), 0, 0));
 
             //======== paneldescriptionarme ========
             {
+                paneldescriptionarme.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 //---- labeldegat ----
                 labeldegat.setText("D\u00e9gats");
+                labeldegat.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 //---- labelprix ----
                 labelprix.setText("Prix");
+                labelprix.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 //---- labelskin ----
                 labelskin.setText("Skin");
+                labelskin.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 //---- labelportée ----
                 labelportée.setText("Port\u00e9e");
+                labelportée.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 //---- labelcapacitéchargeur ----
                 labelcapacitéchargeur.setText("Capacit\u00e9 chargeur");
+                labelcapacitéchargeur.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 //---- labelcatégorie ----
                 labelcatégorie.setText("Cat\u00e9gorie");
+                labelcatégorie.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 //---- labelnom ----
                 labelnom.setText("Nom");
+                labelnom.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 GroupLayout paneldescriptionarmeLayout = new GroupLayout(paneldescriptionarme);
                 paneldescriptionarme.setLayout(paneldescriptionarmeLayout);
@@ -142,6 +148,10 @@ public class Boutique {
 
             //======== panelValeur ========
             {
+                panelValeur.setMaximumSize(new Dimension(2147483647, 2147483647));
+
+                //---- comboBoxCategorie ----
+                comboBoxCategorie.setMaximumSize(new Dimension(2147483647, 2147483647));
 
                 GroupLayout panelValeurLayout = new GroupLayout(panelValeur);
                 panelValeur.setLayout(panelValeurLayout);
@@ -156,7 +166,7 @@ public class Boutique {
                                 .addComponent(textFielddegat, GroupLayout.Alignment.TRAILING)
                                 .addComponent(textFieldnom, GroupLayout.Alignment.TRAILING)
                                 .addComponent(textFieldprix)
-                                .addComponent(comboBoxCategorie))
+                                .addComponent(comboBoxCategorie, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap())
                 );
                 panelValeurLayout.setVerticalGroup(
@@ -185,12 +195,14 @@ public class Boutique {
 
             //---- button9 ----
             button9.setText("Nouvelle Arme");
+            button9.setMaximumSize(new Dimension(2147483647, 2147483647));
             ShopWindow.add(button9, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(1, 1, 1, 6), 0, 0));
 
             //---- button10 ----
             button10.setText("Acheter");
+            button10.setMaximumSize(new Dimension(2147483647, 2147483647));
             ShopWindow.add(button10, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(1, 1, 1, 1), 0, 0));

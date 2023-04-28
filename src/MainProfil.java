@@ -17,9 +17,10 @@ public class MainProfil {
         {
             System.out.println("Pas Egal");
         }
-        profilUser.Save("Data.bin",profilUser);
+        profilUser.Save("DataUser.bin",profilUser);
 
         Profil profilLoad = new Profil();
-        profilLoad.Load("DataUser.bin");
+        profilLoad = (Profil) profilLoad.Load("DataUser.bin");
+        profilLoad.Affiche();
     }
 }
