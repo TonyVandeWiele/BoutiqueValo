@@ -2,18 +2,18 @@ Projet JAVA Gestion d'un inventaire et d'un boutique d'arme
 
 Package métier
   
-  Class -> abstract Arme
-           ArmeAFeu (Hérite de Arme)
-           ArmeCAC  (Hérite de Arme)
-           Skin
-           Profil
+  Class -> abstract Arme 
+           -ArmeAFeu (Hérite de Arme)
+           -ArmeCAC  (Hérite de Arme)
+           -Skin
+          -Profil
   
   Enum -> Categorie
-          Rareté
+          -Rareté
   
-  Interface - > ISaveLoad
+  Interface -> ISaveLoad
   
-Package GUI
+Package GUI -> 
   -InventoryWindow
   -ShopWindow
   
