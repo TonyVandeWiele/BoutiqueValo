@@ -17,7 +17,7 @@ public class Inventaire implements ISaveLoad
         SniperList = new ArrayList<>();
         CACList = new ArrayList<>();
 
-        SkinList = new ArrayList>;
+        SkinList = new ArrayList<>();
 
         User = new Profil();
     }
@@ -87,10 +87,10 @@ public class Inventaire implements ISaveLoad
     }
     public void Save(String fileName, Object data)
     {
-
+        return;
     }
     public Object Load(String fileName)
     {
-
+        return new Object();
     }
 }
