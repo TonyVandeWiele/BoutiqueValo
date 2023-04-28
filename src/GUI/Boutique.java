@@ -45,7 +45,13 @@ public class Boutique {
         textFieldportee = new JTextField();
         textFieldcapacitechargeur = new JTextField();
         textFieldprix = new JTextField();
-        comboBoxCategorie = new JComboBox();
+        DefaultComboBoxModel listearme=new DefaultComboBoxModel<>();
+        listearme.addElement("Assaut");
+        listearme.addElement("SMG");
+        listearme.addElement("Sniper");
+        listearme.addElement("Corps à corps");
+        comboBoxCategorie = new JComboBox(listearme);
+        comboBoxCategorie.setSelectedIndex(0);
         button9 = new JButton();
         button10 = new JButton();
 
