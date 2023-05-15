@@ -1,16 +1,17 @@
-import metier.*;
-
-import java.util.ArrayList;
-
+import Model.*;
 public class Main {
     public static void main(String[] args)
     {
+        ArmeAFeu armeBaseAssaut = new ArmeAFeu();
 
-        Inventaire.getInstance().setAssautList(Inventaire.getInstance().LoadListFeu("DataListArme.bin"));
+        ArmeAFeu armeAssaut = new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.epique,"/img"), Categorie.Assaut,300,60,30,90,35);
+
+        Inventaire.getInstance().AjouterArme(armeBaseAssaut);
+        Inventaire.getInstance().AjouterArme(armeAssaut);
+
         for ( ArmeAFeu armeAssautList : Inventaire.getInstance().getAssautList())
         {
             armeAssautList.Affiche();
         }
-
     }
 }

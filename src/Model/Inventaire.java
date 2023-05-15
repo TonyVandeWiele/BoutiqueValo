@@ -1,4 +1,5 @@
-package metier;
+package Model;
+
 import java.util.ArrayList;
 import java.io.*;
 

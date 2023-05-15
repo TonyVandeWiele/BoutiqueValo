@@ -1,67 +1,65 @@
-package metier;
+package Model;
 
-import javax.xml.crypto.Data;
 import java.io.*;
-import java.time.LocalDateTime;
-import java.util.Date;
 
-public class Profil implements ISaveLoad, Serializable {
-    private String pseudo;
-    private String avatar;
-    private float argent;
-    private LocalDateTime datecreationProfil;
-
-    public String getAvatar() { return avatar;}
-    public String getPseudo() { return pseudo; }
-    public float getArgent() { return argent; }
-    public LocalDateTime getdateCreationProfil() { return datecreationProfil; }
-
-    public void setArgent(float argent) {
-        if(argent < 0)
-            throw new RuntimeException("Pas de Prix Négatif !");
-        this.argent = argent;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Profil()
+public class ArmeAFeu extends Arme implements Serializable
+{
+    private int degatsTete;
+    private int degatsCorps;
+    private int portee;
+    private int capaciteChargeur;
+    public int getDegatsTete()
     {
-        pseudo="Pas de pseudo";
-        avatar="Pas d'avatar";
-        argent=0;
-        datecreationProfil = LocalDateTime.now();
+        return degatsTete;
     }
-    public Profil(String vPseudo, String vAvatar)
+    public int getDegatsCorps()
     {
-        pseudo=vPseudo;
-        avatar=vAvatar;
-        argent=0;
-        datecreationProfil = LocalDateTime.now();
+        return degatsCorps;
+    }
+    public int getPortee()
+    {
+        return portee;
+    }
+    public int getCapaciteChargeur()
+    {
+        return capaciteChargeur;
+    }
+    public ArmeAFeu()
+    {
+        super();
+        degatsTete=0;
+        degatsCorps=0;
+        portee=0;
+        capaciteChargeur=0;
+    }
+    public ArmeAFeu(String vNom, Skin vSkin,Categorie vCategorie,float vPrix,int vDegTete,int vDegCorps,int vPortee,int vChargeur)
+    {
+        super(vNom, vSkin,vCategorie, vPrix);
+        degatsTete=vDegTete;
+        degatsCorps=vDegCorps;
+        portee=vPortee;
+        capaciteChargeur=vChargeur;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nDegat dans la Tete : " + getDegatsTete() + "\nDegat dans le corps : " + getDegatsCorps()+ "\nPortée de l'arme : " + getPortee() + "\nCapacité du chargeur : " + getCapaciteChargeur();
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ArmeAFeu armeAFeu = (ArmeAFeu) obj;
+        if(super.equals(armeAFeu) && getDegatsTete() == armeAFeu.getDegatsTete() && getPortee() == armeAFeu.getPortee() && getCapaciteChargeur() == armeAFeu.getCapaciteChargeur())
+        {
+            return true;
+        }
+        return false;
     }
 
     public void Affiche()
     {
         System.out.println(toString());
-    }
-    @Override
-    public String toString() {
-        return "\nPseudo : " + getPseudo() + "\nArgent" + getArgent() + "\nAvatar : " +getAvatar() + "\nDate création : " + getdateCreationProfil();
-    }
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Profil profil = (Profil) obj;
-        if(getPseudo().equals(profil.getPseudo()) && getAvatar().equals(profil.getAvatar()) && getdateCreationProfil().equals(profil.getdateCreationProfil()))
-        {
-            return true;
-        }
-        return false;
     }
 
     public void Save(String filename, Object obj) {

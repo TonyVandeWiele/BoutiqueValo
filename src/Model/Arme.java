@@ -1,65 +1,68 @@
-package metier;
+package Model;
 
 import java.io.*;
 
-public class ArmeAFeu extends Arme implements Serializable
+abstract class Arme implements Model.ISaveLoad, Serializable
 {
-    private int degatsTete;
-    private int degatsCorps;
-    private int portee;
-    private int capaciteChargeur;
-    public int getDegatsTete()
+    private String nom;
+    private Model.Skin skin;
+    private Model.Categorie categorie;
+    private float prix;
+
+    public Arme()
     {
-        return degatsTete;
+        nom="Pas de Nom";
+        skin = new Model.Skin();
+        categorie= Model.Categorie.Assaut;
+        prix=0;
     }
-    public int getDegatsCorps()
+    public Arme(String vNom, Model.Skin vSkin, Categorie vCategorie, float vPrix)
     {
-        return degatsCorps;
+        nom=vNom;
+        skin=vSkin;
+        categorie=vCategorie;
+        prix=vPrix;
     }
-    public int getPortee()
+    public String getNom()
     {
-        return portee;
+        return nom;
     }
-    public int getCapaciteChargeur()
+    public Model.Categorie getCategorie()
     {
-        return capaciteChargeur;
+        return categorie;
     }
-    public ArmeAFeu()
-    {
-        super();
-        degatsTete=0;
-        degatsCorps=0;
-        portee=0;
-        capaciteChargeur=0;
+    public  float getPrix() { return prix; }
+    public Skin getSkin() { return skin; }
+
+    public void setNom(String nom) { this.nom = nom; }
+    public void setPrix(int prix) {
+        this.prix = prix;
     }
-    public ArmeAFeu(String vNom, Skin vSkin,Categorie vCategorie,float vPrix,int vDegTete,int vDegCorps,int vPortee,int vChargeur)
-    {
-        super(vNom, vSkin,vCategorie, vPrix);
-        degatsTete=vDegTete;
-        degatsCorps=vDegCorps;
-        portee=vPortee;
-        capaciteChargeur=vChargeur;
+    public void setCategorie(Model.Categorie Categorie) {
+        this.categorie = Categorie;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "\nDegat dans la Tete : " + getDegatsTete() + "\nDegat dans le corps : " + getDegatsCorps()+ "\nPortée de l'arme : " + getPortee() + "\nCapacité du chargeur : " + getCapaciteChargeur();
+    public void setSkin(Model.Skin skin) { this.skin = skin; }
+
+
+    public String toString()
+    {
+        return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix();
     }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        ArmeAFeu armeAFeu = (ArmeAFeu) obj;
-        if(super.equals(armeAFeu) && getDegatsTete() == armeAFeu.getDegatsTete() && getPortee() == armeAFeu.getPortee() && getCapaciteChargeur() == armeAFeu.getCapaciteChargeur())
+        Arme arme = (Arme) obj;
+        if(getNom().equals(arme.getNom()) && getCategorie().equals(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix())
         {
             return true;
         }
         return false;
     }
-
     public void Affiche()
     {
-        System.out.println(toString());
+        System.out.println("Voici une arme : " + toString());
     }
 
     public void Save(String filename, Object obj) {

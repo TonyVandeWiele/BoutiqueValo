@@ -1,4 +1,4 @@
-package metier;
+package Model;
 
 import java.io.IOException;
 

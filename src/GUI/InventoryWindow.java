@@ -1,10 +1,11 @@
 package GUI;
 
-import metier.ArmeAFeu;
-import metier.ArmeCAC;
+import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class InventoryWindow {
     private JPanel jPanel;
@@ -38,7 +39,7 @@ public class InventoryWindow {
         JButton jButtonInventaire = new JButton("Inventaire");
         JButton jButtonBoutique = new JButton("Boutique");
         JButton jButtonParametre = new JButton("Paramètre");
-
+        jButtonInventaire.addActionListener(e -> jButtonInventaire.setVisible(false));
         GridBagConstraints gbcButton = new GridBagConstraints();
         
         jPanelMenu.add(jButtonInventaire,gbcButton);

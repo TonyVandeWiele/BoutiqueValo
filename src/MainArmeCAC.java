@@ -1,4 +1,4 @@
-import metier.*;
+import Model.*;
 
 public class MainArmeCAC {
     public static void main(String[] args)
@@ -6,7 +6,7 @@ public class MainArmeCAC {
         ArmeCAC armeBase = new ArmeCAC();
         armeBase.Affiche();
 
-        ArmeCAC armeCAC = new ArmeCAC("Vandal",new Skin("Reaver",Rarete.epique,"/img"),Categorie.CAC,200,50);
+        ArmeCAC armeCAC = new ArmeCAC("Vandal",new Skin("Reaver", Rarete.epique,"/img"), Categorie.CAC,200,50);
         armeCAC.Affiche();
 
         if(armeBase.equals(armeCAC))

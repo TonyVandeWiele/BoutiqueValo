@@ -1,4 +1,4 @@
-package metier;
+package Model;
 
 public class ArmeCAC extends Arme
 {

@@ -1,4 +1,4 @@
-package metier;
+package Model;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,7 +13,7 @@ public class Skin implements ISaveLoad, Serializable
     public Skin()
     {
         nom="Pas de Nom";
-        rarete=Rarete.commun;
+        rarete= Rarete.commun;
         image="Pas de Repertoire";
     }
     public Skin(String vNom, Rarete vRarete,String vImage)

@@ -1,67 +1,65 @@
-package metier;
+package Model;
+
 import java.io.*;
+import java.time.LocalDateTime;
 
-abstract class Arme implements ISaveLoad, Serializable
-{
-    private String nom;
-    private Skin skin;
-    private Categorie categorie;
-    private float prix;
+public class Profil implements ISaveLoad, Serializable {
+    private String pseudo;
+    private String avatar;
+    private float argent;
+    private LocalDateTime datecreationProfil;
 
-    public Arme()
+    public String getAvatar() { return avatar;}
+    public String getPseudo() { return pseudo; }
+    public float getArgent() { return argent; }
+    public LocalDateTime getdateCreationProfil() { return datecreationProfil; }
+
+    public void setArgent(float argent) {
+        if(argent < 0)
+            throw new RuntimeException("Pas de Prix Négatif !");
+        this.argent = argent;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Profil()
     {
-        nom="Pas de Nom";
-        skin = new Skin();
-        categorie=Categorie.Assaut;
-        prix=0;
+        pseudo="Pas de pseudo";
+        avatar="Pas d'avatar";
+        argent=0;
+        datecreationProfil = LocalDateTime.now();
     }
-    public Arme(String vNom,Skin vSkin,Categorie vCategorie,float vPrix)
+    public Profil(String vPseudo, String vAvatar)
     {
-        nom=vNom;
-        skin=vSkin;
-        categorie=vCategorie;
-        prix=vPrix;
-    }
-    public String getNom()
-    {
-        return nom;
-    }
-    public Categorie getCategorie()
-    {
-        return categorie;
-    }
-    public  float getPrix() { return prix; }
-    public Skin getSkin() { return skin; }
-
-    public void setNom(String nom) { this.nom = nom; }
-    public void setPrix(int prix) {
-        this.prix = prix;
-    }
-    public void setCategorie(Categorie Categorie) {
-        this.categorie = Categorie;
+        pseudo=vPseudo;
+        avatar=vAvatar;
+        argent=0;
+        datecreationProfil = LocalDateTime.now();
     }
 
-    public void setSkin(Skin skin) { this.skin = skin; }
-
-
-    public String toString()
+    public void Affiche()
     {
-        return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix();
+        System.out.println(toString());
     }
     @Override
+    public String toString() {
+        return "\nPseudo : " + getPseudo() + "\nArgent" + getArgent() + "\nAvatar : " +getAvatar() + "\nDate création : " + getdateCreationProfil();
+    }
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Arme arme = (Arme) obj;
-        if(getNom().equals(arme.getNom()) && getCategorie().equals(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix())
+        Profil profil = (Profil) obj;
+        if(getPseudo().equals(profil.getPseudo()) && getAvatar().equals(profil.getAvatar()) && getdateCreationProfil().equals(profil.getdateCreationProfil()))
         {
             return true;
         }
         return false;
-    }
-    public void Affiche()
-    {
-        System.out.println("Voici une arme : " + toString());
     }
 
     public void Save(String filename, Object obj) {
