@@ -18,11 +18,11 @@ public class MainArmeCAC {
             System.out.println("Pas Egal");
         }
 
-        armeCAC.Save("Data.bin",armeCAC);
+        //armeCAC.Save("Data.bin",armeCAC);
 
-        ArmeCAC armeLoad =new ArmeCAC();
-        armeLoad = (ArmeCAC) armeLoad.Load("Data.bin");
+        //ArmeCAC armeLoad =new ArmeCAC();
+        //armeLoad = (ArmeCAC) armeLoad.Load("Data.bin");
 
-        armeLoad.Affiche();
+        //armeLoad.Affiche();
     }
 }

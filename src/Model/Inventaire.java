@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.io.*;
 
@@ -11,13 +12,15 @@ public class Inventaire
     private ArrayList<ArmeAFeu> SniperList;
     private ArrayList<ArmeCAC> CACList;
     private ArrayList<Skin> SkinList;
+    private ArrayList<Arme> BoutiqueList;
     private Profil User;
 
-    private Inventaire() {
+    public Inventaire() {
         AssautList = new ArrayList<>();
         SMGList = new ArrayList<>();
         SniperList = new ArrayList<>();
         CACList = new ArrayList<>();
+        BoutiqueList = new ArrayList<>();
         SkinList = new ArrayList<>();
         User = new Profil();
     }
@@ -38,6 +41,9 @@ public class Inventaire
     }
     public ArrayList<ArmeAFeu> getSniperList() { return SniperList; }
     public ArrayList<ArmeCAC> getCACList() { return CACList; }
+    public ArrayList<Arme> getBoutiqueList() {
+        return BoutiqueList;
+    }
     public ArrayList<Skin> getSkinList() { return SkinList; }
     public Profil getUser() { return User; }
 
@@ -45,21 +51,31 @@ public class Inventaire
         AssautList = assautList;
     }
 
-    public <T extends Arme> void AjouterArme(T arme)
+    public <T extends Arme> void AjouterArme(int choix, T arme)
     {
-        if(arme instanceof ArmeAFeu)
+        if(choix == 1)
         {
-            if(arme.getCategorie().equals(Categorie.Assaut))
+            if(arme instanceof ArmeAFeu)
             {
-                getAssautList().add((ArmeAFeu) arme);
-            } else if (arme.getCategorie().equals(Categorie.SMG)) {
-                getSMGList().add((ArmeAFeu) arme);
+                if(arme.getCategorie().equals(Categorie.Assaut))
+                {
+                    getAssautList().add((ArmeAFeu) arme);
+                } else if (arme.getCategorie().equals(Categorie.SMG)) {
+                    getSMGList().add((ArmeAFeu) arme);
+                }
+                else if (arme.getCategorie().equals(Categorie.Sniper)){
+                    getSniperList().add((ArmeAFeu) arme);
+                }
+            } else if (arme instanceof ArmeCAC) {
+                getCACList().add((ArmeCAC) arme);
             }
-            else if (arme.getCategorie().equals(Categorie.Sniper)){
-                getSniperList().add((ArmeAFeu) arme);
+        }
+        else
+        {
+            if(arme instanceof Arme)
+            {
+                getBoutiqueList().add(arme);
             }
-        } else if (arme instanceof ArmeCAC) {
-            getCACList().add((ArmeCAC) arme);
         }
     }
     public <T extends Arme> void SupprimerArme(T arme)
@@ -140,5 +156,52 @@ public class Inventaire
         }
 
         return listeObjets;
+    }
+
+    public void save(String nomFichier) {
+        try {
+            // Créer un flux de sortie pour écrire les données binaires dans le fichier
+            FileOutputStream fichierSortie = new FileOutputStream(nomFichier);
+
+            // Créer un flux d'objet pour sérialiser l'inventaire
+            ObjectOutputStream objetSortie = new ObjectOutputStream(fichierSortie);
+
+            // Écrire l'inventaire dans le fichier binaire
+            objetSortie.writeObject(this);
+
+            // Fermer les flux
+            objetSortie.close();
+            fichierSortie.close();
+
+            System.out.println("L'inventaire a été sauvegardé dans le fichier " + nomFichier);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Inventaire load(String nomFichier) {
+        Inventaire inventaire = null;
+        try {
+            // Créer un flux d'entrée pour lire les données binaires du fichier
+            FileInputStream fichierEntree = new FileInputStream(nomFichier);
+
+            // Créer un flux d'objet pour désérialiser l'inventaire
+            ObjectInputStream objetEntree = new ObjectInputStream(fichierEntree);
+
+            // Lire l'inventaire depuis le fichier binaire
+            inventaire = (Inventaire) objetEntree.readObject();
+
+            // Fermer les flux
+            objetEntree.close();
+            fichierEntree.close();
+
+            System.out.println("L'inventaire a été chargé depuis le fichier " + nomFichier);
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return inventaire;
     }
 }

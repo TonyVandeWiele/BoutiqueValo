@@ -1,44 +1,65 @@
 package GUI;
 
+import Controller.Controlleur;
+import Model.Arme;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseListener;
 
 public class Boutique extends JFrame {
     private JPanel jPanelBoutique;
+    private JPanel jPanelStats;
+
+    private JLabel labelTailleChargeur;
+    public JLabel labelValeurChargeur;
+    private JLabel labelArme;
+    private JLabel labelImageArme;
+    public JLabel labelDegat;
+    public JLabel labelValeurDegat;
+    public JLabel labelValeurPortee;
+    private JLabel labelPortee;
+    private JButton boutonAcheter;
+
+    public JList<Arme> listeArmes;
+
 
     public Boutique() {
         // Propriétés de la fenêtre
         setTitle("Boutique arme");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        com.formdev.flatlaf.FlatDarculaLaf.install();
 
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(new Dimension(640,400));
+        setLocationRelativeTo(null);
 
         // Création du jPanelBoutique
         jPanelBoutique = new JPanel();
-
-        JPanel panelStats=new JPanel(new GridBagLayout());
+        jPanelStats = new JPanel();
+        jPanelStats.setLayout(new GridBagLayout());
 
         // Configuration du layout du jPanelBoutique avec un GridBagLayout
         jPanelBoutique.setLayout(new GridBagLayout());
+
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
 
         // Création des composants
-        JLabel labelArme = new JLabel("Sélectionner une arme:");
+        labelArme = new JLabel("Sélectionner une arme:");
         labelArme.setHorizontalAlignment(SwingConstants.CENTER);
-        JList<String> listeArmes = new JList<>(new String[]{"Pistolet", "Fusil", "Sniper", "Pompe"});
+        listeArmes = new JList<>();
         listeArmes.setFont(listeArmes.getFont().deriveFont(listeArmes.getFont().getSize() + 2f));
-        JLabel labelImageArme = new JLabel();
-        JButton boutonAcheter = new JButton("Acheter");
-        JLabel labelDegat=new JLabel("Dégâts :");
-        JLabel labelValeurDegat=new JLabel("100-150");
-        JLabel labelPortee=new JLabel("Portée");
-        JLabel labelValeurPortee=new JLabel("600");
-        JLabel labelTailleChargeur=new JLabel("Taille du chargeur :");
-        JLabel labelValeurChargeur=new JLabel("52");
+        labelImageArme = new JLabel();
+        boutonAcheter = new JButton("Acheter");
+        labelDegat=new JLabel("Dégâts : ");
+        labelValeurDegat=new JLabel();
+        labelPortee=new JLabel("Portée : ");
+        labelValeurPortee=new JLabel();
+        labelTailleChargeur=new JLabel("Taille du chargeur : ");
+        labelValeurChargeur=new JLabel();
 
         // Chargement de l'image à partir du fichier
         ImageIcon imageIcon = new ImageIcon("F:\\Programme\\Java\\Boutique\\Picture\\integration.jpg");
@@ -78,52 +99,53 @@ public class Boutique extends JFrame {
         constraints.weighty = 1;
         jPanelBoutique.add(labelImageArme, constraints);
 
-
-        // Ajout des labels au panelStats avec les contraintes
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weightx = 0;
-        constraints.weighty = 0;
-        panelStats.add(labelDegat, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.weightx = 0;
-        constraints.weighty = 0;
-        panelStats.add(labelPortee, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.weightx = 0;
-        constraints.weighty = 0;
-        panelStats.add(labelTailleChargeur, constraints);
-
-        // Ajout des JLabel pour les valeurs au panelStats
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        constraints.weightx = 0;
-        constraints.weighty = 0;
-        panelStats.add(labelValeurDegat, constraints);
-
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        constraints.weightx = 0;
-        constraints.weighty = 0;
-        panelStats.add(labelValeurPortee, constraints);
-
-        constraints.gridx = 1;
-        constraints.gridy = 2;
-        constraints.weightx = 0;
-        constraints.weighty = 0;
-        panelStats.add(labelValeurChargeur, constraints);
-
-        // Ajout du panelStats à l'est avec largeur de 2/5 de la fenêtre
+        // Ajout du jPanelStats à l'est avec largeur de 2/5 de la fenêtre
         constraints.gridx = 3;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
         constraints.weightx = 0.4;
         constraints.weighty = 1;
-        jPanelBoutique.add(panelStats, constraints);
+        jPanelBoutique.add(jPanelStats, constraints);
+
+
+        // Ajout des labels au jPanelStats avec les contraintes
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 0;
+        constraints.weighty = 0;
+        jPanelStats.add(labelDegat, constraints);
+
+        // Ajout des JLabel pour les valeurs au jPanelStats
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        jPanelStats.add(labelValeurDegat, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        jPanelStats.add(labelPortee, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        jPanelStats.add(labelValeurPortee, constraints);
+
+        constraints.weightx = 10;
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        jPanelStats.add(labelTailleChargeur, constraints);
+
+        constraints.gridx = 1;
+        constraints.weightx = 10;
+        constraints.gridy = 2;
+        jPanelStats.add(labelValeurChargeur, constraints);
+
+        constraints.weighty = 1;
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        jPanelStats.add(Box.createVerticalGlue(), constraints);
+
+
 
         // Ajout du boutonAcheter au sud avec largeur de 1/5 de la fenêtre
         constraints.gridx = 0;
@@ -137,6 +159,13 @@ public class Boutique extends JFrame {
         add(jPanelBoutique);
 
         setVisible(true);
+        setContentPane(jPanelBoutique);
+    }
+
+    public void setControleur(Controlleur c)
+    {
+        listeArmes.addListSelectionListener(c);
+        this.addWindowListener(c);
     }
 
     public static void main(String[] args) {

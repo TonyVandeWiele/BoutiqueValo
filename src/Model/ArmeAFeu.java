@@ -43,7 +43,8 @@ public class ArmeAFeu extends Arme implements Serializable
 
     @Override
     public String toString() {
-        return super.toString() + "\nDegat dans la Tete : " + getDegatsTete() + "\nDegat dans le corps : " + getDegatsCorps()+ "\nPortée de l'arme : " + getPortee() + "\nCapacité du chargeur : " + getCapaciteChargeur();
+        //return super.toString() + "\nDegat dans la Tete : " + getDegatsTete() + "\nDegat dans le corps : " + getDegatsCorps()+ "\nPortée de l'arme : " + getPortee() + "\nCapacité du chargeur : " + getCapaciteChargeur();
+        return super.toString();
     }
     @Override
     public boolean equals(Object obj) {

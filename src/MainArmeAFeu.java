@@ -21,11 +21,11 @@ public class MainArmeAFeu implements Serializable
             System.out.println("Pas Egal");
         }
 
-        armeAssaut.Save("Data.bin",armeAssaut);
+        //armeAssaut.Save("Data.bin",armeAssaut);
 
-        ArmeAFeu armeAssautLoad =new ArmeAFeu();
-        armeAssautLoad = (ArmeAFeu) armeAssautLoad.Load("Data.bin");
+        //ArmeAFeu armeAssautLoad =new ArmeAFeu();
+        //armeAssautLoad = (ArmeAFeu) armeAssautLoad.Load("Data.bin");
 
-        armeAssautLoad.Affiche();
+        //armeAssautLoad.Affiche();
     }
 }

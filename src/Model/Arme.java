@@ -2,7 +2,7 @@ package Model;
 
 import java.io.*;
 
-abstract class Arme implements Model.ISaveLoad, Serializable
+public abstract class Arme implements Model.ISaveLoad, Serializable
 {
     private String nom;
     private Model.Skin skin;
@@ -47,7 +47,8 @@ abstract class Arme implements Model.ISaveLoad, Serializable
 
     public String toString()
     {
-        return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix();
+        //return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix();
+        return "\n Nom : " + getNom() + "    Skin : " + getSkin().getNom() + "   Prix : " + getPrix();
     }
     @Override
     public boolean equals(Object obj) {
