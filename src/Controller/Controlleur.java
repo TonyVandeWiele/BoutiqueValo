@@ -9,6 +9,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Controlleur extends WindowAdapter implements ActionListener , ListSelectionListener
@@ -31,6 +33,12 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         inventory.AjouterArme(0,new ArmeAFeu("Operator",new Skin("Reaver",Rarete.rare,"MesImages/operator_defaut.png"),Categorie.Sniper,3,8,3,10,3));
         inventory.AjouterArme(0,new ArmeCAC("Knife",new Skin("Reaver",Rarete.rare,"MesImages/knife_defaut.png"),Categorie.CAC,3,3));
         inventory.AjouterArme(0,new ArmeCAC());
+
+        //Creation d'un profil
+        if(inventory.getUser() == null)
+        {
+            inventory.setUser("Martin123","MesImages/logo1.png",1000);
+        }
         return;
     }
     public void initView()
@@ -51,6 +59,11 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         {
             inventoryWindow.comboBoxCAC.addItem(String.valueOf(arme));
         }
+
+        inventoryWindow.jImageAvatar.setIcon(inventoryWindow.scaleImage(Inventaire.getInstance().getUser().getAvatar(),50,50));
+        inventoryWindow.labelArgent.setText("Argent : " + inventory.getUser().getArgent());
+        inventoryWindow.labelProfil.setText("Nom du Joueur ( " + inventory.getUser().getPseudo() + " )");
+        inventoryWindow.labelDate.setText("Date Création Profil : " + inventory.getUser().getdateCreationProfil().format(DateTimeFormatter.ofPattern("HH:mm:ss   dd-MM-yyyy")));
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -81,7 +94,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         if(e.getActionCommand() == "comboBoxAssaut")
         {
             int index = inventoryWindow.comboBoxAssaut.getSelectedIndex();
-            inventoryWindow.jImageAssaut.setIcon(inventoryWindow.scaleImage(Inventaire.getInstance().getAssautList().get(index).getSkin().getImage()));
+            inventoryWindow.jImageAssaut.setIcon(inventoryWindow.scaleImage(Inventaire.getInstance().getAssautList().get(index).getSkin().getImage(),250,150));
         }
         if(e.getActionCommand() == "comboBoxSMG")
         {

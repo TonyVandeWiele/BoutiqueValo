@@ -22,7 +22,6 @@ public class Inventaire
         CACList = new ArrayList<>();
         BoutiqueList = new ArrayList<>();
         SkinList = new ArrayList<>();
-        User = new Profil();
     }
 
     public static Inventaire getInstance() {
@@ -96,6 +95,10 @@ public class Inventaire
         }
     }
 
+    public void setUser(String pseudo, String avatar, float argent)
+    {
+        User = new Profil(pseudo,avatar,argent);
+    }
     public void AjouterArgent(float argent)
     {
         getUser().setArgent(getUser().getArgent() + argent);

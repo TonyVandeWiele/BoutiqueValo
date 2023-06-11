@@ -43,6 +43,12 @@ public class InventoryWindow extends JFrame {
 
 
 
+    public Label labelProfil;
+    public Label labelBanniere;
+    public JLabel jImageAvatar;
+    public Label labelArgent;
+    public Label labelDate;
+
     public JButton jButtonInventaire;
     public JButton jButtonBoutique;
     public JButton jButtonParametre;
@@ -89,7 +95,7 @@ public class InventoryWindow extends JFrame {
         //Menu
         jButtonInventaire = new JButton("Inventaire");
         jButtonBoutique = new JButton("Boutique");
-        JButton jButtonParametre = new JButton("Paramètre");
+        jButtonParametre = new JButton("Paramètre");
         GridBagConstraints gbcButton = new GridBagConstraints();
         
         jPanelMenu.add(jButtonInventaire,gbcButton);
@@ -111,30 +117,26 @@ public class InventoryWindow extends JFrame {
         jPanelProfil.setLayout(layoutProfil);
 
         //Profil
-        Label labelProfil = new Label("Nom du Joueur",Label.CENTER);
+        labelProfil = new Label("Nom du Joueur",Label.CENTER);
         labelProfil.setFont(new Font("SansSerif",Font.BOLD,16));
         jPanelProfil.add(labelProfil);
 
-        Label labelBanniere = new Label("Banière : ",Label.CENTER);
+        labelBanniere = new Label("Banière : ",Label.CENTER);
         labelBanniere.setFont(new Font("SansSerif",Font.BOLD,14));
         jPanelProfil.add(labelBanniere);
 
-        ImageIcon iconProfil = new ImageIcon("C:\\Users\\vande\\Pictures\\carte.png");
-        Image imgProfil = iconProfil.getImage();
-        Image newImgProfil = imgProfil.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        ImageIcon newIconProfil = new ImageIcon(newImgProfil);
-        JLabel imageLabelProfil = new JLabel(newIconProfil);
-        imageLabelProfil.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        imageLabelProfil.setBorder(BorderFactory.createLineBorder(Color.black));
-        jPanelProfil.add(imageLabelProfil);
 
-        Label labelLVL = new Label("Argent : ",Label.CENTER);
-        labelLVL.setFont(new Font("SansSerif",Font.BOLD,14));
-        jPanelProfil.add(labelLVL);
+        jImageAvatar = new JLabel();
+        jImageAvatar.setIcon(scaleImage("MesImages/logo1.png",50,50));
+        jPanelProfil.add(jImageAvatar);
 
-        Label labelDate = new Label("Date Création Profil : ",Label.CENTER);
-        labelLVL.setFont(new Font("SansSerif",Font.BOLD,14));
-        jPanelProfil.add(labelLVL);
+        labelArgent = new Label("Argent : ",Label.CENTER);
+        labelArgent.setFont(new Font("SansSerif",Font.BOLD,14));
+        jPanelProfil.add(labelArgent);
+
+        labelDate = new Label("Date Création Profil : ",Label.CENTER);
+        labelDate.setFont(new Font("SansSerif",Font.BOLD,14));
+        jPanelProfil.add(labelDate);
 
         jPanelVide0 = new JPanel();
         jPanelVide1 = new JPanel();
@@ -196,7 +198,7 @@ public class InventoryWindow extends JFrame {
         jPanelAssaut.add(labelAssaut);
 
         jImageAssaut = new JLabel();
-        jImageAssaut.setIcon(scaleImage("MesImages/vandal_defaut.png"));
+        jImageAssaut.setIcon(scaleImage("MesImages/vandal_defaut.png",250,150));
         jPanelAssaut.add(jImageAssaut);
 
         jPanelAssaut.add(jPanelVide0);
@@ -229,7 +231,7 @@ public class InventoryWindow extends JFrame {
         jPanelSMG.add(labelSMG);
 
         jImageSMG = new JLabel();
-        jImageSMG.setIcon(scaleImage("MesImages/spectre_defaut.png"));
+        jImageSMG.setIcon(scaleImage("MesImages/spectre_defaut.png",250,150));
         jPanelSMG.add(jImageSMG);
 
         jPanelSMG.add(jPanelVide1);
@@ -249,7 +251,7 @@ public class InventoryWindow extends JFrame {
         jPanelSniper.add(Box.createRigidArea(new Dimension(0,50)));
 
         jImageSniper = new JLabel();
-        jImageSniper.setIcon(scaleImage("MesImages/operator_defaut.png"));
+        jImageSniper.setIcon(scaleImage("MesImages/operator_defaut.png",250,150));
         jPanelSniper.add(jImageSniper);
 
         jPanelSniper.add(jPanelVide2);
@@ -267,7 +269,7 @@ public class InventoryWindow extends JFrame {
         jPanelCAC.add(labelCAC);
 
         jImageCAC = new JLabel();
-        jImageCAC.setIcon(scaleImage("MesImages/knife_kingdom.png"));
+        jImageCAC.setIcon(scaleImage("MesImages/knife_kingdom.png",250,150));
         jPanelCAC.add(jImageCAC);
 
         jPanelCAC.add(jPanelVide3);
@@ -283,10 +285,10 @@ public class InventoryWindow extends JFrame {
         setVisible(true);
 
     }
-    public ImageIcon scaleImage(String filename) {
+    public ImageIcon scaleImage(String filename, int width, int height) {
         ImageIcon icon = new ImageIcon(filename);
         Image img = icon.getImage();
-        Image newImg = img.getScaledInstance(250, 150, Image.SCALE_SMOOTH);
+        Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon newIcon = new ImageIcon(newImg);
         return newIcon;
     }

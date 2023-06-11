@@ -35,11 +35,11 @@ public class Profil implements ISaveLoad, Serializable {
         argent=0;
         datecreationProfil = LocalDateTime.now();
     }
-    public Profil(String vPseudo, String vAvatar)
+    public Profil(String vPseudo, String vAvatar, float vArgent)
     {
         pseudo=vPseudo;
         avatar=vAvatar;
-        argent=0;
+        argent=vArgent;
         datecreationProfil = LocalDateTime.now();
     }
 
