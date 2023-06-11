@@ -1,236 +1,184 @@
-/*
- * Created by JFormDesigner on Thu Apr 27 11:50:51 CEST 2023
- */
-
 package GUI;
 
-import java.awt.*;
+import Controller.Controlleur;
+import Model.Arme;
+
 import javax.swing.*;
-import javax.swing.GroupLayout;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseListener;
+
+public class Boutique extends JFrame {
+    private JPanel jPanelBoutique;
+    private JPanel jPanelStats;
+
+    private JLabel labelTailleChargeur;
+    public JLabel labelValeurChargeur;
+    private JLabel labelArme;
+    private JLabel labelImageArme;
+    public JLabel labelDegat;
+    public JLabel labelValeurDegat;
+    public JLabel labelValeurPortee;
+    private JLabel labelPortee;
+    private JButton boutonAcheter;
+
+    public JList<Arme> listeArmes;
 
 
-/**
- * @author hiroy
- */
-public class Boutique {
     public Boutique() {
-        initComponents();
+        // Propriétés de la fenêtre
+        setTitle("Boutique arme");
+        com.formdev.flatlaf.FlatDarculaLaf.install();
+
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(new Dimension(640,400));
+        setLocationRelativeTo(null);
+
+        // Création du jPanelBoutique
+        jPanelBoutique = new JPanel();
+        jPanelStats = new JPanel();
+        jPanelStats.setLayout(new GridBagLayout());
+
+        // Configuration du layout du jPanelBoutique avec un GridBagLayout
+        jPanelBoutique.setLayout(new GridBagLayout());
+
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+
+        // Création des composants
+        labelArme = new JLabel("Sélectionner une arme:");
+        labelArme.setHorizontalAlignment(SwingConstants.CENTER);
+        listeArmes = new JList<>();
+        listeArmes.setFont(listeArmes.getFont().deriveFont(listeArmes.getFont().getSize() + 2f));
+        labelImageArme = new JLabel();
+        boutonAcheter = new JButton("Acheter");
+        labelDegat=new JLabel("Dégâts : ");
+        labelValeurDegat=new JLabel();
+        labelPortee=new JLabel("Portée : ");
+        labelValeurPortee=new JLabel();
+        labelTailleChargeur=new JLabel("Taille du chargeur : ");
+        labelValeurChargeur=new JLabel();
+
+        // Chargement de l'image à partir du fichier
+        ImageIcon imageIcon = new ImageIcon("F:\\Programme\\Java\\Boutique\\Picture\\integration.jpg");
+        Image image = imageIcon.getImage();
+
+        // Ajout d'un ComponentListener pour redimensionner l'image lors du changement de taille du label
+        labelImageArme.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                ImageIcon scaledIcon = new ImageIcon(image.getScaledInstance(labelImageArme.getWidth(), labelImageArme.getHeight(), Image.SCALE_SMOOTH));
+                labelImageArme.setIcon(scaledIcon);
+            }
+        });
+
+        // Ajout du labelArme au nord avec largeur de 1/5 de la fenêtre
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.weightx = 0.2;
+        constraints.weighty = 0;
+        jPanelBoutique.add(labelArme, constraints);
+
+        // Ajout de la listeArmes à l'ouest avec largeur de 1/5 de la fenêtre
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.weightx = 0.2;
+        constraints.weighty = 1;
+        jPanelBoutique.add(listeArmes, constraints);
+
+        // Ajout du labelImageArme au centre avec largeur de 2/5 de la fenêtre
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.gridwidth = 2;
+        constraints.weightx = 0.4;
+        constraints.weighty = 1;
+        jPanelBoutique.add(labelImageArme, constraints);
+
+        // Ajout du jPanelStats à l'est avec largeur de 2/5 de la fenêtre
+        constraints.gridx = 3;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.weightx = 0.4;
+        constraints.weighty = 1;
+        jPanelBoutique.add(jPanelStats, constraints);
+
+
+        // Ajout des labels au jPanelStats avec les contraintes
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 0;
+        constraints.weighty = 0;
+        jPanelStats.add(labelDegat, constraints);
+
+        // Ajout des JLabel pour les valeurs au jPanelStats
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        jPanelStats.add(labelValeurDegat, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        jPanelStats.add(labelPortee, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        jPanelStats.add(labelValeurPortee, constraints);
+
+        constraints.weightx = 10;
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        jPanelStats.add(labelTailleChargeur, constraints);
+
+        constraints.gridx = 1;
+        constraints.weightx = 10;
+        constraints.gridy = 2;
+        jPanelStats.add(labelValeurChargeur, constraints);
+
+        constraints.weighty = 1;
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        jPanelStats.add(Box.createVerticalGlue(), constraints);
+
+
+
+        // Ajout du boutonAcheter au sud avec largeur de 1/5 de la fenêtre
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 4;
+        constraints.weightx = 0;
+        constraints.weighty = 0;
+        jPanelBoutique.add(boutonAcheter, constraints);
+
+        // Ajout du jPanelBoutique à la fenêtre
+        add(jPanelBoutique);
+
+        setVisible(true);
+        setContentPane(jPanelBoutique);
     }
 
-    public static void main(String[] args)
+    public void setControleur(Controlleur c)
     {
+        listeArmes.addListSelectionListener(c);
+        this.addWindowListener(c);
+    }
+
+    public static void main(String[] args) {
         com.formdev.flatlaf.FlatDarculaLaf.install();
-        JFrame frame=new JFrame("Boutique Valo");
-        frame.setContentPane(new Boutique().ShopWindow);
-        frame.pack();
+        JFrame frame = new JFrame("InventoryWindow");
+        frame.setContentPane(new Boutique().jPanelBoutique);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(1190,600));
+        frame.setSize(new Dimension(1190,600));
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+
         frame.setVisible(true);
     }
-    private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - TonyVDW
-        ShopWindow = new JPanel();
-        scrollPaneListeArme = new JScrollPane();
-        paneldescriptionarme = new JPanel();
-        labeldegat = new JLabel();
-        labelprix = new JLabel();
-        labelskin = new JLabel();
-        labelportée = new JLabel();
-        labelcapacitéchargeur = new JLabel();
-        labelcatégorie = new JLabel();
-        labelnom = new JLabel();
-        panelValeur = new JPanel();
-        textFieldskin = new JTextField();
-        textFieldnom = new JTextField();
-        textFielddegat = new JTextField();
-        textFieldportee = new JTextField();
-        textFieldcapacitechargeur = new JTextField();
-        textFieldprix = new JTextField();
-        comboBoxCategorie = new JComboBox();
-        button9 = new JButton();
-        button10 = new JButton();
-
-        //======== ShopWindow ========
-        {
-            ShopWindow.setPreferredSize(new Dimension(400, 300));
-            ShopWindow.setMinimumSize(new Dimension(400, 300));
-            ShopWindow.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
-            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,ShopWindow. getBorder( )) ); ShopWindow. addPropertyChangeListener (new java. beans.
-            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
-            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
-            ShopWindow.setLayout(new GridBagLayout());
-            ((GridBagLayout)ShopWindow.getLayout()).columnWidths = new int[] {127, 144, 123, 0};
-            ((GridBagLayout)ShopWindow.getLayout()).rowHeights = new int[] {265, 0, 0};
-            ((GridBagLayout)ShopWindow.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 1.0E-4};
-            ((GridBagLayout)ShopWindow.getLayout()).rowWeights = new double[] {0.0, 0.0, 1.0E-4};
-
-            //======== scrollPaneListeArme ========
-            {
-                scrollPaneListeArme.setMaximumSize(new Dimension(2147483647, 2147483647));
-            }
-            ShopWindow.add(scrollPaneListeArme, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(1, 1, 6, 6), 0, 0));
-
-            //======== paneldescriptionarme ========
-            {
-                paneldescriptionarme.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- labeldegat ----
-                labeldegat.setText("D\u00e9gats");
-                labeldegat.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- labelprix ----
-                labelprix.setText("Prix");
-                labelprix.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- labelskin ----
-                labelskin.setText("Skin");
-                labelskin.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- labelportée ----
-                labelportée.setText("Port\u00e9e");
-                labelportée.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- labelcapacitéchargeur ----
-                labelcapacitéchargeur.setText("Capacit\u00e9 chargeur");
-                labelcapacitéchargeur.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- labelcatégorie ----
-                labelcatégorie.setText("Cat\u00e9gorie");
-                labelcatégorie.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- labelnom ----
-                labelnom.setText("Nom");
-                labelnom.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                GroupLayout paneldescriptionarmeLayout = new GroupLayout(paneldescriptionarme);
-                paneldescriptionarme.setLayout(paneldescriptionarmeLayout);
-                paneldescriptionarmeLayout.setHorizontalGroup(
-                    paneldescriptionarmeLayout.createParallelGroup()
-                        .addGroup(paneldescriptionarmeLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(paneldescriptionarmeLayout.createParallelGroup()
-                                .addComponent(labelnom, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addComponent(labelskin, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addComponent(labelcapacitéchargeur, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addComponent(labelportée, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addComponent(labeldegat, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addComponent(labelprix, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addComponent(labelcatégorie, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
-                            .addContainerGap())
-                );
-                paneldescriptionarmeLayout.setVerticalGroup(
-                    paneldescriptionarmeLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, paneldescriptionarmeLayout.createSequentialGroup()
-                            .addContainerGap(13, Short.MAX_VALUE)
-                            .addComponent(labelcatégorie, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                            .addComponent(labelnom, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                            .addComponent(labeldegat, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                            .addComponent(labelportée, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                            .addComponent(labelcapacitéchargeur, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                            .addComponent(labelskin, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                            .addComponent(labelprix, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(9, Short.MAX_VALUE))
-                );
-            }
-            ShopWindow.add(paneldescriptionarme, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(1, 1, 6, 6), 0, 0));
-
-            //======== panelValeur ========
-            {
-                panelValeur.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                //---- comboBoxCategorie ----
-                comboBoxCategorie.setMaximumSize(new Dimension(2147483647, 2147483647));
-
-                GroupLayout panelValeurLayout = new GroupLayout(panelValeur);
-                panelValeur.setLayout(panelValeurLayout);
-                panelValeurLayout.setHorizontalGroup(
-                    panelValeurLayout.createParallelGroup()
-                        .addGroup(panelValeurLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(panelValeurLayout.createParallelGroup()
-                                .addComponent(textFieldportee)
-                                .addComponent(textFieldcapacitechargeur, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                                .addComponent(textFieldskin)
-                                .addComponent(textFielddegat, GroupLayout.Alignment.TRAILING)
-                                .addComponent(textFieldnom, GroupLayout.Alignment.TRAILING)
-                                .addComponent(textFieldprix)
-                                .addComponent(comboBoxCategorie, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addContainerGap())
-                );
-                panelValeurLayout.setVerticalGroup(
-                    panelValeurLayout.createParallelGroup()
-                        .addGroup(panelValeurLayout.createSequentialGroup()
-                            .addContainerGap(10, Short.MAX_VALUE)
-                            .addComponent(comboBoxCategorie, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                            .addComponent(textFieldnom, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                            .addComponent(textFielddegat, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                            .addComponent(textFieldportee, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                            .addComponent(textFieldcapacitechargeur, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                            .addComponent(textFieldskin, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                            .addComponent(textFieldprix, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(10, Short.MAX_VALUE))
-                );
-            }
-            ShopWindow.add(panelValeur, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(1, 1, 6, 1), 0, 0));
-
-            //---- button9 ----
-            button9.setText("Nouvelle Arme");
-            button9.setMaximumSize(new Dimension(2147483647, 2147483647));
-            ShopWindow.add(button9, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(1, 1, 1, 6), 0, 0));
-
-            //---- button10 ----
-            button10.setText("Acheter");
-            button10.setMaximumSize(new Dimension(2147483647, 2147483647));
-            ShopWindow.add(button10, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(1, 1, 1, 1), 0, 0));
-        }
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
-    }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - TonyVDW
-    private JPanel ShopWindow;
-    private JScrollPane scrollPaneListeArme;
-    private JPanel paneldescriptionarme;
-    private JLabel labeldegat;
-    private JLabel labelprix;
-    private JLabel labelskin;
-    private JLabel labelportée;
-    private JLabel labelcapacitéchargeur;
-    private JLabel labelcatégorie;
-    private JLabel labelnom;
-    private JPanel panelValeur;
-    private JTextField textFieldskin;
-    private JTextField textFieldnom;
-    private JTextField textFielddegat;
-    private JTextField textFieldportee;
-    private JTextField textFieldcapacitechargeur;
-    private JTextField textFieldprix;
-    private JComboBox comboBoxCategorie;
-    private JButton button9;
-    private JButton button10;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
+

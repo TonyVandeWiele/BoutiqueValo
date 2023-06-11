@@ -1,4 +1,4 @@
-package metier;
+package Model;
 
 public enum Categorie {
     Assaut,

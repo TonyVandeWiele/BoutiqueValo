@@ -1,16 +1,17 @@
-import metier.*;
-
-import java.util.ArrayList;
+import Model.*;
+import GUI.*;
+import Controller.*;
 
 public class Main {
     public static void main(String[] args)
     {
 
-        Inventaire.getInstance().setAssautList(Inventaire.getInstance().LoadListFeu("DataListArme.bin"));
-        for ( ArmeAFeu armeAssautList : Inventaire.getInstance().getAssautList())
-        {
-            armeAssautList.Affiche();
-        }
+        InventoryWindow inventoryWindow = new InventoryWindow();
 
+        Controlleur controlleur = new Controlleur(Inventaire.getInstance(),inventoryWindow);
+
+        inventoryWindow.setControleur(controlleur);
+
+        inventoryWindow.setVisible(true);
     }
 }

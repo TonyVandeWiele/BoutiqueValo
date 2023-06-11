@@ -1,4 +1,4 @@
-import metier.Profil;
+import Model.*;
 
 public class MainProfil {
     public static void main(String[] args)

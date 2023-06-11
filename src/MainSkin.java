@@ -1,6 +1,4 @@
-import metier.Profil;
-import metier.Rarete;
-import metier.Skin;
+import Model.*;
 
 import java.io.IOException;
 

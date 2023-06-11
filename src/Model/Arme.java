@@ -1,21 +1,22 @@
-package metier;
+package Model;
+
 import java.io.*;
 
-abstract class Arme implements ISaveLoad, Serializable
+public abstract class Arme implements Model.ISaveLoad, Serializable
 {
     private String nom;
-    private Skin skin;
-    private Categorie categorie;
+    private Model.Skin skin;
+    private Model.Categorie categorie;
     private float prix;
 
     public Arme()
     {
         nom="Pas de Nom";
-        skin = new Skin();
-        categorie=Categorie.Assaut;
+        skin = new Model.Skin();
+        categorie= Model.Categorie.Assaut;
         prix=0;
     }
-    public Arme(String vNom,Skin vSkin,Categorie vCategorie,float vPrix)
+    public Arme(String vNom, Model.Skin vSkin, Categorie vCategorie, float vPrix)
     {
         nom=vNom;
         skin=vSkin;
@@ -26,7 +27,7 @@ abstract class Arme implements ISaveLoad, Serializable
     {
         return nom;
     }
-    public Categorie getCategorie()
+    public Model.Categorie getCategorie()
     {
         return categorie;
     }
@@ -37,16 +38,17 @@ abstract class Arme implements ISaveLoad, Serializable
     public void setPrix(int prix) {
         this.prix = prix;
     }
-    public void setCategorie(Categorie Categorie) {
+    public void setCategorie(Model.Categorie Categorie) {
         this.categorie = Categorie;
     }
 
-    public void setSkin(Skin skin) { this.skin = skin; }
+    public void setSkin(Model.Skin skin) { this.skin = skin; }
 
 
     public String toString()
     {
-        return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix();
+        //return "\nNom :" + getNom() + "\nSkin : " + getSkin() + "\nCategorie :" + getCategorie() + "\nPrix :"+getPrix();
+        return "\n Nom : " + getNom() + "    Skin : " + getSkin().getNom() + "   Prix : " + getPrix();
     }
     @Override
     public boolean equals(Object obj) {

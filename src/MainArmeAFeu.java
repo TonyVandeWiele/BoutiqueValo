@@ -1,7 +1,4 @@
-import metier.ArmeAFeu;
-import metier.Categorie;
-import metier.Rarete;
-import metier.Skin;
+import Model.*;
 
 import java.io.Serializable;
 
@@ -12,7 +9,7 @@ public class MainArmeAFeu implements Serializable
         ArmeAFeu armeBase = new ArmeAFeu();
         armeBase.Affiche();
 
-        ArmeAFeu armeAssaut = new ArmeAFeu("Vandal",new Skin("Reaver",Rarete.epique,"/img"),Categorie.Assaut,300,60,30,90,35);
+        ArmeAFeu armeAssaut = new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.epique,"/img"),Categorie.Assaut,300,60,30,90,35);
         armeAssaut.Affiche();
 
         if(armeBase.equals(armeAssaut))
@@ -24,11 +21,11 @@ public class MainArmeAFeu implements Serializable
             System.out.println("Pas Egal");
         }
 
-        armeAssaut.Save("Data.bin",armeAssaut);
+        //armeAssaut.Save("Data.bin",armeAssaut);
 
-        ArmeAFeu armeAssautLoad =new ArmeAFeu();
-        armeAssautLoad = (ArmeAFeu) armeAssautLoad.Load("Data.bin");
+        //ArmeAFeu armeAssautLoad =new ArmeAFeu();
+        //armeAssautLoad = (ArmeAFeu) armeAssautLoad.Load("Data.bin");
 
-        armeAssautLoad.Affiche();
+        //armeAssautLoad.Affiche();
     }
 }

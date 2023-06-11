@@ -1,9 +1,7 @@
-package metier;
+package Model;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Profil implements ISaveLoad, Serializable {
     private String pseudo;

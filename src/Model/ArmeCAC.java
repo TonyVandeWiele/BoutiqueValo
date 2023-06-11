@@ -1,4 +1,4 @@
-package metier;
+package Model;
 
 public class ArmeCAC extends Arme
 {
@@ -21,7 +21,8 @@ public class ArmeCAC extends Arme
 
     @Override
     public String toString() {
-        return super.toString() + "\nDégat Tranchant : " + getDegatTranchant();
+        //return super.toString() + "\nDégat Tranchant : " + getDegatTranchant();
+        return super.toString();
     }
     @Override
     public boolean equals(Object obj) {
