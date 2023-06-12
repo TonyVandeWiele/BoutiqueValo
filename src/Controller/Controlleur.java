@@ -31,8 +31,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         inventory.AjouterArme(0,new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.rare,"MesImages/vandal_defaut.png"), Categorie.Assaut,300,160,40,90,25));
         inventory.AjouterArme(0,new ArmeAFeu("Spectre",new Skin("Reaver",Rarete.rare,"MesImages/spectre_defaut.png"),Categorie.SMG,180,60,15,40,35));
         inventory.AjouterArme(0,new ArmeAFeu("Operator",new Skin("Reaver",Rarete.rare,"MesImages/operator_defaut.png"),Categorie.Sniper,560,320,170,320,6));
-        inventory.AjouterArme(0,new ArmeCAC("Knife",new Skin("Reaver",Rarete.rare,"MesImages/knife_defaut.png"),Categorie.CAC,790,35));
-        inventory.AjouterArme(0,new ArmeCAC());
+        inventory.AjouterArme(0,new ArmeCAC("Knife",new Skin("Reaver",Rarete.rare,"MesImages/knife_kingdom.png"),Categorie.CAC,790,35));
 
         //Creation d'un profil
         if(inventory.getUser() == null)
@@ -95,28 +94,41 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             int index = inventoryWindow.comboBoxAssaut.getSelectedIndex();
             ArmeAFeu a = inventory.getAssautList().get(index);
             inventoryWindow.jImageAssaut.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
-            inventoryWindow.jImageAssaut.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DT : " + a.getDegatsTete() + "\n   DG : " + a.getDegatsCorps() + "\n   Portée : " + a.getPortee() + "\n   Prix : " + a.getPrix() + "\n   Capacité Chargeur : " + a.getCapaciteChargeur());
+
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DT: %s<br>&nbsp;DG: %s<br>&nbsp;Portée: %s<br>&nbsp;Prix: %s<br>&nbsp;Capacité Chargeur: %s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
+
+            inventoryWindow.jImageAssaut.setToolTipText(tooltipText);
         }
         if(e.getActionCommand() == "comboBoxSMG")
         {
             int index = inventoryWindow.comboBoxSMG.getSelectedIndex();
             ArmeAFeu a = inventory.getSMGList().get(index);
             inventoryWindow.jImageSMG.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
-            inventoryWindow.jImageSMG.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DT : " + a.getDegatsTete() + "\n   DG : " + a.getDegatsCorps() + "\n   Portée : " + a.getPortee() + "\n   Prix : " + a.getPrix() + "\n   Capacité Chargeur : " + a.getCapaciteChargeur());
+
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DT: %s<br>&nbsp;DG: %s<br>&nbsp;Portée: %s<br>&nbsp;Prix: %s<br>&nbsp;Capacité Chargeur: %s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
+            inventoryWindow.jImageSMG.setToolTipText(tooltipText);
         }
         if(e.getActionCommand() == "comboBoxSniper")
         {
             int index = inventoryWindow.comboBoxSniper.getSelectedIndex();
             ArmeAFeu a = inventory.getSniperList().get(index);
             inventoryWindow.jImageSniper.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
-            inventoryWindow.jImageSniper.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DT : " + a.getDegatsTete() + "\n   DG : " + a.getDegatsCorps() + "\n   Portée : " + a.getPortee() + "\n   Prix : " + a.getPrix() + "\n   Capacité Chargeur : " + a.getCapaciteChargeur());
+
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DT: %s<br>&nbsp;DG: %s<br>&nbsp;Portée: %s<br>&nbsp;Prix: %s<br>&nbsp;Capacité Chargeur: %s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
+            inventoryWindow.jImageSniper.setToolTipText(tooltipText);
         }
         if(e.getActionCommand() == "comboBoxCAC")
         {
             int index = inventoryWindow.comboBoxCAC.getSelectedIndex();
             ArmeCAC a = inventory.getCACList().get(index);
             inventoryWindow.jImageCAC.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
-            inventoryWindow.jImageCAC.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DTr : " + a.getDegatTranchant() + "\n   Prix : " + a.getPrix());
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DTr:%s <br>&nbsp;Prix:%s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatTranchant(), a.getPrix());
+
+            inventoryWindow.jImageCAC.setToolTipText(tooltipText);
         }
 
         if(e.getActionCommand() == "boutonAcheter")
@@ -147,14 +159,33 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     }
 
     @Override
-    public void valueChanged(ListSelectionEvent e) {
-
-        if(inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex()) instanceof ArmeAFeu)
+    public void valueChanged(ListSelectionEvent e)
+    {
+        Arme a = inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex());
+        if(a instanceof ArmeAFeu)
         {
-            ArmeAFeu arme = (ArmeAFeu) inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex());
-            boutiqueWindow.labelValeurDegat.setText(String.valueOf(arme.getDegatsTete()));
-            boutiqueWindow.labelValeurChargeur.setText(String.valueOf(arme.getCapaciteChargeur()));
-            boutiqueWindow.labelValeurPortee.setText(String.valueOf(arme.getPortee()));
+            ArmeAFeu arme = (ArmeAFeu) a;
+            boutiqueWindow.labelChargeur.setVisible(true);
+            boutiqueWindow.labelPortee.setVisible(true);
+            boutiqueWindow.labelDegatCorps.setVisible(true);
+            boutiqueWindow.labelDegatTete.setText("Dégâts Tete : " + arme.getDegatsTete() + "\n");
+            boutiqueWindow.labelChargeur.setText("Capacité Chargeur : " + arme.getCapaciteChargeur() + "\n");
+            boutiqueWindow.labelDegatCorps.setText("Dégâts Corps : " + arme.getDegatsCorps() + "\n");
+            boutiqueWindow.labelPortee.setText("Portée : " + arme.getPortee() + "\n");
+            boutiqueWindow.labelCategorie.setText("Catégorie : " + arme.getCategorie() + "\n");
+            boutiqueWindow.labelPrix.setText("Prix : " + arme.getPrix() + "\n");
+            boutiqueWindow.labelRarete.setText("Rarete Skin: " + arme.getSkin().getRarete() + "\n");
+        }
+        else if (a != null)
+        {
+            ArmeCAC arme = (ArmeCAC) a;
+            boutiqueWindow.labelDegatTete.setText("Dégâts Tranchant : " + arme.getDegatTranchant() + "\n");
+            boutiqueWindow.labelCategorie.setText("Catégorie : " + arme.getCategorie() + "\n");
+            boutiqueWindow.labelPrix.setText("Prix : " + arme.getPrix() + "\n");
+            boutiqueWindow.labelRarete.setText("Rarete Skin: " + arme.getSkin().getRarete() + "\n");
+            boutiqueWindow.labelChargeur.setVisible(false);
+            boutiqueWindow.labelPortee.setVisible(false);
+            boutiqueWindow.labelDegatCorps.setVisible(false);
         }
 
     }

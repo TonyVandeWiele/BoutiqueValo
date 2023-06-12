@@ -60,7 +60,7 @@ public class InventoryWindow extends JFrame {
     public JPanel jPanelVide4;
 
     public InventoryWindow() {
-        com.formdev.flatlaf.FlatDarculaLaf.install();
+        //com.formdev.flatlaf.FlatDarculaLaf.install();
 
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(940,600));

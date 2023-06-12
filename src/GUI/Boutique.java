@@ -13,14 +13,15 @@ public class Boutique extends JFrame {
     private JPanel jPanelBoutique;
     private JPanel jPanelStats;
 
-    private JLabel labelTailleChargeur;
-    public JLabel labelValeurChargeur;
+    public JLabel labelChargeur;
+    public JLabel labelDegatTete;
     private JLabel labelArme;
     private JLabel labelImageArme;
-    public JLabel labelDegat;
-    public JLabel labelValeurDegat;
-    public JLabel labelValeurPortee;
-    private JLabel labelPortee;
+    public JLabel labelDegatCorps;
+    public JLabel labelPortee;
+    public JLabel labelCategorie;
+    public JLabel labelPrix;
+    public JLabel labelRarete;
     private JButton boutonAcheter;
 
     public JList<Arme> listeArmes;
@@ -30,7 +31,7 @@ public class Boutique extends JFrame {
     public Boutique() {
         // Propriétés de la fenêtre
         setTitle("Boutique arme");
-        com.formdev.flatlaf.FlatDarculaLaf.install();
+        //com.formdev.flatlaf.FlatDarculaLaf.install();
 
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(640,400));
@@ -58,12 +59,13 @@ public class Boutique extends JFrame {
 
         labelImageArme = new JLabel();
         boutonAcheter = new JButton("Acheter");
-        labelDegat=new JLabel("Dégâts : ");
-        labelValeurDegat=new JLabel();
+        labelDegatTete=new JLabel("Dégâts Tete : ");
+        labelDegatCorps=new JLabel("Dégâts Corps : ");
         labelPortee=new JLabel("Portée : ");
-        labelValeurPortee=new JLabel();
-        labelTailleChargeur=new JLabel("Taille du chargeur : ");
-        labelValeurChargeur=new JLabel();
+        labelChargeur=new JLabel("Capacité Chargeur : ");
+        labelCategorie = new JLabel("Catégorie : ");
+        labelPrix = new JLabel("Prix : ");
+        labelRarete = new JLabel("Rareté Skin : ");
 
         // Chargement de l'image à partir du fichier
         ImageIcon imageIcon = new ImageIcon("F:\\Programme\\Java\\Boutique\\Picture\\integration.jpg");
@@ -115,38 +117,43 @@ public class Boutique extends JFrame {
         // Ajout des labels au jPanelStats avec les contraintes
         constraints.anchor = GridBagConstraints.NORTHWEST;
 
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.insets = new Insets(10, 10, 10, 10);
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.weightx = 0;
         constraints.weighty = 0;
-        jPanelStats.add(labelDegat, constraints);
+        jPanelStats.add(labelDegatTete, constraints);
 
         // Ajout des JLabel pour les valeurs au jPanelStats
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        jPanelStats.add(labelValeurDegat, constraints);
-
         constraints.gridx = 0;
         constraints.gridy = 1;
+        jPanelStats.add(labelDegatCorps, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
         jPanelStats.add(labelPortee, constraints);
 
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        jPanelStats.add(labelValeurPortee, constraints);
-
-        constraints.weightx = 10;
         constraints.gridx = 0;
-        constraints.gridy = 2;
-        jPanelStats.add(labelTailleChargeur, constraints);
+        constraints.gridy = 3;
+        jPanelStats.add(labelChargeur, constraints);
 
-        constraints.gridx = 1;
-        constraints.weightx = 10;
-        constraints.gridy = 2;
-        jPanelStats.add(labelValeurChargeur, constraints);
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        jPanelStats.add(labelCategorie, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+        jPanelStats.add(labelPrix, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 6;
+        jPanelStats.add(labelRarete, constraints);
+
 
         constraints.weighty = 1;
         constraints.gridx = 0;
-        constraints.gridy = 3;
+        constraints.gridy = 7;
         jPanelStats.add(Box.createVerticalGlue(), constraints);
 
 
