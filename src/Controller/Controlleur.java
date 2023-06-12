@@ -7,9 +7,10 @@ import Model.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.*;
-import java.awt.event.*;
-import java.text.SimpleDateFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -66,11 +67,11 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand() == "boutonInventaire")
+        if(e.getActionCommand().equals("boutonInventaire"))
         {
             return;
         }
-        if(e.getActionCommand() == "boutonBoutique")
+        if(e.getActionCommand().equals("boutonBoutique"))
         {
             if(this.boutiqueWindow == null)
             {
@@ -85,11 +86,11 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             this.boutiqueWindow.setVisible(true);
             return;
         }
-        if(e.getActionCommand() == "boutonParametre")
+        if(e.getActionCommand().equals("boutonParametre"))
         {
             return;
         }
-        if(e.getActionCommand() == "comboBoxAssaut")
+        if(e.getActionCommand().equals("comboBoxAssaut"))
         {
             int index = inventoryWindow.comboBoxAssaut.getSelectedIndex();
             ArmeAFeu a = inventory.getAssautList().get(index);
@@ -100,7 +101,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
 
             inventoryWindow.jImageAssaut.setToolTipText(tooltipText);
         }
-        if(e.getActionCommand() == "comboBoxSMG")
+        if(e.getActionCommand().equals("comboBoxSMG"))
         {
             int index = inventoryWindow.comboBoxSMG.getSelectedIndex();
             ArmeAFeu a = inventory.getSMGList().get(index);
@@ -110,7 +111,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
                     a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
             inventoryWindow.jImageSMG.setToolTipText(tooltipText);
         }
-        if(e.getActionCommand() == "comboBoxSniper")
+        if(e.getActionCommand().equals("comboBoxSniper"))
         {
             int index = inventoryWindow.comboBoxSniper.getSelectedIndex();
             ArmeAFeu a = inventory.getSniperList().get(index);
@@ -120,7 +121,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
                     a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
             inventoryWindow.jImageSniper.setToolTipText(tooltipText);
         }
-        if(e.getActionCommand() == "comboBoxCAC")
+        if(e.getActionCommand().equals("comboBoxCAC"))
         {
             int index = inventoryWindow.comboBoxCAC.getSelectedIndex();
             ArmeCAC a = inventory.getCACList().get(index);
@@ -131,7 +132,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             inventoryWindow.jImageCAC.setToolTipText(tooltipText);
         }
 
-        if(e.getActionCommand() == "boutonAcheter")
+        if(e.getActionCommand().equals("boutonAcheter"))
         {
             try
             {
