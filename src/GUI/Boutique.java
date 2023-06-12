@@ -24,6 +24,7 @@ public class Boutique extends JFrame {
     private JButton boutonAcheter;
 
     public JList<Arme> listeArmes;
+    public DefaultListModel<Arme> modellistesArmes;
 
 
     public Boutique() {
@@ -50,8 +51,11 @@ public class Boutique extends JFrame {
         // Création des composants
         labelArme = new JLabel("Sélectionner une arme:");
         labelArme.setHorizontalAlignment(SwingConstants.CENTER);
-        listeArmes = new JList<>();
+
+        modellistesArmes = new DefaultListModel<>();
+        listeArmes = new JList<>(modellistesArmes);
         listeArmes.setFont(listeArmes.getFont().deriveFont(listeArmes.getFont().getSize() + 2f));
+
         labelImageArme = new JLabel();
         boutonAcheter = new JButton("Acheter");
         labelDegat=new JLabel("Dégâts : ");
@@ -165,6 +169,8 @@ public class Boutique extends JFrame {
     public void setControleur(Controlleur c)
     {
         listeArmes.addListSelectionListener(c);
+        boutonAcheter.addActionListener(c);
+        boutonAcheter.setActionCommand("boutonAcheter");
         this.addWindowListener(c);
     }
 

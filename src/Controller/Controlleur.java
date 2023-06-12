@@ -28,16 +28,16 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     }
     public void initModel()
     {
-        inventory.AjouterArme(0,new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.rare,"MesImages/vandal_defaut.png"), Categorie.Assaut,3,3,3,3,3));
-        inventory.AjouterArme(0,new ArmeAFeu("Spectre",new Skin("Reaver",Rarete.rare,"MesImages/spectre_defaut.png"),Categorie.SMG,3,3,4,3,3));
-        inventory.AjouterArme(0,new ArmeAFeu("Operator",new Skin("Reaver",Rarete.rare,"MesImages/operator_defaut.png"),Categorie.Sniper,3,8,3,10,3));
-        inventory.AjouterArme(0,new ArmeCAC("Knife",new Skin("Reaver",Rarete.rare,"MesImages/knife_defaut.png"),Categorie.CAC,3,3));
+        inventory.AjouterArme(0,new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.rare,"MesImages/vandal_defaut.png"), Categorie.Assaut,300,160,40,90,25));
+        inventory.AjouterArme(0,new ArmeAFeu("Spectre",new Skin("Reaver",Rarete.rare,"MesImages/spectre_defaut.png"),Categorie.SMG,180,60,15,40,35));
+        inventory.AjouterArme(0,new ArmeAFeu("Operator",new Skin("Reaver",Rarete.rare,"MesImages/operator_defaut.png"),Categorie.Sniper,560,320,170,320,6));
+        inventory.AjouterArme(0,new ArmeCAC("Knife",new Skin("Reaver",Rarete.rare,"MesImages/knife_defaut.png"),Categorie.CAC,790,35));
         inventory.AjouterArme(0,new ArmeCAC());
 
         //Creation d'un profil
         if(inventory.getUser() == null)
         {
-            inventory.setUser("Martin123","MesImages/logo1.png",1000);
+            inventory.setUser("Martin123","MesImages/logo1.png",10000);
         }
         return;
     }
@@ -77,12 +77,11 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             {
                 this.boutiqueWindow = new Boutique();
                 this.boutiqueWindow.setControleur(this);
-                DefaultListModel<Arme> model = new DefaultListModel<>();
                 for (Arme arme : inventory.getBoutiqueList())
                 {
-                    model.addElement(arme);
+                    boutiqueWindow.modellistesArmes.addElement(arme);
                 }
-                this.boutiqueWindow.listeArmes.setModel(model);
+                this.boutiqueWindow.listeArmes.setModel(boutiqueWindow.modellistesArmes);
             }
             this.boutiqueWindow.setVisible(true);
             return;
@@ -94,12 +93,46 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         if(e.getActionCommand() == "comboBoxAssaut")
         {
             int index = inventoryWindow.comboBoxAssaut.getSelectedIndex();
-            inventoryWindow.jImageAssaut.setIcon(inventoryWindow.scaleImage(Inventaire.getInstance().getAssautList().get(index).getSkin().getImage(),250,150));
+            ArmeAFeu a = inventory.getAssautList().get(index);
+            inventoryWindow.jImageAssaut.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+            inventoryWindow.jImageAssaut.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DT : " + a.getDegatsTete() + "\n   DG : " + a.getDegatsCorps() + "\n   Portée : " + a.getPortee() + "\n   Prix : " + a.getPrix() + "\n   Capacité Chargeur : " + a.getCapaciteChargeur());
         }
         if(e.getActionCommand() == "comboBoxSMG")
         {
             int index = inventoryWindow.comboBoxSMG.getSelectedIndex();
-            inventoryWindow.jImageSMG.setIcon(new ImageIcon(Inventaire.getInstance().getAssautList().get(index).getSkin().getImage()));
+            ArmeAFeu a = inventory.getSMGList().get(index);
+            inventoryWindow.jImageSMG.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+            inventoryWindow.jImageSMG.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DT : " + a.getDegatsTete() + "\n   DG : " + a.getDegatsCorps() + "\n   Portée : " + a.getPortee() + "\n   Prix : " + a.getPrix() + "\n   Capacité Chargeur : " + a.getCapaciteChargeur());
+        }
+        if(e.getActionCommand() == "comboBoxSniper")
+        {
+            int index = inventoryWindow.comboBoxSniper.getSelectedIndex();
+            ArmeAFeu a = inventory.getSniperList().get(index);
+            inventoryWindow.jImageSniper.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+            inventoryWindow.jImageSniper.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DT : " + a.getDegatsTete() + "\n   DG : " + a.getDegatsCorps() + "\n   Portée : " + a.getPortee() + "\n   Prix : " + a.getPrix() + "\n   Capacité Chargeur : " + a.getCapaciteChargeur());
+        }
+        if(e.getActionCommand() == "comboBoxCAC")
+        {
+            int index = inventoryWindow.comboBoxCAC.getSelectedIndex();
+            ArmeCAC a = inventory.getCACList().get(index);
+            inventoryWindow.jImageCAC.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+            inventoryWindow.jImageCAC.setToolTipText(a.getNom() + "\nCatégorie " + a.getCategorie() + "\n" + a.getSkin().toString() + "\nStats : " +  "\n   DTr : " + a.getDegatTranchant() + "\n   Prix : " + a.getPrix());
+        }
+
+        if(e.getActionCommand() == "boutonAcheter")
+        {
+            try
+            {
+                inventory.RetirerArgent(inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex()).getPrix());
+                inventoryWindow.labelArgent.setText("Argent : " + inventory.getUser().getArgent());
+
+                inventory.AjouterArme(1,inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex()));
+                AjouterArme(1,inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex()));
+            }
+            catch (IllegalArgumentException ie)
+            {
+                JOptionPane.showMessageDialog(null, "Une erreur est survenue : " + ie.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -135,6 +168,34 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         } else if (e.getSource() == this.boutiqueWindow) {
             e.getWindow().setVisible(false);
         }
-        //super.windowClosing(e);
+    }
+
+
+    public <T extends Arme> void AjouterArme(int choix, T arme)
+    {
+        if(choix == 1)
+        {
+            if(arme instanceof ArmeAFeu)
+            {
+                if(arme.getCategorie().equals(Categorie.Assaut))
+                {
+                    inventoryWindow.comboBoxAssaut.addItem(arme.toString());
+                } else if (arme.getCategorie().equals(Categorie.SMG)) {
+                    inventoryWindow.comboBoxSMG.addItem(arme.toString());
+                }
+                else if (arme.getCategorie().equals(Categorie.Sniper)){
+                    inventoryWindow.comboBoxSniper.addItem(arme.toString());
+                }
+            } else if (arme instanceof ArmeCAC) {
+                inventoryWindow.comboBoxCAC.addItem(arme.toString());
+            }
+        }
+        else
+        {
+            if(arme != null)
+            {
+                boutiqueWindow.modellistesArmes.addElement(arme);
+            }
+        }
     }
 }

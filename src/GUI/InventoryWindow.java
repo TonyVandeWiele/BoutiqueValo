@@ -107,7 +107,7 @@ public class InventoryWindow extends JFrame {
         jPanelProfil.setLayout(new GridBagLayout());
         jPanelContent = new JPanel(new GridBagLayout());
 
-        gbc.weightx = 0.2;
+        gbc.weightx = 0.1;
         gbc.gridx = 0;
         gbc.gridy = 0;
         jPanelProfil.setBorder(BorderFactory.createMatteBorder(2,0,2,2,Color.black));
@@ -183,103 +183,117 @@ public class InventoryWindow extends JFrame {
         jPanelContent.add(jPanelCAC,gbc);
 
         //Configuration des Layouts pour le panel Assaut, SMG, Sniper et CAC
-        BoxLayout layoutAssaut = new BoxLayout(jPanelAssaut, BoxLayout.Y_AXIS);
+        GridBagConstraints gbcA = new GridBagConstraints();
+
+        GridBagLayout layoutAssaut = new GridBagLayout();
         jPanelAssaut.setLayout(layoutAssaut);
-        BoxLayout layoutSMG = new BoxLayout(jPanelSMG, BoxLayout.Y_AXIS);
+        GridBagLayout layoutSMG = new GridBagLayout();
         jPanelSMG.setLayout(layoutSMG);
-        BoxLayout layoutSniper = new BoxLayout(jPanelSniper, BoxLayout.Y_AXIS);
+        GridBagLayout layoutSniper = new GridBagLayout();
         jPanelSniper.setLayout(layoutSniper);
-        BoxLayout layoutCAC = new BoxLayout(jPanelCAC, BoxLayout.Y_AXIS);
+        GridBagLayout layoutCAC = new GridBagLayout();
         jPanelCAC.setLayout(layoutCAC);
 
         //ASSAUT
+        gbcA.anchor = GridBagConstraints.CENTER;
+        gbcA.insets = new Insets(0, 0, 10, 0);
+        gbcA.gridx = 0;
+        gbcA.gridy = 0;
         labelAssaut = new JLabel("Assaut",CENTER);
         labelAssaut.setFont(new Font("SansSerif",Font.BOLD,16));
-        jPanelAssaut.add(labelAssaut);
+        jPanelAssaut.add(labelAssaut,gbcA);
 
+        gbcA.gridx = 0;
+        gbcA.gridy = 1;
         jImageAssaut = new JLabel();
         jImageAssaut.setIcon(scaleImage("MesImages/vandal_defaut.png",250,150));
-        jPanelAssaut.add(jImageAssaut);
+        jPanelAssaut.add(jImageAssaut,gbcA);
 
-        jPanelAssaut.add(jPanelVide0);
 
+        gbcA.insets = new Insets(0, 0, 0, 0);
+        gbcA.gridx = 0;
+        gbcA.gridy = 2;
+        gbcA.fill = GridBagConstraints.HORIZONTAL;
         comboBoxAssaut = new JComboBox<>();
         comboBoxAssaut.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(10,10,10,10),
                 comboBoxAssaut.getBorder()
         ));
         comboBoxAssaut.setPreferredSize(new Dimension(5,40));
-        comboBoxAssaut.setRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list,
-                                                          Object value,
-                                                          int index,
-                                                          boolean isSelected,
-                                                          boolean cellHasFocus) {
-                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                if (value instanceof ArmeAFeu) {
-                    setText(((ArmeAFeu)value).getNom());
-                }
-                return this;
-            }
-        });
-        jPanelAssaut.add(comboBoxAssaut);
+        jPanelAssaut.add(comboBoxAssaut,gbcA);
 
         //SMG
+        gbcA.gridx = 0;
+        gbcA.gridy = 0;
         labelSMG = new JLabel("SMG",CENTER);
         labelSMG.setFont(new Font("SansSerif",Font.BOLD,16));
-        jPanelSMG.add(labelSMG);
+        //labelSMG.setHorizontalAlignment(CENTER);
+        jPanelSMG.add(labelSMG,gbcA);
 
+        gbcA.gridx = 0;
+        gbcA.gridy = 1;
         jImageSMG = new JLabel();
         jImageSMG.setIcon(scaleImage("MesImages/spectre_defaut.png",250,150));
-        jPanelSMG.add(jImageSMG);
+        jImageSMG.setHorizontalAlignment(JLabel.CENTER);
+        jPanelSMG.add(jImageSMG,gbcA);
 
-        jPanelSMG.add(jPanelVide1);
-
+        gbcA.gridx = 0;
+        gbcA.gridy = 2;
         comboBoxSMG = new JComboBox<>();
         comboBoxSMG.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(10,10,10,10),
                 comboBoxSMG.getBorder()
         ));
-        jPanelSMG.add(comboBoxSMG);
+        comboBoxSMG.setPreferredSize(new Dimension(5,40));
+        jPanelSMG.add(comboBoxSMG,gbcA);
 
         //Sniper
+        gbcA.gridx = 0;
+        gbcA.gridy = 0;
         labelSniper = new JLabel("Sniper",CENTER);
         labelSniper.setFont(new Font("SansSerif",Font.BOLD,16));
-        jPanelSniper.add(labelSniper,CENTER);
+        jPanelSniper.add(labelSniper,gbcA);
 
-        jPanelSniper.add(Box.createRigidArea(new Dimension(0,50)));
-
+        //jPanelSniper.add(Box.createRigidArea(new Dimension(0,50)));
+        gbcA.gridx = 0;
+        gbcA.gridy = 1;
         jImageSniper = new JLabel();
         jImageSniper.setIcon(scaleImage("MesImages/operator_defaut.png",250,150));
-        jPanelSniper.add(jImageSniper);
+        jPanelSniper.add(jImageSniper,gbcA);
 
-        jPanelSniper.add(jPanelVide2);
-
+        gbcA.gridx = 0;
+        gbcA.gridy = 2;
         comboBoxSniper = new JComboBox<>();
         comboBoxSniper.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(10,10,10,10),
                 comboBoxSniper.getBorder()
         ));
-        jPanelSniper.add(comboBoxSniper);
+        comboBoxSniper.setPreferredSize(new Dimension(5,40));
+        jPanelSniper.add(comboBoxSniper,gbcA);
 
         //CAC
+        gbcA.gridx = 0;
+        gbcA.gridy = 0;
         labelCAC = new JLabel("Corps à Corps",CENTER);
         labelCAC.setFont(new Font("SansSerif",Font.BOLD,16));
-        jPanelCAC.add(labelCAC);
+        jPanelCAC.add(labelCAC,gbcA);
 
+        gbcA.gridx = 0;
+        gbcA.gridy = 1;
         jImageCAC = new JLabel();
         jImageCAC.setIcon(scaleImage("MesImages/knife_kingdom.png",250,150));
-        jPanelCAC.add(jImageCAC);
+        jPanelCAC.add(jImageCAC,gbcA);
 
-        jPanelCAC.add(jPanelVide3);
 
+        gbcA.gridx = 0;
+        gbcA.gridy = 2;
         comboBoxCAC = new JComboBox<>();
         comboBoxCAC.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(10,10,10,10),
                 comboBoxCAC.getBorder()
         ));
-        jPanelCAC.add(comboBoxCAC);
+        comboBoxCAC.setPreferredSize(new Dimension(5,40));
+        jPanelCAC.add(comboBoxCAC,gbcA);
 
         setContentPane(jPanel);
         setVisible(true);

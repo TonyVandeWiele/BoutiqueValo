@@ -16,7 +16,7 @@ public class Profil implements ISaveLoad, Serializable {
 
     public void setArgent(float argent) {
         if(argent < 0)
-            throw new RuntimeException("Pas de Prix Négatif !");
+            throw new IllegalArgumentException("Le prix ne peut pas être négatif");
         this.argent = argent;
     }
 
