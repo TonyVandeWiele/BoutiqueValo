@@ -2,16 +2,18 @@ package GUI;
 
 import Controller.Controlleur;
 import Model.Arme;
+import Model.ArmeAFeu;
+import Model.ArmeCAC;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 
 public class Boutique extends JFrame {
     private JPanel jPanelBoutique;
     private JPanel jPanelStats;
-
     public JLabel labelChargeur;
     public JLabel labelDegatTete;
     private JLabel labelArme;
@@ -27,7 +29,7 @@ public class Boutique extends JFrame {
     public DefaultListModel<Arme> modellistesArmes;
 
 
-    public Boutique() {
+    public Boutique(ArrayList<ArmeAFeu> listeFeu,ArrayList<ArmeCAC> listeCAC) {
         // Propriétés de la fenêtre
         setTitle("Boutique arme");
         //com.formdev.flatlaf.FlatDarculaLaf.install();
@@ -53,6 +55,12 @@ public class Boutique extends JFrame {
         labelArme.setHorizontalAlignment(SwingConstants.CENTER);
 
         modellistesArmes = new DefaultListModel<>();
+        for(ArmeAFeu armeAFeu:listeFeu){
+            modellistesArmes.addElement(armeAFeu);
+        }
+        for(ArmeCAC armeCAC:listeCAC){
+            modellistesArmes.addElement(armeCAC);
+        }
         listeArmes = new JList<>(modellistesArmes);
         listeArmes.setFont(listeArmes.getFont().deriveFont(listeArmes.getFont().getSize() + 2f));
 
@@ -180,17 +188,5 @@ public class Boutique extends JFrame {
         this.addWindowListener(c);
     }
 
-    public static void main(String[] args) {
-        com.formdev.flatlaf.FlatDarculaLaf.install();
-        JFrame frame = new JFrame("InventoryWindow");
-        frame.setContentPane(new Boutique().jPanelBoutique);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setMinimumSize(new Dimension(1190,600));
-        frame.setSize(new Dimension(1190,600));
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-
-        frame.setVisible(true);
-    }
 }
 

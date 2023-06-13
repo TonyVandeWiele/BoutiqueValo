@@ -4,6 +4,7 @@ import Controller.Controlleur;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 import static javax.swing.SwingConstants.CENTER;
 
@@ -321,6 +322,7 @@ public class InventoryWindow extends JFrame {
 
         jButtonBoutique.addActionListener(c);
         jButtonBoutique.setActionCommand("boutonBoutique");
+
         this.addWindowListener(c);
     }
 

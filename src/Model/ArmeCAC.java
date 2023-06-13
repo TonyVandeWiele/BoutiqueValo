@@ -1,6 +1,8 @@
 package Model;
 
-public class ArmeCAC extends Arme
+import java.io.Serializable;
+
+public class ArmeCAC extends Arme implements Serializable
 {
     private int degatTranchant;
 

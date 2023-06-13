@@ -13,12 +13,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.io.*;
 
 public class Controlleur extends WindowAdapter implements ActionListener , ListSelectionListener
 {
     private Inventaire inventory;
     private InventoryWindow inventoryWindow;
     private Boutique boutiqueWindow;
+
     public Controlleur(Inventaire inventory, InventoryWindow inventoryWindow)
     {
         this.inventory = inventory;
@@ -29,6 +31,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     }
     public void initModel()
     {
+        inventory.loadProfil();
         inventory.AjouterArme(0,new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.rare,"MesImages/vandal_defaut.png"), Categorie.Assaut,300,160,40,90,25));
         inventory.AjouterArme(0,new ArmeAFeu("Spectre",new Skin("Reaver",Rarete.rare,"MesImages/spectre_defaut.png"),Categorie.SMG,180,60,15,40,35));
         inventory.AjouterArme(0,new ArmeAFeu("Operator",new Skin("Reaver",Rarete.rare,"MesImages/operator_defaut.png"),Categorie.Sniper,560,320,170,320,6));
@@ -75,7 +78,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         {
             if(this.boutiqueWindow == null)
             {
-                this.boutiqueWindow = new Boutique();
+                this.boutiqueWindow = new Boutique(inventory.getBoutiqueFeu(),inventory.getBoutiqueCAC());
                 this.boutiqueWindow.setControleur(this);
                 for (Arme arme : inventory.getBoutiqueList())
                 {
@@ -195,6 +198,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     public void windowClosing(WindowEvent e) {
         if(e.getSource() == this.inventoryWindow)
         {
+            inventory.saveProfil();
             super.windowClosing(e);
             System.exit(0);
         } else if (e.getSource() == this.boutiqueWindow) {
@@ -230,4 +234,5 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             }
         }
     }
+
 }
