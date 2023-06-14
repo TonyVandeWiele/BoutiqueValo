@@ -15,6 +15,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
 
 public class Controlleur extends WindowAdapter implements ActionListener , ListSelectionListener
 {
@@ -34,17 +35,14 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     }
     public void initModel()
     {
-        inventory.loadProfil();
-        inventory.AjouterArme(0,new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.rare,"MesImages/vandal_defaut.png"), Categorie.Assaut,300,160,40,90,25));
-        inventory.AjouterArme(0,new ArmeAFeu("Spectre",new Skin("Reaver",Rarete.rare,"MesImages/spectre_defaut.png"),Categorie.SMG,180,60,15,40,35));
-        inventory.AjouterArme(0,new ArmeAFeu("Operator",new Skin("Reaver",Rarete.rare,"MesImages/operator_defaut.png"),Categorie.Sniper,560,320,170,320,6));
-        inventory.AjouterArme(0,new ArmeCAC("Knife",new Skin("Reaver",Rarete.rare,"MesImages/knife_kingdom.png"),Categorie.CAC,790,35));
 
-        //Creation d'un profil
-        if(inventory.getUser() == null)
-        {
-            inventory.setUser("NO_NAME","MesImages/logo1.png",10000);
-        }
+        inventory.loadProfil();
+        inventory.loadBoutique();
+        //inventory.AjouterArme(2,new ArmeAFeu("Vandal",new Skin("Reaver", Rarete.rare,"MesImages/vandal_defaut.png"), Categorie.Assaut,300,160,40,90,25));
+        //inventory.AjouterArme(2,new ArmeAFeu("Spectre",new Skin("Reaver",Rarete.rare,"MesImages/spectre_defaut.png"),Categorie.SMG,180,60,15,40,35));
+        //inventory.AjouterArme(2,new ArmeAFeu("Operator",new Skin("Reaver",Rarete.rare,"MesImages/operator_defaut.png"),Categorie.Sniper,560,320,170,320,6));
+        //inventory.AjouterArme(3,new ArmeCAC("Knife",new Skin("Reaver",Rarete.rare,"MesImages/knife_kingdom.png"),Categorie.CAC,790,35));
+        //inventory.saveBoutique();
     }
     public void initView()
     {
@@ -97,6 +95,38 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             inventory.loadProfil();
             initView();
         }
+        if(e.getActionCommand().equals("menuItem5"))
+        {
+            String montantString = JOptionPane.showInputDialog("Veuillez entrer le montant à ajouter :");
+
+            if (montantString != null && !montantString.isEmpty()) {
+                try {
+                    float montant = Integer.parseInt(montantString);
+
+                    inventory.AjouterArgent(montant);
+
+                    initView();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Montant invalide. Veuillez entrer un nombre entier.");
+                }
+            }
+        }
+        if(e.getActionCommand().equals("menuItem6"))
+        {
+            String montantString = JOptionPane.showInputDialog("Veuillez entrer le montant à retirer :");
+
+            if (montantString != null && !montantString.isEmpty()) {
+                try {
+                    float montant = Integer.parseInt(montantString);
+
+                    inventory.RetirerArgent(montant);
+
+                    initView();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Montant invalide. Veuillez entrer un nombre entier.");
+                }
+            }
+        }
         if(e.getActionCommand().equals("okButton"))
         {
             inventory.getUser().setPseudo(PseudoDialog.textField.getText());
@@ -114,6 +144,8 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
                 boutiqueWindow.setControleur(this);
                 boutiqueWindow.setModal(true);
                 boutiqueWindow.setTitle("Boutique");
+                inventory.getBoutiqueList().addAll(inventory.getBoutiqueCAC());
+                inventory.getBoutiqueList().addAll(inventory.getBoutiqueFeu());
                 for (Arme arme : inventory.getBoutiqueList())
                 {
                     boutiqueWindow.modellistesArmes.addElement(arme);
@@ -201,7 +233,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             int returnVal = fileChooser.showOpenDialog(inventoryWindow);
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                inventory.setPathBoutique(fileChooser.getSelectedFile().getAbsolutePath());
+                inventory.setPathBoutique(fileChooser.getSelectedFile().getAbsolutePath()+"/Boutiques.csv");
                 parameterWindow.labelPathBoutique.setText("Path Actuel : " + inventory.getPathBoutique());
             }
         }
@@ -216,6 +248,8 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 inventory.setPathProfil(fileChooser.getSelectedFile().getAbsolutePath() + "/Profil.bin");
                 parameterWindow.labelPathProfil.setText("Path Actuel : " + inventory.getPathProfil());
+                Preferences prefs = Preferences.userRoot().node("BoutiqueValoProfil");
+                prefs.put("pathProfile",fileChooser.getSelectedFile().getAbsolutePath() + "/Profil.bin");
             }
         }
     }

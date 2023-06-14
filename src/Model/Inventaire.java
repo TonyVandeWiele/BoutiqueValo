@@ -3,6 +3,7 @@ package Model;
 import java.awt.*;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.prefs.Preferences;
 
 public class Inventaire implements Serializable
 {
@@ -17,6 +18,7 @@ public class Inventaire implements Serializable
     private Profil User;
     private String pathProfil;
     private String pathBoutique;
+    private Preferences prefs;
 
     public Inventaire() {
         AssautList = new ArrayList<>();
@@ -92,12 +94,15 @@ public class Inventaire implements Serializable
         }
         else
         {
-            if(choix==2)
+            if(choix==2&&arme instanceof ArmeAFeu)
             {
-                //if(arme instanceof ArmeCAC)
-                    //getBoutiqueCAC().add(arme);
+                getBoutiqueFeu().add((ArmeAFeu) arme);
             }
-            if(arme instanceof Arme)
+            if(choix==3&&arme instanceof ArmeCAC)
+            {
+                getBoutiqueCAC().add((ArmeCAC) arme);
+            }
+            if(choix==0&&arme instanceof Arme)
             {
                 getBoutiqueList().add(arme);
             }
@@ -138,17 +143,24 @@ public class Inventaire implements Serializable
             outputStream.writeObject(getSMGList());
             outputStream.writeObject(getSniperList());
             outputStream.writeObject(getCACList());
+            prefs = Preferences.userRoot().node("BoutiqueValoProfil");
+            prefs.put("pathProfile",pathProfil);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void loadProfil() {
+        prefs = Preferences.userRoot().node("BoutiqueValoProfil");
+        String pathprofil = prefs.get("pathProfile", null);
+        if (pathprofil != null) {
+            setPathProfil(pathprofil);
+        }
         File file = new File(pathProfil);
         if (!file.exists()) {
             // Le fichier n'existe pas.
-            // Vous pouvez ignorer le chargement, créer un profil par défaut, ou gérer cette situation comme vous le souhaitez.
             System.out.println("Le fichier n'existe pas. Création d'un profil par défaut...");
             // Créez ici votre profil par défaut...
+            setUser("NO_NAME","MesImages/logo1.png",10000);
         } else {
             try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
                 setUser((Profil) inputStream.readObject());
@@ -199,28 +211,28 @@ public class Inventaire implements Serializable
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",");
-                if (values.length == 9 || values.length == 7) {
+                if (values.length == 10 || values.length == 7) {
                     String nom = values[0];
                     String skinNom = values[1];
                     Rarete rarete = Rarete.valueOf(values[2]);
                     String image = values[3];
                     Categorie categorie = Categorie.valueOf(values[4]);
-                    int prix = Integer.parseInt(values[5]);
+                    float prix = Float.parseFloat(values[5]);
 
                     if (categorie == Categorie.Assaut || categorie == Categorie.SMG || categorie == Categorie.Sniper) {
                         int degatsTete = Integer.parseInt(values[6]);
                         int degatsCorps = Integer.parseInt(values[7]);
                         int portee = Integer.parseInt(values[8]);
-                        int tailleChargeur = Integer.parseInt(values[9]);
+                        int capaciteChargeur = Integer.parseInt(values[9]);
 
                         Skin skin = new Skin(skinNom, rarete, image);
-                        ArmeAFeu arme = new ArmeAFeu(nom, skin, categorie, prix, degatsTete, degatsCorps, portee, tailleChargeur);
+                        ArmeAFeu arme = new ArmeAFeu(nom, skin, categorie, prix, degatsTete, degatsCorps, portee, capaciteChargeur);
                         BoutiqueFeu.add(arme);
                     } else if (categorie == Categorie.CAC) {
-                        int degatsTranchant = Integer.parseInt(values[6]);
+                        int degatTranchant = Integer.parseInt(values[6]);
 
                         Skin skin = new Skin(skinNom, rarete, image);
-                        ArmeCAC arme = new ArmeCAC(nom, skin, categorie, prix, degatsTranchant);
+                        ArmeCAC arme = new ArmeCAC(nom, skin, categorie,(int) prix, degatTranchant);
                         BoutiqueCAC.add(arme);
                     }
                 }

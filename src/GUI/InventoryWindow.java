@@ -64,6 +64,8 @@ public class InventoryWindow extends JFrame {
     public JMenuItem menuItem2;
     public JMenuItem menuItem3;
     public JMenuItem menuItem4;
+    public JMenuItem menuItem5;
+    public JMenuItem menuItem6;
 
     public InventoryWindow() {
         //com.formdev.flatlaf.FlatDarculaLaf.install();
@@ -313,6 +315,8 @@ public class InventoryWindow extends JFrame {
         menuItem2 = new JMenuItem("Modifier Bannière");
         menuItem3 = new JMenuItem("Save");
         menuItem4 = new JMenuItem("Load");
+        menuItem5=new JMenuItem("Ajouter argent");
+        menuItem6=new JMenuItem("Retirer argent");
 
         // Ajouter les items au premier menu
         menu1.add(menuItem1);
@@ -321,6 +325,8 @@ public class InventoryWindow extends JFrame {
         // Ajouter les items au deuxième menu
         menu2.add(menuItem3);
         menu2.add(menuItem4);
+        menu2.add(menuItem5);
+        menu2.add(menuItem6);
 
         // Ajouter les menus à la barre de menus
         menuBar.add(menu1);
@@ -362,6 +368,9 @@ public class InventoryWindow extends JFrame {
         jButtonBoutique.addActionListener(c);
         jButtonBoutique.setActionCommand("boutonBoutique");
 
+        jButtonParametre.addActionListener(c);
+        jButtonParametre.setActionCommand("boutonParametre");
+
         menuItem1.addActionListener(c);
         menuItem1.setActionCommand("menuItem1");
 
@@ -370,6 +379,12 @@ public class InventoryWindow extends JFrame {
 
         menuItem4.addActionListener(c);
         menuItem4.setActionCommand("menuItem4");
+
+        menuItem5.addActionListener(c);
+        menuItem5.setActionCommand("menuItem5");
+
+        menuItem6.addActionListener(c);
+        menuItem6.setActionCommand("menuItem6");
 
         this.addWindowListener(c);
     }
