@@ -55,15 +55,11 @@ public abstract class Arme implements Model.ISaveLoad, Serializable
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Arme arme = (Arme) obj;
-        if(getNom().equals(arme.getNom()) && getCategorie().equals(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix())
-        {
-            return true;
-        }
-        return false;
+        return getNom().equals(arme.getNom()) && getCategorie().equals(arme.getCategorie()) && getSkin().equals(arme.getSkin()) && getPrix() == arme.getPrix();
     }
     public void Affiche()
     {
-        System.out.println("Voici une arme : " + toString());
+        System.out.println("Voici une arme : " + this);
     }
 
     public void Save(String filename, Object obj) {

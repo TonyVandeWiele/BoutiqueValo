@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class PseudoDialog extends JDialog {
     public static JTextField textField;
-    private JButton okButton;
+    private final JButton okButton;
     private String pseudo;
 
     public PseudoDialog() {

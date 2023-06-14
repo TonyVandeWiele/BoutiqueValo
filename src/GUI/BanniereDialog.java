@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class BanniereDialog extends JDialog {
     public static JTextField textField;
-    private JButton chooseButton;
+    private final JButton chooseButton;
 
     public BanniereDialog() {
 

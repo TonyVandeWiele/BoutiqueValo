@@ -2,39 +2,33 @@ package GUI;
 
 import Controller.Controlleur;
 import Model.Arme;
-import Model.ArmeAFeu;
-import Model.ArmeCAC;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.ArrayList;
 
 public class Boutique extends JDialog {
-    private JPanel jPanelBoutique;
-    private JPanel jPanelStats;
+    private final JPanel jPanelBoutique;
+    private final JPanel jPanelStats;
     public JLabel labelChargeur;
     public JLabel labelDegatTete;
-    private JLabel labelArme;
-    private JLabel labelImageArme;
+    private final JLabel labelArme;
+    public final JLabel labelImageArme;
     public JLabel labelDegatCorps;
     public JLabel labelPortee;
     public JLabel labelCategorie;
     public JLabel labelPrix;
     public JLabel labelRarete;
-    private JButton boutonAcheter;
-
+    public Image imageArme;
+    private final JButton boutonAcheter;
     public JList<Arme> listeArmes;
-    public DefaultListModel<Arme> modellistesArmes;
 
-
-    public Boutique() {
+    public Boutique(JFrame parent) {
         // Propriétés de la fenêtre
-        setTitle("Boutique");
-        //com.formdev.flatlaf.FlatDarculaLaf.install();
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(640,400));
+        super(parent, "Boutique", true);
+        com.formdev.flatlaf.FlatDarculaLaf.install();
+        setSize(new Dimension(1050,480));
         setLocationRelativeTo(null);
 
         // Création du jPanelBoutique
@@ -45,7 +39,6 @@ public class Boutique extends JDialog {
         // Configuration du layout du jPanelBoutique avec un GridBagLayout
         jPanelBoutique.setLayout(new GridBagLayout());
 
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
 
@@ -53,9 +46,8 @@ public class Boutique extends JDialog {
         labelArme = new JLabel("Sélectionner une arme:");
         labelArme.setHorizontalAlignment(SwingConstants.CENTER);
 
-        modellistesArmes = new DefaultListModel<>();
 
-        listeArmes = new JList<>(modellistesArmes);
+        listeArmes = new JList<>();
         listeArmes.setFont(listeArmes.getFont().deriveFont(listeArmes.getFont().getSize() + 2f));
 
         labelImageArme = new JLabel();
@@ -69,15 +61,15 @@ public class Boutique extends JDialog {
         labelRarete = new JLabel("Rareté Skin : ");
 
         // Chargement de l'image à partir du fichier
-        ImageIcon imageIcon = new ImageIcon("F:\\Programme\\Java\\Boutique\\Picture\\integration.jpg");
-        Image image = imageIcon.getImage();
+        ImageIcon imageIcon = new ImageIcon("MesImages/logo2.png");
+        imageArme = imageIcon.getImage();
 
         // Ajout d'un ComponentListener pour redimensionner l'image lors du changement de taille du label
         labelImageArme.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 super.componentResized(e);
-                ImageIcon scaledIcon = new ImageIcon(image.getScaledInstance(labelImageArme.getWidth(), labelImageArme.getHeight(), Image.SCALE_SMOOTH));
+                ImageIcon scaledIcon = new ImageIcon(imageArme.getScaledInstance(labelImageArme.getWidth(), labelImageArme.getHeight(), Image.SCALE_SMOOTH));
                 labelImageArme.setIcon(scaledIcon);
             }
         });

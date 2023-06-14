@@ -4,7 +4,6 @@ import Controller.Controlleur;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 
 import static javax.swing.SwingConstants.CENTER;
 
@@ -45,7 +44,6 @@ public class InventoryWindow extends JFrame {
     public Label labelArgent;
     public Label labelDate;
 
-    public JButton jButtonInventaire;
     public JButton jButtonBoutique;
     public JButton jButtonParametre;
 
@@ -68,9 +66,8 @@ public class InventoryWindow extends JFrame {
     public JMenuItem menuItem6;
 
     public InventoryWindow() {
-        //com.formdev.flatlaf.FlatDarculaLaf.install();
+        com.formdev.flatlaf.FlatDarculaLaf.install();
 
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(940,600));
         setLocationRelativeTo(null);
 
@@ -78,7 +75,7 @@ public class InventoryWindow extends JFrame {
 
         jPanel.setLayout(new GridBagLayout());
 
-        //Panel Menu et Cell(Profil et Content)
+        //Panel Menu et Cell (Profil et Content)
         jPanelMenu = new JPanel();
         jPanelCell = new JPanel();
         jPanelCell.setLayout(new GridBagLayout());
@@ -101,12 +98,10 @@ public class InventoryWindow extends JFrame {
         jPanel.add(jPanelCell,gbc);
 
         //Menu
-        jButtonInventaire = new JButton("Inventaire");
         jButtonBoutique = new JButton("Boutique");
         jButtonParametre = new JButton("Paramètre");
         GridBagConstraints gbcButton = new GridBagConstraints();
-        
-        jPanelMenu.add(jButtonInventaire,gbcButton);
+
         jPanelMenu.add(jButtonBoutique,gbcButton);
         jPanelMenu.add(jButtonParametre,gbcButton);
 
@@ -129,7 +124,7 @@ public class InventoryWindow extends JFrame {
         labelProfil.setFont(new Font("SansSerif",Font.BOLD,16));
         jPanelProfil.add(labelProfil);
 
-        labelBanniere = new Label("Banière : ",Label.CENTER);
+        labelBanniere = new Label("Banière du joueur : ",Label.CENTER);
         labelBanniere.setFont(new Font("SansSerif",Font.BOLD,14));
         jPanelProfil.add(labelBanniere);
 
@@ -214,7 +209,7 @@ public class InventoryWindow extends JFrame {
         gbcA.gridx = 0;
         gbcA.gridy = 1;
         jImageAssaut = new JLabel();
-        jImageAssaut.setIcon(scaleImage("MesImages/vandal_defaut.png",250,150));
+        jImageAssaut.setIcon(scaleImage("MesImages/vandal_pp.png",250,150));
         jPanelAssaut.add(jImageAssaut,gbcA);
 
 
@@ -241,7 +236,7 @@ public class InventoryWindow extends JFrame {
         gbcA.gridx = 0;
         gbcA.gridy = 1;
         jImageSMG = new JLabel();
-        jImageSMG.setIcon(scaleImage("MesImages/spectre_defaut.png",250,150));
+        jImageSMG.setIcon(scaleImage("MesImages/spectre_pp.png",250,150));
         jImageSMG.setHorizontalAlignment(JLabel.CENTER);
         jPanelSMG.add(jImageSMG,gbcA);
 
@@ -266,7 +261,7 @@ public class InventoryWindow extends JFrame {
         gbcA.gridx = 0;
         gbcA.gridy = 1;
         jImageSniper = new JLabel();
-        jImageSniper.setIcon(scaleImage("MesImages/operator_defaut.png",250,150));
+        jImageSniper.setIcon(scaleImage("MesImages/operator_pp.png",250,150));
         jPanelSniper.add(jImageSniper,gbcA);
 
         gbcA.gridx = 0;
@@ -289,7 +284,7 @@ public class InventoryWindow extends JFrame {
         gbcA.gridx = 0;
         gbcA.gridy = 1;
         jImageCAC = new JLabel();
-        jImageCAC.setIcon(scaleImage("MesImages/knife_kingdom.png",250,150));
+        jImageCAC.setIcon(scaleImage("MesImages/knife_pp.png",250,150));
         jPanelCAC.add(jImageCAC,gbcA);
 
 
@@ -344,8 +339,7 @@ public class InventoryWindow extends JFrame {
         ImageIcon icon = new ImageIcon(filename);
         Image img = icon.getImage();
         Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon newIcon = new ImageIcon(newImg);
-        return newIcon;
+        return new ImageIcon(newImg);
     }
 
     public void setControleur(Controlleur c)
@@ -361,9 +355,6 @@ public class InventoryWindow extends JFrame {
 
         comboBoxCAC.addActionListener(c);
         comboBoxCAC.setActionCommand("comboBoxCAC");
-
-        jButtonInventaire.addActionListener(c);
-        jButtonInventaire.setActionCommand("boutonInventaire");
 
         jButtonBoutique.addActionListener(c);
         jButtonBoutique.setActionCommand("boutonBoutique");

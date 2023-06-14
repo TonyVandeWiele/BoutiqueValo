@@ -12,7 +12,7 @@ public class Inventaire implements Serializable
     private ArrayList<ArmeAFeu> SMGList;
     private ArrayList<ArmeAFeu> SniperList;
     private ArrayList<ArmeCAC> CACList;
-    private ArrayList<Arme> BoutiqueList;
+    private final ArrayList<Arme> BoutiqueList;
     private ArrayList<ArmeAFeu> BoutiqueFeu;
     private ArrayList<ArmeCAC> BoutiqueCAC;
     private Profil User;
@@ -28,8 +28,8 @@ public class Inventaire implements Serializable
         BoutiqueList = new ArrayList<>();
         BoutiqueFeu=new ArrayList<>();
         BoutiqueCAC=new ArrayList<>();
-        pathProfil=new String("src/Data/Profil.bin");
-        pathBoutique=new String("src/Data/Boutique.csv");
+        pathProfil= "src/Data/Profil.bin";
+        pathBoutique= "src/Data/Boutique.csv";
     }
 
     public static Inventaire getInstance() {
@@ -155,6 +155,7 @@ public class Inventaire implements Serializable
         if (pathprofil != null) {
             setPathProfil(pathprofil);
         }
+
         File file = new File(pathProfil);
         if (!file.exists()) {
             // Le fichier n'existe pas.
@@ -207,38 +208,44 @@ public class Inventaire implements Serializable
     }
 
     public void loadBoutique() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(pathBoutique))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] values = line.split(",");
-                if (values.length == 10 || values.length == 7) {
-                    String nom = values[0];
-                    String skinNom = values[1];
-                    Rarete rarete = Rarete.valueOf(values[2]);
-                    String image = values[3];
-                    Categorie categorie = Categorie.valueOf(values[4]);
-                    float prix = Float.parseFloat(values[5]);
+        File file = new File(pathBoutique);
+        if (!file.exists()) {
+            // Le fichier n'existe pas.
+            System.out.println("Pas donnée ...");
+        } else {
+            try (BufferedReader reader = new BufferedReader(new FileReader(pathBoutique))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] values = line.split(",");
+                    if (values.length == 10 || values.length == 7) {
+                        String nom = values[0];
+                        String skinNom = values[1];
+                        Rarete rarete = Rarete.valueOf(values[2]);
+                        String image = values[3];
+                        Categorie categorie = Categorie.valueOf(values[4]);
+                        float prix = Float.parseFloat(values[5]);
 
-                    if (categorie == Categorie.Assaut || categorie == Categorie.SMG || categorie == Categorie.Sniper) {
-                        int degatsTete = Integer.parseInt(values[6]);
-                        int degatsCorps = Integer.parseInt(values[7]);
-                        int portee = Integer.parseInt(values[8]);
-                        int capaciteChargeur = Integer.parseInt(values[9]);
+                        if (categorie == Categorie.Assaut || categorie == Categorie.SMG || categorie == Categorie.Sniper) {
+                            int degatsTete = Integer.parseInt(values[6]);
+                            int degatsCorps = Integer.parseInt(values[7]);
+                            int portee = Integer.parseInt(values[8]);
+                            int capaciteChargeur = Integer.parseInt(values[9]);
 
-                        Skin skin = new Skin(skinNom, rarete, image);
-                        ArmeAFeu arme = new ArmeAFeu(nom, skin, categorie, prix, degatsTete, degatsCorps, portee, capaciteChargeur);
-                        BoutiqueFeu.add(arme);
-                    } else if (categorie == Categorie.CAC) {
-                        int degatTranchant = Integer.parseInt(values[6]);
+                            Skin skin = new Skin(skinNom, rarete, image);
+                            ArmeAFeu arme = new ArmeAFeu(nom, skin, categorie, prix, degatsTete, degatsCorps, portee, capaciteChargeur);
+                            BoutiqueFeu.add(arme);
+                        } else if (categorie == Categorie.CAC) {
+                            int degatTranchant = Integer.parseInt(values[6]);
 
-                        Skin skin = new Skin(skinNom, rarete, image);
-                        ArmeCAC arme = new ArmeCAC(nom, skin, categorie,(int) prix, degatTranchant);
-                        BoutiqueCAC.add(arme);
+                            Skin skin = new Skin(skinNom, rarete, image);
+                            ArmeCAC arme = new ArmeCAC(nom, skin, categorie, (int) prix, degatTranchant);
+                            BoutiqueCAC.add(arme);
+                        }
                     }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

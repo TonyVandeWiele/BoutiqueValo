@@ -4,10 +4,10 @@ import java.io.*;
 
 public class ArmeAFeu extends Arme implements Serializable
 {
-    private int degatsTete;
-    private int degatsCorps;
-    private int portee;
-    private int capaciteChargeur;
+    private final int degatsTete;
+    private final int degatsCorps;
+    private final int portee;
+    private final int capaciteChargeur;
     public int getDegatsTete()
     {
         return degatsTete;
@@ -51,16 +51,12 @@ public class ArmeAFeu extends Arme implements Serializable
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         ArmeAFeu armeAFeu = (ArmeAFeu) obj;
-        if(super.equals(armeAFeu) && getDegatsTete() == armeAFeu.getDegatsTete() && getPortee() == armeAFeu.getPortee() && getCapaciteChargeur() == armeAFeu.getCapaciteChargeur())
-        {
-            return true;
-        }
-        return false;
+        return super.equals(armeAFeu) && getDegatsTete() == armeAFeu.getDegatsTete() && getPortee() == armeAFeu.getPortee() && getCapaciteChargeur() == armeAFeu.getCapaciteChargeur();
     }
 
     public void Affiche()
     {
-        System.out.println(toString());
+        System.out.println(this);
     }
 
     public void Save(String filename, Object obj) {

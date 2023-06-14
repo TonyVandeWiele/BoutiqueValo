@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class JavaBeanLog {
-    private String pathLog;
+    private final String pathLog;
 
     public JavaBeanLog()
     {
-        pathLog=new String("src/Data/Log.txt");
+        pathLog= "src/Data/Log.txt";
     }
     public void logPurchase(String NomArme, float Prix, String Acheteur) {
         String logEntry = createLogEntry(NomArme, Prix, Acheteur);

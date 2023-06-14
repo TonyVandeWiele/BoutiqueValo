@@ -8,12 +8,12 @@ import java.awt.*;
 public class ParameterWindow extends JDialog {
     public JButton chooseButtonProfil;
     public JLabel labelPathProfil;
-    private JButton chooseButtonBoutique;
+    private final JButton chooseButtonBoutique;
     public JLabel labelPathBoutique;
 
     public ParameterWindow(JFrame parent) {
         super(parent, "Modification Chemin d'accès", true);
-        setSize(300, 150);
+        setSize(400, 250);
         setLocationRelativeTo(null);
         setLayout(new GridLayout(5, 1));
 

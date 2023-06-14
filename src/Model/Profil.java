@@ -7,7 +7,7 @@ public class Profil implements ISaveLoad, Serializable {
     private String pseudo;
     private String avatar;
     private float argent;
-    private LocalDateTime datecreationProfil;
+    private final LocalDateTime datecreationProfil;
 
     public String getAvatar() { return avatar;}
     public String getPseudo() { return pseudo; }
@@ -45,7 +45,7 @@ public class Profil implements ISaveLoad, Serializable {
 
     public void Affiche()
     {
-        System.out.println(toString());
+        System.out.println(this);
     }
     @Override
     public String toString() {
@@ -55,11 +55,7 @@ public class Profil implements ISaveLoad, Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Profil profil = (Profil) obj;
-        if(getPseudo().equals(profil.getPseudo()) && getAvatar().equals(profil.getAvatar()) && getdateCreationProfil().equals(profil.getdateCreationProfil()))
-        {
-            return true;
-        }
-        return false;
+        return getPseudo().equals(profil.getPseudo()) && getAvatar().equals(profil.getAvatar()) && getdateCreationProfil().equals(profil.getdateCreationProfil());
     }
 
     public void Save(String filename, Object obj) {

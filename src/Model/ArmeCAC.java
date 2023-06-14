@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ArmeCAC extends Arme implements Serializable
 {
-    private int degatTranchant;
+    private final int degatTranchant;
 
     public int getDegatTranchant() {
         return degatTranchant;
@@ -31,14 +31,10 @@ public class ArmeCAC extends Arme implements Serializable
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         ArmeCAC armeCAC = (ArmeCAC) obj;
-        if(super.equals(armeCAC) && getDegatTranchant() == armeCAC.getDegatTranchant())
-        {
-            return true;
-        }
-        return false;
+        return super.equals(armeCAC) && getDegatTranchant() == armeCAC.getDegatTranchant();
     }
     @Override
     public void Affiche() {
-        System.out.println(toString());
+        System.out.println(this);
     }
 }

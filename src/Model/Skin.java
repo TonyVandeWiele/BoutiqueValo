@@ -63,11 +63,7 @@ public class Skin implements ISaveLoad, Serializable
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Skin skin = (Skin) obj;
-        if (Objects.equals(nom, skin.nom) && Objects.equals(image, skin.image) && rarete == skin.rarete)
-        {
-            return true;
-        }
-        return false;
+        return Objects.equals(nom, skin.nom) && Objects.equals(image, skin.image) && rarete == skin.rarete;
     }
 
     public String toCsv() {
@@ -91,7 +87,6 @@ public class Skin implements ISaveLoad, Serializable
         }
         catch ( Exception I)
         {
-            return;
         }
     }
 }
