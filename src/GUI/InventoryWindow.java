@@ -55,6 +55,16 @@ public class InventoryWindow extends JFrame {
     public JPanel jPanelVide3;
     public JPanel jPanelVide4;
 
+
+    public JMenuBar menuBar;
+    public JMenu menu1;
+    public JMenu menu2;
+
+    public JMenuItem menuItem1;
+    public JMenuItem menuItem2;
+    public JMenuItem menuItem3;
+    public JMenuItem menuItem4;
+
     public InventoryWindow() {
         //com.formdev.flatlaf.FlatDarculaLaf.install();
 
@@ -291,6 +301,35 @@ public class InventoryWindow extends JFrame {
         comboBoxCAC.setPreferredSize(new Dimension(5,40));
         jPanelCAC.add(comboBoxCAC,gbcA);
 
+        // Créer la barre de menu
+        menuBar = new JMenuBar();
+
+        // Créer les menus
+        menu1 = new JMenu("Menu 1");
+        menu2 = new JMenu("Menu 2");
+
+        // Ajouter des items aux menus
+        menuItem1 = new JMenuItem("Set Pseudo");
+        menuItem2 = new JMenuItem("Item 2");
+        menuItem3 = new JMenuItem("Item 3");
+        menuItem4 = new JMenuItem("Item 4");
+
+        // Ajouter les items au premier menu
+        menu1.add(menuItem1);
+        menu1.add(menuItem2);
+
+        // Ajouter les items au deuxième menu
+        menu2.add(menuItem3);
+        menu2.add(menuItem4);
+
+        // Ajouter les menus à la barre de menus
+        menuBar.add(menu1);
+        menuBar.add(menu2);
+
+        // Ajouter la barre de menus à la fenêtre
+        this.setJMenuBar(menuBar);
+
+
         setContentPane(jPanel);
         setVisible(true);
 
@@ -322,6 +361,9 @@ public class InventoryWindow extends JFrame {
 
         jButtonBoutique.addActionListener(c);
         jButtonBoutique.setActionCommand("boutonBoutique");
+
+        menuItem1.addActionListener(c);
+        menuItem1.setActionCommand("menuItem1");
 
         this.addWindowListener(c);
     }

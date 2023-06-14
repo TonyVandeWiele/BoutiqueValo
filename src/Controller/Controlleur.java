@@ -2,6 +2,7 @@ package Controller;
 
 import GUI.Boutique;
 import GUI.InventoryWindow;
+import GUI.PseudoDialog;
 import Model.*;
 
 import javax.swing.*;
@@ -70,6 +71,14 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("menuItem1"))
+        {
+            PseudoDialog dialog = new PseudoDialog();
+            dialog.setModal(true);
+            dialog.setTitle("Changement de pseudo");
+            dialog.setSize(300, 200);
+        }
+
         if(e.getActionCommand().equals("boutonInventaire"))
         {
             return;
