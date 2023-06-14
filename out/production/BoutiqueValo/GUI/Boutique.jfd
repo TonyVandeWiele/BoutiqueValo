@@ -1,0 +1,123 @@
+JFDML JFormDesigner: "8.0.3.0.246" Java: "17.0.6" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+			"$columnSpecs": "122, 139, 123"
+			"$rowSpecs": "260, 0"
+			"$hGap": 5
+			"$vGap": 5
+			"$alignTop": true
+			"$alignLeft": true
+		} ) {
+			name: "ShopWindow"
+			"preferredSize": new java.awt.Dimension( 400, 300 )
+			"minimumSize": new java.awt.Dimension( 400, 300 )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPaneListeArme"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"insets": new java.awt.Insets( 1, 1, 1, 1 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp labelnom::l::127:x, comp labelskin::t::127:x, comp labelcapacitéchargeur::t::127:x, comp labelportée::t::127:x, comp labeldegat::t::127:x, comp labelprix::t::127:x, comp labelcatégorie::l::127:x}, space :::p}}"
+				"$verticalGroup": "par l {seq t {space ::13:x, comp labelcatégorie:::p:22:p, space ::14:x, comp labelnom:::p:22:p, space ::14:x, comp labeldegat:::p:22:p, space ::14:x, comp labelportée:::p:22:p, space ::14:x, comp labelcapacitéchargeur:::p:22:p, space ::14:x, comp labelskin:::p:22:p, space ::14:x, comp labelprix:::p:22:p, space ::9:x}}"
+			} ) {
+				name: "paneldescriptionarme"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labeldegat"
+					"text": "Dégats"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelprix"
+					"text": "Prix"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelskin"
+					"text": "Skin"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelportée"
+					"text": "Portée"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelcapacitéchargeur"
+					"text": "Capacité chargeur"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelcatégorie"
+					"text": "Catégorie"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelnom"
+					"text": "Nom"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 1
+				"insets": new java.awt.Insets( 1, 1, 1, 1 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp textFieldportee::l:::x, comp textFieldcapacitechargeur::l::111:x, comp textFieldskin::l:::x, comp textFielddegat::t:::x, comp textFieldnom::t:::x, comp textFieldprix::l:::x, comp comboBoxCategorie::l:::x}, space :::p}}"
+				"$verticalGroup": "par l {seq l {space ::10:x, comp comboBoxCategorie:::p:24:p, space ::12:x, comp textFieldnom:::p:24:p, space ::12:x, comp textFielddegat:::p:24:p, space ::12:x, comp textFieldportee:::p:24:p, space ::12:x, comp textFieldcapacitechargeur:::p:24:p, space ::12:x, comp textFieldskin:::p:24:p, space ::12:x, comp textFieldprix:::p:24:p, space ::10:x}}"
+			} ) {
+				name: "panelValeur"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldskin"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldnom"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFielddegat"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldportee"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldcapacitechargeur"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldprix"
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "comboBoxCategorie"
+					"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 2
+				"insets": new java.awt.Insets( 1, 1, 1, 1 )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button9"
+				"text": "Nouvelle Arme"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridy": 1
+				"insets": new java.awt.Insets( 1, 1, 1, 1 )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button10"
+				"text": "Acheter"
+				"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+				"gridx": 2
+				"gridy": 1
+				"insets": new java.awt.Insets( 1, 1, 1, 1 )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 100, 40 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
+

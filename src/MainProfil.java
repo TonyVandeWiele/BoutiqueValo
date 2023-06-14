@@ -6,18 +6,18 @@ public class MainProfil {
         Profil profilBase = new Profil();
         profilBase.Affiche();
 
-        Profil profilUser = new Profil("TonyV50","/img");
-        profilUser.Affiche();
+        //Profil profilUser = new Profil("TonyV50","/img");
+        //profilUser.Affiche();
 
-        if(profilBase.equals(profilUser))
+        /*if(profilBase.equals(profilUser))
         {
             System.out.println("Egal");
         }
         else
         {
             System.out.println("Pas Egal");
-        }
-        profilUser.Save("DataUser.bin",profilUser);
+        }*/
+        //profilUser.Save("DataUser.bin",profilUser);
 
         Profil profilLoad = new Profil();
         profilLoad = (Profil) profilLoad.Load("DataUser.bin");

@@ -52,9 +52,9 @@ public class Skin implements ISaveLoad, Serializable
     @Override
     public String toString() {
         return "Skin{" +
-                "nom='" + nom + '\'' +
-                ", image='" + image + '\'' +
-                ", rarete=" + rarete +
+                "nom ='" + nom + '\'' +
+                ", image ='" + image + '\'' +
+                ", rarete =" + rarete +
                 '}';
     }
 

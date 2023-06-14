@@ -16,7 +16,7 @@ public class Profil implements ISaveLoad, Serializable {
 
     public void setArgent(float argent) {
         if(argent < 0)
-            throw new RuntimeException("Pas de Prix Négatif !");
+            throw new IllegalArgumentException("Le prix ne peut pas être négatif");
         this.argent = argent;
     }
 
@@ -35,11 +35,11 @@ public class Profil implements ISaveLoad, Serializable {
         argent=0;
         datecreationProfil = LocalDateTime.now();
     }
-    public Profil(String vPseudo, String vAvatar)
+    public Profil(String vPseudo, String vAvatar, float vArgent)
     {
         pseudo=vPseudo;
         avatar=vAvatar;
-        argent=0;
+        argent=vArgent;
         datecreationProfil = LocalDateTime.now();
     }
 
