@@ -22,11 +22,14 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     private PseudoDialog pseudoDialog;
     private BanniereDialog banniereDialog;
     private ParameterWindow parameterWindow;
+    private JavaBeanLog Bean;
 
     public Controlleur(Inventaire inventory, InventoryWindow inventoryWindow)
     {
         this.inventory = inventory;
         this.inventoryWindow = inventoryWindow;
+
+        Bean=new JavaBeanLog();
 
         initModel();
         initView();
@@ -225,8 +228,11 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
                 inventory.RetirerArgent(inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex()).getPrix());
                 inventoryWindow.labelArgent.setText("Argent : " + inventory.getUser().getArgent());
 
-                inventory.AjouterArme(1,inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex()));
-                AjouterArme(1,inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex()));
+                Arme arme=inventory.getBoutiqueList().get(boutiqueWindow.listeArmes.getSelectedIndex());
+
+                inventory.AjouterArme(1,arme);
+                AjouterArme(1,arme);
+                Bean.logPurchase(arme.getNom(), arme.getPrix(), inventory.getUser().getPseudo());
             }
             catch (IllegalArgumentException ie)
             {
