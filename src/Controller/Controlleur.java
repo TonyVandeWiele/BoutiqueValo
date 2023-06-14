@@ -1,9 +1,6 @@
 package Controller;
 
-import GUI.Boutique;
-import GUI.ParameterWindow;
-import GUI.InventoryWindow;
-import GUI.PseudoDialog;
+import GUI.*;
 import Model.*;
 
 import javax.swing.*;
@@ -22,6 +19,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     private InventoryWindow inventoryWindow;
     private Boutique boutiqueWindow;
     private PseudoDialog pseudoDialog;
+    private BanniereDialog banniereDialog;
     private ParameterWindow parameterWindow;
 
     public Controlleur(Inventaire inventory, InventoryWindow inventoryWindow)
@@ -84,9 +82,21 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
                 pseudoDialog.setControleur(this);
                 pseudoDialog.setModal(true);
                 pseudoDialog.setTitle("Changement de pseudo");
+                pseudoDialog.setSize(300, 100);
             }
-            pseudoDialog.setSize(300, 200);
             pseudoDialog.setVisible(true);
+        }
+        if(e.getActionCommand().equals("menuItem2"))
+        {
+            if(banniereDialog == null)
+            {
+                banniereDialog = new BanniereDialog();
+                banniereDialog.setControleur(this);
+                banniereDialog.setModal(true);
+                banniereDialog.setTitle("Changement de Bannière");
+                banniereDialog.setSize(300, 100);
+            }
+            banniereDialog.setVisible(true);
         }
         if(e.getActionCommand().equals("menuItem3"))
         {
@@ -218,6 +228,17 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
                 parameterWindow.labelPathProfil.setText("Path Actuel : " + inventory.getPathProfil());
             }
         }
+        if(e.getActionCommand().equals("chooseButtonImage"))
+        {
+            JFileChooser fileChooser = new JFileChooser();
+
+            int option = fileChooser.showOpenDialog(inventoryWindow);
+            if (option == JFileChooser.APPROVE_OPTION) {
+                inventory.getUser().setAvatar(fileChooser.getSelectedFile().getAbsolutePath());
+                banniereDialog.textField.setText(inventory.getUser().getAvatar());
+                inventoryWindow.jImageAvatar.setIcon(inventoryWindow.scaleImage(inventory.getUser().getAvatar(),50,50));
+            }
+        }
     }
 
     public static <T> DefaultComboBoxModel<T> UpdateComboBox(ArrayList list) {
@@ -269,7 +290,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             inventory.saveProfil();
             super.windowClosing(e);
             System.exit(0);
-        } else if (e.getSource() == boutiqueWindow || e.getSource() == pseudoDialog) {
+        } else if (e.getSource() == boutiqueWindow || e.getSource() == pseudoDialog || e.getSource() == banniereDialog) {
             e.getWindow().setVisible(false);
         }
     }
