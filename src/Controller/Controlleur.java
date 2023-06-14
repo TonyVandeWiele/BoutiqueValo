@@ -76,10 +76,10 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             inventoryWindow.comboBoxCAC.addItem(String.valueOf(arme));
         }
 
-        inventoryWindow.jImageAvatar.setIcon(inventoryWindow.scaleImage(Inventaire.getInstance().getUser().getAvatar(),50,50));
+        inventoryWindow.jImageAvatar.setIcon(inventoryWindow.scaleImage(Inventaire.getInstance().getUser().getAvatar(),150,150));
         inventoryWindow.labelArgent.setText("Argent : " + inventory.getUser().getArgent());
         inventoryWindow.labelProfil.setText("Nom du Joueur ( " + inventory.getUser().getPseudo() + " )");
-        inventoryWindow.labelDate.setText("Date Création Profil : " + inventory.getUser().getdateCreationProfil().format(DateTimeFormatter.ofPattern("HH:mm:ss   dd-MM-yyyy")));
+        inventoryWindow.labelDate.setText("Date Création Profil : " + inventory.getUser().getdateCreationProfil().format(DateTimeFormatter.ofPattern("'Le' dd-MM-yyyy 'à' HH:mm 'h'  ")));
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -105,12 +105,11 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         {
             if(banniereDialog == null)
             {
-                banniereDialog = new BanniereDialog();
+                banniereDialog = new BanniereDialog(inventoryWindow);
                 banniereDialog.setControleur(this);
-                banniereDialog.setModal(true);
-                banniereDialog.setTitle("Changement de Bannière");
-                banniereDialog.setSize(300, 200);
+                banniereDialog.setSize(320, 100);
             }
+            banniereDialog.textField.setText("Path Actuel : " + inventory.getUser().getAvatar());
             banniereDialog.setVisible(true);
         }
         if(e.getActionCommand().equals("chooseButtonImage"))
@@ -121,7 +120,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             if (option == JFileChooser.APPROVE_OPTION) {
                 inventory.getUser().setAvatar(fileChooser.getSelectedFile().getAbsolutePath());
                 BanniereDialog.textField.setText(inventory.getUser().getAvatar());
-                inventoryWindow.jImageAvatar.setIcon(inventoryWindow.scaleImage(inventory.getUser().getAvatar(),50,50));
+                inventoryWindow.jImageAvatar.setIcon(inventoryWindow.scaleImage(inventory.getUser().getAvatar(),170,170));
             }
         }
 

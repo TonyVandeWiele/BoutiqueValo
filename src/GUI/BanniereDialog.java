@@ -10,9 +10,8 @@ public class BanniereDialog extends JDialog {
     public static JTextField textField;
     private final JButton chooseButton;
 
-    public BanniereDialog() {
-
-        setSize(300, 150);
+    public BanniereDialog(JFrame parent) {
+        super(parent, "Modification Bannière", true);
         setLocationRelativeTo(null);
         setLayout(new GridLayout(2, 1));
         com.formdev.flatlaf.FlatDarculaLaf.install();

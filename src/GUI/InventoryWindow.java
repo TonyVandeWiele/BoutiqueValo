@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static javax.swing.SwingConstants.CENTER;
+import static javax.swing.SwingConstants.LEFT;
 
 
 public class InventoryWindow extends JFrame {
@@ -116,30 +117,39 @@ public class InventoryWindow extends JFrame {
         jPanelProfil.setBorder(BorderFactory.createMatteBorder(2,0,2,2,Color.black));
         jPanelCell.add(jPanelProfil,gbc);
 
-        BoxLayout layoutProfil = new BoxLayout(jPanelProfil, BoxLayout.Y_AXIS);
-        jPanelProfil.setLayout(layoutProfil);
+
 
         //Profil
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         labelProfil = new Label("Nom du Joueur",Label.CENTER);
         labelProfil.setFont(new Font("SansSerif",Font.BOLD,16));
-        jPanelProfil.add(labelProfil);
+        jPanelProfil.add(labelProfil,gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         labelBanniere = new Label("Banière du joueur : ",Label.CENTER);
         labelBanniere.setFont(new Font("SansSerif",Font.BOLD,14));
-        jPanelProfil.add(labelBanniere);
+        jPanelProfil.add(labelBanniere,gbc);
 
-
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         jImageAvatar = new JLabel();
-        jImageAvatar.setIcon(scaleImage("MesImages/logo1.png",50,50));
-        jPanelProfil.add(jImageAvatar);
+        jImageAvatar.setIcon(scaleImage("MesImages/logo1.png",150,150));
+        jImageAvatar.setHorizontalAlignment(CENTER);
+        jPanelProfil.add(jImageAvatar,gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         labelArgent = new Label("Argent : ",Label.CENTER);
         labelArgent.setFont(new Font("SansSerif",Font.BOLD,14));
-        jPanelProfil.add(labelArgent);
+        jPanelProfil.add(labelArgent,gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         labelDate = new Label("Date Création Profil : ",Label.CENTER);
         labelDate.setFont(new Font("SansSerif",Font.BOLD,14));
-        jPanelProfil.add(labelDate);
+        jPanelProfil.add(labelDate,gbc);
 
         jPanelVide0 = new JPanel();
         jPanelVide1 = new JPanel();

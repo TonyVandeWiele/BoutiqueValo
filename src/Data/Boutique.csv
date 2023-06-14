@@ -1,0 +1,13 @@
+Vandal,Base,commun,MesImages/vandal_defaut.png,Assaut,300.0,160,40,90,25
+Vandal,Ruin,peucommun,MesImages/vandal_ruin.png,Assaut,600.0,160,40,90,25
+Phantom,Oni,epique,MesImages/phantom_oni.png,Assaut,390.0,140,35,70,30
+Phantom,Singularity,epique,MesImages/phantom_singularity.png,Assaut,450.0,140,35,70,30
+Spectre,Base,commun,MesImages/spectre_defaut.png,SMG,180.0,60,15,40,35
+Spectre,Prime,rare,MesImages/spectre_prime.png,SMG,380.0,60,15,40,35
+Stinger,Sovereign,rare,MesImages/stinger_sovereign.png,SMG,180.0,40,10,30,25
+Operator,Base,commun,MesImages/operator_defaut.png,Sniper,560.0,320,170,320,6
+Operator,ElderFlameBlue,epique,MesImages/operator_elderflameBlue.png,Sniper,760.0,320,170,320,6
+Operator,ElderFlameRed,epique,MesImages/operator_elderflameRed.png,Sniper,660.0,320,170,320,6
+Knife,Base,commun,MesImages/knife_kingdom.png,CAC,790.0,35
+Knife,Sovereign,epique,MesImages/sword_sovereign.png,CAC,800.0,35
+Knife,Reaver,legendaire,MesImages/knife_reaver.png,CAC,998.0,35
