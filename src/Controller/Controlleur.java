@@ -43,28 +43,27 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
         //Creation d'un profil
         if(inventory.getUser() == null)
         {
-            inventory.setUser("Martin123","MesImages/logo1.png",10000);
+            inventory.setUser("NO_NAME","MesImages/logo1.png",10000);
         }
-        return;
     }
     public void initView()
     {
-        inventoryWindow.comboBoxAssaut.removeAll();
+        inventoryWindow.comboBoxAssaut.setModel(new DefaultComboBoxModel<>());
         for (ArmeAFeu arme : inventory.getAssautList())
         {
             inventoryWindow.comboBoxAssaut.addItem(String.valueOf(arme));
         }
-        inventoryWindow.comboBoxSMG.removeAll();
+        inventoryWindow.comboBoxSMG.setModel(new DefaultComboBoxModel<>());
         for (ArmeAFeu arme : inventory.getSMGList())
         {
             inventoryWindow.comboBoxSMG.addItem(String.valueOf(arme));
         }
-        inventoryWindow.comboBoxSniper.removeAll();
+        inventoryWindow.comboBoxSniper.setModel(new DefaultComboBoxModel<>());
         for (ArmeAFeu arme : inventory.getSniperList())
         {
             inventoryWindow.comboBoxSniper.addItem(String.valueOf(arme));
         }
-        inventoryWindow.comboBoxCAC.removeAll();
+        inventoryWindow.comboBoxCAC.setModel(new DefaultComboBoxModel<>());
         for (ArmeCAC arme : inventory.getCACList())
         {
             inventoryWindow.comboBoxCAC.addItem(String.valueOf(arme));
