@@ -11,6 +11,7 @@ public class ParameterWindow extends JDialog {
     private final JButton chooseButtonBoutique;
     public JLabel labelPathBoutique;
 
+
     public ParameterWindow(JFrame parent) {
         super(parent, "Modification Chemin d'accès", true);
         setSize(400, 250);

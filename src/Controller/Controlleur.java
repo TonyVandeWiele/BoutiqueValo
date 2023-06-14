@@ -169,6 +169,32 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             }
         }
 
+        if(e.getActionCommand().equals("menuItem7")) //Suppression d'argent
+        {
+            String selectedFormat = (String) JOptionPane.showInputDialog(
+                    inventoryWindow,
+                    "Sélectionnez un format :",
+                    "Paramètres",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    new String[]{"A (HH:mm)", "B (HH:mm:ss)", "C (HH)"},
+                    "test"
+            );
+
+            if(selectedFormat.contains("C"))
+            {
+                inventoryWindow.labelDate.setText("Date Création Profil : " + inventory.getUser().getdateCreationProfil().format(DateTimeFormatter.ofPattern("'Le' dd-MM-yyyy 'à' HH 'h'  ")));
+            }
+            else if(selectedFormat.contains("B"))
+            {
+                inventoryWindow.labelDate.setText("Date Création Profil : " + inventory.getUser().getdateCreationProfil().format(DateTimeFormatter.ofPattern("'Le' dd-MM-yyyy 'à' HH:mm:ss 'h'  ")));
+            }
+            else
+            {
+                inventoryWindow.labelDate.setText("Date Création Profil : " + inventory.getUser().getdateCreationProfil().format(DateTimeFormatter.ofPattern("'Le' dd-MM-yyyy 'à' HH:mm 'h'  ")));
+            }
+        }
+
         if(e.getActionCommand().equals("boutonBoutique"))
         {
             if(boutiqueWindow == null)
@@ -219,6 +245,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             parameterWindow.labelPathBoutique.setText("Path Actuel : " + inventory.getPathBoutique());
             parameterWindow.labelPathProfil.setText("Path Actuel : " + inventory.getPathProfil());
             parameterWindow.setVisible(true);
+
         }
         if(e.getActionCommand().equals("chooseButtonBoutique"))
         {

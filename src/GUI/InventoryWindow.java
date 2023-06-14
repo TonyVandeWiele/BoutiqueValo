@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 import static javax.swing.SwingConstants.CENTER;
-import static javax.swing.SwingConstants.LEFT;
 
 
 public class InventoryWindow extends JFrame {
@@ -65,6 +64,7 @@ public class InventoryWindow extends JFrame {
     public JMenuItem menuItem4;
     public JMenuItem menuItem5;
     public JMenuItem menuItem6;
+    public JMenuItem menuItem7;
 
     public InventoryWindow() {
         com.formdev.flatlaf.FlatDarculaLaf.install();
@@ -322,6 +322,7 @@ public class InventoryWindow extends JFrame {
         menuItem4 = new JMenuItem("Load");
         menuItem5=new JMenuItem("Ajouter argent");
         menuItem6=new JMenuItem("Retirer argent");
+        menuItem7=new JMenuItem("Format Date");
 
         // Ajouter les items au premier menu
         menu1.add(menuItem1);
@@ -332,6 +333,7 @@ public class InventoryWindow extends JFrame {
         menu2.add(menuItem4);
         menu2.add(menuItem5);
         menu2.add(menuItem6);
+        menu2.add(menuItem7);
 
         // Ajouter les menus à la barre de menus
         menuBar.add(menu1);
@@ -389,6 +391,9 @@ public class InventoryWindow extends JFrame {
 
         menuItem6.addActionListener(c);
         menuItem6.setActionCommand("menuItem6");
+
+        menuItem7.addActionListener(c);
+        menuItem7.setActionCommand("menuItem7");
 
         this.addWindowListener(c);
     }
