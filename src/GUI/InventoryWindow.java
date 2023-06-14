@@ -305,14 +305,14 @@ public class InventoryWindow extends JFrame {
         menuBar = new JMenuBar();
 
         // Créer les menus
-        menu1 = new JMenu("Menu 1");
-        menu2 = new JMenu("Menu 2");
+        menu1 = new JMenu("Profil");
+        menu2 = new JMenu("Action");
 
         // Ajouter des items aux menus
-        menuItem1 = new JMenuItem("Set Pseudo");
-        menuItem2 = new JMenuItem("Item 2");
-        menuItem3 = new JMenuItem("Item 3");
-        menuItem4 = new JMenuItem("Item 4");
+        menuItem1 = new JMenuItem("Modifier Pseudo");
+        menuItem2 = new JMenuItem("Modifier Bannière");
+        menuItem3 = new JMenuItem("Save");
+        menuItem4 = new JMenuItem("Load");
 
         // Ajouter les items au premier menu
         menu1.add(menuItem1);
@@ -364,6 +364,12 @@ public class InventoryWindow extends JFrame {
 
         menuItem1.addActionListener(c);
         menuItem1.setActionCommand("menuItem1");
+
+        menuItem3.addActionListener(c);
+        menuItem3.setActionCommand("menuItem3");
+
+        menuItem4.addActionListener(c);
+        menuItem4.setActionCommand("menuItem4");
 
         this.addWindowListener(c);
     }

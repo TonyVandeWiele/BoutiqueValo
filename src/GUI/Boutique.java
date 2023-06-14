@@ -11,7 +11,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
-public class Boutique extends JFrame {
+public class Boutique extends JDialog {
     private JPanel jPanelBoutique;
     private JPanel jPanelStats;
     public JLabel labelChargeur;
@@ -29,11 +29,10 @@ public class Boutique extends JFrame {
     public DefaultListModel<Arme> modellistesArmes;
 
 
-    public Boutique(ArrayList<ArmeAFeu> listeFeu,ArrayList<ArmeCAC> listeCAC) {
+    public Boutique() {
         // Propriétés de la fenêtre
-        setTitle("Boutique arme");
+        setTitle("Boutique");
         //com.formdev.flatlaf.FlatDarculaLaf.install();
-
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(640,400));
         setLocationRelativeTo(null);
@@ -55,12 +54,7 @@ public class Boutique extends JFrame {
         labelArme.setHorizontalAlignment(SwingConstants.CENTER);
 
         modellistesArmes = new DefaultListModel<>();
-        for(ArmeAFeu armeAFeu:listeFeu){
-            modellistesArmes.addElement(armeAFeu);
-        }
-        for(ArmeCAC armeCAC:listeCAC){
-            modellistesArmes.addElement(armeCAC);
-        }
+
         listeArmes = new JList<>(modellistesArmes);
         listeArmes.setFont(listeArmes.getFont().deriveFont(listeArmes.getFont().getSize() + 2f));
 
@@ -176,7 +170,6 @@ public class Boutique extends JFrame {
         // Ajout du jPanelBoutique à la fenêtre
         add(jPanelBoutique);
 
-        setVisible(true);
         setContentPane(jPanelBoutique);
     }
 

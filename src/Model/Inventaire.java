@@ -26,8 +26,8 @@ public class Inventaire implements Serializable
         BoutiqueList = new ArrayList<>();
         BoutiqueFeu=new ArrayList<>();
         BoutiqueCAC=new ArrayList<>();
-        pathProfil=new String("Data\\Profil.bin");
-        pathBoutique=new String("Data\\Boutique.csv");
+        pathProfil=new String("src/Data/Profil.bin");
+        pathBoutique=new String("src/Data/Boutique.csv");
     }
 
     public static Inventaire getInstance() {
@@ -52,6 +52,8 @@ public class Inventaire implements Serializable
     public ArrayList<ArmeCAC> getBoutiqueCAC(){return BoutiqueCAC;}
     public ArrayList<ArmeAFeu> getBoutiqueFeu(){return BoutiqueFeu;}
     public Profil getUser() { return User; }
+    public String getPathProfil() { return pathProfil;}
+    public String getPathBoutique() { return pathBoutique;}
 
     public void setAssautList(ArrayList<ArmeAFeu> assautList) {
         AssautList = assautList;
@@ -66,6 +68,8 @@ public class Inventaire implements Serializable
     }
     public void setBoutiqueFeu(ArrayList<ArmeAFeu> armeAFeus){BoutiqueFeu=armeAFeus;}
     public void setBoutiqueCAC(ArrayList<ArmeCAC> armeCACS){BoutiqueCAC=armeCACS;}
+    public void setPathProfil(String path) { pathProfil = path;}
+    public void setPathBoutique(String path) { pathBoutique = path;}
 
     public <T extends Arme> void AjouterArme(int choix, T arme)
     {
@@ -134,19 +138,27 @@ public class Inventaire implements Serializable
             outputStream.writeObject(getSMGList());
             outputStream.writeObject(getSniperList());
             outputStream.writeObject(getCACList());
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void loadProfil() {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(pathProfil))) {
-            setUser((Profil) inputStream.readObject());
-            setAssautList((ArrayList<ArmeAFeu>) inputStream.readObject());
-            setSMGList((ArrayList<ArmeAFeu>) inputStream.readObject());
-            setSniperList((ArrayList<ArmeAFeu>) inputStream.readObject());
-            setCACList((ArrayList<ArmeCAC>) inputStream.readObject());
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        File file = new File(pathProfil);
+        if (!file.exists()) {
+            // Le fichier n'existe pas.
+            // Vous pouvez ignorer le chargement, créer un profil par défaut, ou gérer cette situation comme vous le souhaitez.
+            System.out.println("Le fichier n'existe pas. Création d'un profil par défaut...");
+            // Créez ici votre profil par défaut...
+        } else {
+            try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
+                setUser((Profil) inputStream.readObject());
+                setAssautList((ArrayList<ArmeAFeu>) inputStream.readObject());
+                setSMGList((ArrayList<ArmeAFeu>) inputStream.readObject());
+                setSniperList((ArrayList<ArmeAFeu>) inputStream.readObject());
+                setCACList((ArrayList<ArmeCAC>) inputStream.readObject());
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
     public void saveBoutique() {

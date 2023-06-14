@@ -1,6 +1,7 @@
 package Controller;
 
 import GUI.Boutique;
+import GUI.ParameterWindow;
 import GUI.InventoryWindow;
 import GUI.PseudoDialog;
 import Model.*;
@@ -14,13 +15,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.io.*;
 
 public class Controlleur extends WindowAdapter implements ActionListener , ListSelectionListener
 {
     private Inventaire inventory;
     private InventoryWindow inventoryWindow;
     private Boutique boutiqueWindow;
+    private PseudoDialog pseudoDialog;
+    private ParameterWindow parameterWindow;
 
     public Controlleur(Inventaire inventory, InventoryWindow inventoryWindow)
     {
@@ -47,18 +49,22 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     }
     public void initView()
     {
+        inventoryWindow.comboBoxAssaut.removeAll();
         for (ArmeAFeu arme : inventory.getAssautList())
         {
             inventoryWindow.comboBoxAssaut.addItem(String.valueOf(arme));
         }
+        inventoryWindow.comboBoxSMG.removeAll();
         for (ArmeAFeu arme : inventory.getSMGList())
         {
             inventoryWindow.comboBoxSMG.addItem(String.valueOf(arme));
         }
+        inventoryWindow.comboBoxSniper.removeAll();
         for (ArmeAFeu arme : inventory.getSniperList())
         {
             inventoryWindow.comboBoxSniper.addItem(String.valueOf(arme));
         }
+        inventoryWindow.comboBoxCAC.removeAll();
         for (ArmeCAC arme : inventory.getCACList())
         {
             inventoryWindow.comboBoxCAC.addItem(String.valueOf(arme));
@@ -73,34 +79,61 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("menuItem1"))
         {
-            PseudoDialog dialog = new PseudoDialog();
-            dialog.setModal(true);
-            dialog.setTitle("Changement de pseudo");
-            dialog.setSize(300, 200);
+            if(pseudoDialog == null)
+            {
+                pseudoDialog = new PseudoDialog();
+                pseudoDialog.setControleur(this);
+                pseudoDialog.setModal(true);
+                pseudoDialog.setTitle("Changement de pseudo");
+            }
+            pseudoDialog.setSize(300, 200);
+            pseudoDialog.setVisible(true);
         }
-
+        if(e.getActionCommand().equals("menuItem3"))
+        {
+            inventory.saveProfil();
+        }
+        if(e.getActionCommand().equals("menuItem4"))
+        {
+            inventory.loadProfil();
+            initView();
+        }
+        if(e.getActionCommand().equals("okButton"))
+        {
+            inventory.getUser().setPseudo(PseudoDialog.textField.getText());
+            inventoryWindow.labelProfil.setText("Nom du Joueur ( " + inventory.getUser().getPseudo() + " )");
+        }
         if(e.getActionCommand().equals("boutonInventaire"))
         {
             return;
         }
         if(e.getActionCommand().equals("boutonBoutique"))
         {
-            if(this.boutiqueWindow == null)
+            if(boutiqueWindow == null)
             {
-                this.boutiqueWindow = new Boutique(inventory.getBoutiqueFeu(),inventory.getBoutiqueCAC());
-                this.boutiqueWindow.setControleur(this);
+                boutiqueWindow = new Boutique();
+                boutiqueWindow.setControleur(this);
+                boutiqueWindow.setModal(true);
+                boutiqueWindow.setTitle("Boutique");
                 for (Arme arme : inventory.getBoutiqueList())
                 {
                     boutiqueWindow.modellistesArmes.addElement(arme);
                 }
-                this.boutiqueWindow.listeArmes.setModel(boutiqueWindow.modellistesArmes);
+                boutiqueWindow.listeArmes.setModel(boutiqueWindow.modellistesArmes);
             }
-            this.boutiqueWindow.setVisible(true);
+            boutiqueWindow.setVisible(true);
             return;
         }
         if(e.getActionCommand().equals("boutonParametre"))
         {
-            return;
+            if( parameterWindow == null)
+            {
+                parameterWindow = new ParameterWindow(inventoryWindow);
+                parameterWindow.setControleur(this);
+            }
+            parameterWindow.labelPathBoutique.setText("Path Actuel : " + inventory.getPathBoutique());
+            parameterWindow.labelPathProfil.setText("Path Actuel : " + inventory.getPathProfil());
+            parameterWindow.setVisible(true);
         }
         if(e.getActionCommand().equals("comboBoxAssaut"))
         {
@@ -159,6 +192,33 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
                 JOptionPane.showMessageDialog(null, "Une erreur est survenue : " + ie.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         }
+
+        if(e.getActionCommand().equals("chooseButtonBoutique"))
+        {
+            JFileChooser fileChooser = new JFileChooser();
+
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+            int returnVal = fileChooser.showOpenDialog(inventoryWindow);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                inventory.setPathBoutique(fileChooser.getSelectedFile().getAbsolutePath());
+                parameterWindow.labelPathBoutique.setText("Path Actuel : " + inventory.getPathBoutique());
+            }
+        }
+        if(e.getActionCommand().equals("chooseButtonProfil"))
+        {
+            JFileChooser fileChooser = new JFileChooser();
+
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+            int returnVal = fileChooser.showOpenDialog(inventoryWindow);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                inventory.setPathProfil(fileChooser.getSelectedFile().getAbsolutePath() + "/Profil.bin");
+                parameterWindow.labelPathProfil.setText("Path Actuel : " + inventory.getPathProfil());
+            }
+        }
     }
 
     public static <T> DefaultComboBoxModel<T> UpdateComboBox(ArrayList list) {
@@ -210,7 +270,7 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             inventory.saveProfil();
             super.windowClosing(e);
             System.exit(0);
-        } else if (e.getSource() == this.boutiqueWindow) {
+        } else if (e.getSource() == boutiqueWindow || e.getSource() == pseudoDialog) {
             e.getWindow().setVisible(false);
         }
     }
