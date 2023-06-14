@@ -374,6 +374,9 @@ public class InventoryWindow extends JFrame {
         menuItem1.addActionListener(c);
         menuItem1.setActionCommand("menuItem1");
 
+        menuItem2.addActionListener(c);
+        menuItem2.setActionCommand("menuItem2");
+
         menuItem3.addActionListener(c);
         menuItem3.setActionCommand("menuItem3");
 
