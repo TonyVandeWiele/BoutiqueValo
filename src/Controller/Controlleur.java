@@ -76,6 +76,47 @@ public class Controlleur extends WindowAdapter implements ActionListener , ListS
             inventoryWindow.comboBoxCAC.addItem(String.valueOf(arme));
         }
 
+        if(!inventory.getAssautList().isEmpty())
+        {
+            ArmeAFeu a = inventory.getAssautList().get(0);
+            inventoryWindow.jImageAssaut.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DT: %s<br>&nbsp;DG: %s<br>&nbsp;Portée: %s<br>&nbsp;Prix: %s<br>&nbsp;Capacité Chargeur: %s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
+
+            inventoryWindow.jImageAssaut.setToolTipText(tooltipText);
+        }
+        if(!inventory.getSMGList().isEmpty())
+        {
+            ArmeAFeu a = inventory.getSMGList().get(0);
+            inventoryWindow.jImageSMG.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DT: %s<br>&nbsp;DG: %s<br>&nbsp;Portée: %s<br>&nbsp;Prix: %s<br>&nbsp;Capacité Chargeur: %s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
+
+            inventoryWindow.jImageSMG.setToolTipText(tooltipText);
+        }
+        if(!inventory.getSniperList().isEmpty())
+        {
+            ArmeAFeu a = inventory.getSniperList().get(0);
+            inventoryWindow.jImageSniper.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DT: %s<br>&nbsp;DG: %s<br>&nbsp;Portée: %s<br>&nbsp;Prix: %s<br>&nbsp;Capacité Chargeur: %s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatsTete(), a.getDegatsCorps(), a.getPortee(), a.getPrix(), a.getCapaciteChargeur());
+
+            inventoryWindow.jImageSniper.setToolTipText(tooltipText);
+        }
+        if(!inventory.getCACList().isEmpty())
+        {
+            ArmeCAC a = inventory.getCACList().get(0);
+            inventoryWindow.jImageCAC.setIcon(inventoryWindow.scaleImage(a.getSkin().getImage(),250,150));
+            String tooltipText = String.format("<html><body>%s &nbsp;&nbsp;&nbsp;Catégorie %s<br>%s<br>Stats:<br>&nbsp;DTr:%s <br>&nbsp;Prix:%s</body></html>",
+                    a.getNom(), a.getCategorie(), a.getSkin().toString(), a.getDegatTranchant(), a.getPrix());
+
+            inventoryWindow.jImageCAC.setToolTipText(tooltipText);
+        }
+
+
         inventoryWindow.jImageAvatar.setIcon(inventoryWindow.scaleImage(Inventaire.getInstance().getUser().getAvatar(),150,150));
         inventoryWindow.labelArgent.setText("Argent : " + inventory.getUser().getArgent());
         inventoryWindow.labelProfil.setText("Nom du Joueur ( " + inventory.getUser().getPseudo() + " )");

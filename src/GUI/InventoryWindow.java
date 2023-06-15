@@ -135,7 +135,7 @@ public class InventoryWindow extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         jImageAvatar = new JLabel();
-        jImageAvatar.setIcon(scaleImage("MesImages/logo1.png",150,150));
+        jImageAvatar.setIcon(scaleImage("MesImages/logo2.png",150,150));
         jImageAvatar.setHorizontalAlignment(CENTER);
         jPanelProfil.add(jImageAvatar,gbc);
 
